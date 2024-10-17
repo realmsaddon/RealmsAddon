@@ -115,6 +115,7 @@ public class TelosAddon implements ClientModInitializer  {
         bagCounter.put("Relics", 0);
         bagCounter.put("TotalRuns", 0);
         bagCounter.put("NoWhiteRuns", 0);
+        bagCounter.put("NoBlackRuns", 0);
     }
 
     public Map<String, Integer> getBagCounter() {
@@ -184,4 +185,8 @@ public class TelosAddon implements ClientModInitializer  {
     public DiscordRPCManager getRpcManager () {
         return rpcManager;
     }
+    public long getPlayTime() {
+        return playTime;
+    }
+
 }

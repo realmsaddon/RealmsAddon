@@ -62,6 +62,7 @@ public class MixinMessageHandler {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player != null) {
                 CompletableFuture.runAsync(() -> {
+                    if (!TelosAddon.getInstance().getConfig().getBoolean("EnableJoinText") || TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
                     try {
                         Thread.sleep(10); // make this display after server join message
                     } catch (InterruptedException e) {
@@ -94,7 +95,7 @@ public class MixinMessageHandler {
         int newValue2 = TelosAddon.getInstance().getBagCounter().get("NoWhiteRuns");
         TelosAddon.getInstance().getBagCounter().replace("NoWhiteRuns", newValue2 + 1);
 
-        int newBlackValue = TelosAddon.getInstance().getBagCounter().get("NoWhiteRuns");
+        int newBlackValue = TelosAddon.getInstance().getBagCounter().get("NoBlackRuns");
         TelosAddon.getInstance().getBagCounter().replace("NoBlackRuns", newBlackValue + 1);
     }
 
