@@ -19,7 +19,7 @@ public class InitializeCommands {
 
     public void initializeCommands() {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(ClientCommandManager.literal("gc")
-                .then(argument("message", StringArgumentType.string())
+                .then(argument("message", StringArgumentType.greedyString())
                         .executes(context -> {
                             final String message = StringArgumentType.getString(context, "message");
                             if (!isInGuildChat) {
