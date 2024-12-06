@@ -24,7 +24,7 @@ public class LocalAPI {
 
     //todo make async
     public static void updateAPI(){
-        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+        CompletableFuture.runAsync(() -> {
             // todo: add lock
                 if (!TelosAddon.getInstance().isOnTelos()) return;
                 Optional<String> info = TabListUtils.getCharInfo();

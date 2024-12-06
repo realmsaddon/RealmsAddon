@@ -115,7 +115,7 @@ public class Config {
         addDefault("NoBlackRunSetting", false);
         addDefault("LifetimeSetting", false);
         addDefault("EnableJoinText", true);
-        addDefault("CallHotkeyShout", false);
+        addDefault("CallHotkeyShout", true);
 
         addDefault("SwingSetting", false);
         addDefault("GammaSetting", false);

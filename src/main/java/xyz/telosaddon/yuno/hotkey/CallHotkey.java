@@ -17,6 +17,7 @@ import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.utils.LocalAPI;
 
 import java.util.Locale;
+import java.util.Objects;
 
 import static xyz.telosaddon.yuno.utils.BossBarUtils.bossBarMap;
 
@@ -29,7 +30,6 @@ public class CallHotkey{
     private static String lastBossFought = "";
     private static int lastBossPortalTimer = 0;
 
-    private static MinecraftClient client = MinecraftClient.getInstance();
     public static void init() {
         keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.telosaddon.call",
@@ -51,10 +51,10 @@ public class CallHotkey{
                     if (!LocalAPI.getCurrentCharacterFighting().equals("")){
                         lastBossFought = LocalAPI.getCurrentCharacterFighting();
                         if (TelosAddon.getInstance().getConfig().getBoolean("CallHotkeyShout")) {
-                            client.getNetworkHandler().sendChatCommand("msg Pixelizedgaming " + LocalAPI.getCurrentCharacterFighting().toLowerCase(Locale.ROOT) + " tp");
+                            Objects.requireNonNull(client.getNetworkHandler()).sendChatCommand("shout " + LocalAPI.getCurrentCharacterFighting().toLowerCase(Locale.ROOT) + " tp");
                         }
                         else{
-                            client.getNetworkHandler().sendChatMessage(LocalAPI.getCurrentCharacterFighting().toLowerCase(Locale.ROOT) + " tp");
+                            Objects.requireNonNull(client.getNetworkHandler()).sendChatMessage(LocalAPI.getCurrentCharacterFighting().toLowerCase(Locale.ROOT) + " tp");
                         }
                         callCooldown = 20 * 60; // 1 min cd
                     }

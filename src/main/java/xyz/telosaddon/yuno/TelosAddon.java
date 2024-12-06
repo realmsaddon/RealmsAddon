@@ -6,6 +6,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.ClickEvent;
@@ -15,18 +16,17 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import xyz.telosaddon.yuno.discordrpc.DiscordRPCManager;
-import xyz.telosaddon.yuno.hotkey.CallHotkey;
-import xyz.telosaddon.yuno.hotkey.MenuHotkey;
-import xyz.telosaddon.yuno.hotkey.NexusHotkey;
+import xyz.telosaddon.yuno.hotkey.*;
 import xyz.telosaddon.yuno.features.ShowMainRangeFeature;
 import xyz.telosaddon.yuno.features.ShowOffHandFeature;
-import xyz.telosaddon.yuno.hotkey.TeleportMenuHotkey;
 import xyz.telosaddon.yuno.renderer.RangeRenderer;
+import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
 import xyz.telosaddon.yuno.sound.SoundManager;
 
 import xyz.telosaddon.yuno.utils.BossBarUtils;
 import xyz.telosaddon.yuno.utils.config.Config;
 import xyz.telosaddon.yuno.sound.CustomSound;
+import xyz.telosaddon.yuno.utils.waypoints.WaypointManager;
 
 import java.util.*;
 
@@ -44,6 +44,7 @@ public class TelosAddon implements ClientModInitializer  {
     public static TelosAddon instance;
 
     private static final DiscordRPCManager rpcManager = new DiscordRPCManager();
+    private static final WaypointManager waypointManager = WaypointManager.getInstance();
     private SoundManager soundManager;
     private Config config;
     private Map<String, Integer> bagCounter;
@@ -67,6 +68,7 @@ public class TelosAddon implements ClientModInitializer  {
         MenuHotkey.init();
         TeleportMenuHotkey.init();
         CallHotkey.init();
+        TestHotkey.init();
     }
     public void stop() {
         config.save();
@@ -88,12 +90,13 @@ public class TelosAddon implements ClientModInitializer  {
         this.showOffHandFeature.tick();
 
         if(isOnTelos()) {
+            updateAPI();
             tickCounter++;
             if(tickCounter >= 20) {
                 playTime++;
                 config.addLong("TotalPlaytime", 1);
                 tickCounter = 0;
-                updateAPI();
+
             }
         }
 
@@ -175,6 +178,8 @@ public class TelosAddon implements ClientModInitializer  {
         this.showOffHandFeature = new ShowOffHandFeature(config);
 
         RangeRenderer.init();
+        WaypointRenderer.init();
+
 
         new InitializeCommands().initializeCommands();
     }
