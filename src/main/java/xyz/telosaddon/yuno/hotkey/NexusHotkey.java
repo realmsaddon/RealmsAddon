@@ -49,7 +49,7 @@ public class NexusHotkey {
             }
         }
         int savedNexusSlot = invslot;
-        scrollToSlot(inv, savedNexusSlot);
+        inv.setSelectedSlot(savedNexusSlot);
         assert client.interactionManager != null;
         client.interactionManager.interactItem(client.player, client.player.getActiveHand());
     }
@@ -58,7 +58,6 @@ public class NexusHotkey {
         int diff = inv.selectedSlot - slot;
         int dist = Math.abs(diff);
         for(int j = 0; j <  dist; j++) {
-            inv.scrollInHotbar(diff);
         }
     }
 }

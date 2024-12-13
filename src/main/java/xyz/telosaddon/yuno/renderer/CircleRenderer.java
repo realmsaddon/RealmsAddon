@@ -117,7 +117,7 @@ public class CircleRenderer implements IRenderer{
 					false,
 					true,
 					RenderLayer.MultiPhaseParameters.builder()
-							.program(COLOR_PROGRAM)
+							.program(POSITION_COLOR_PROGRAM)
 							.layering(VIEW_OFFSET_Z_LAYERING)
 							.transparency(NO_TRANSPARENCY)
 							.target(ITEM_ENTITY_TARGET)

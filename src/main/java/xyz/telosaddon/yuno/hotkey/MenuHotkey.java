@@ -8,6 +8,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 import xyz.telosaddon.yuno.owo_ui.HomeTab;
+import xyz.telosaddon.yuno.ui.TelosMenu;
 
 @Environment(EnvType.CLIENT)
 public class MenuHotkey {
@@ -23,7 +24,7 @@ public class MenuHotkey {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (keyBinding.wasPressed()) {
-                client.setScreen(new HomeTab());
+                client.setScreen(new TelosMenu());
             }
         });
     }

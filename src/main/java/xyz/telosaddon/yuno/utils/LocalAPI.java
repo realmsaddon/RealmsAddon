@@ -21,11 +21,12 @@ public class LocalAPI {
     private static String currentCharacterArea = "";
     private static String currentCharacterFighting = "";
     private static String currentClientPing = "";
+    private static String lastKnownBoss = "";
+    private static String currentPortalCall = "";
+    private static int currentPortalCallTime = 0;
 
-    //todo make async
     public static void updateAPI(){
         CompletableFuture.runAsync(() -> {
-            // todo: add lock
                 if (!TelosAddon.getInstance().isOnTelos()) return;
                 Optional<String> info = TabListUtils.getCharInfo();
                 if (info.isEmpty()) return;
@@ -55,6 +56,7 @@ public class LocalAPI {
     }
 
     private static void updateCharacterArea(){
+
         if (bossBarMap != null) {
             Object[] preArray = bossBarMap.values().toArray();
             if (preArray.length > 5 && preArray[1] instanceof BossBar && preArray[3] instanceof BossBar) {
@@ -66,6 +68,7 @@ public class LocalAPI {
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
                 //LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
+                lastKnownBoss = currentCharacterFighting;
                 switch (bossBar.getName().hashCode()){
                     case -1083980771 -> currentCharacterFighting = "Chungus";
                     case 452824575 -> currentCharacterFighting = "Illarious";
@@ -105,6 +108,45 @@ public class LocalAPI {
                     case 1997519880 -> currentCharacterFighting = "Thornwood Wargrove";
                     default -> currentCharacterFighting = "";
                 }
+
+                // this means a boss has died recently.
+                if (!lastKnownBoss.equals(currentCharacterFighting) && currentCharacterFighting.equals("")) {
+
+                    switch (lastKnownBoss){
+                        case "Chungus" -> currentPortalCall = "void";
+                        case "Illarious" -> currentPortalCall = "loa";
+                        case "Astaroth" -> currentPortalCall = "shatters";
+                        case "Glumi" -> currentPortalCall = "fungal";
+                        case "Lotil" -> currentPortalCall = "omni";
+                        case "Tidol" -> currentPortalCall =  "corsairs";
+                        case "Valus" -> currentPortalCall = "cultists";
+                        case "Oozul" -> currentPortalCall = "chronos";
+                        case "Freddy" -> currentPortalCall = "pizza";
+                        case "Anubis" -> currentPortalCall = "alair";
+                        case "Defender" -> currentPortalCall = "cprov";
+
+                        default -> currentPortalCall = "";
+                    }
+                    lastKnownBoss = "";
+                    if (currentPortalCall.isEmpty()){
+                        return;
+                    }
+
+                    // a boss portal has dropped, start timer
+                    CompletableFuture.runAsync(() -> {
+                        currentPortalCallTime = 30;
+                        while(currentPortalCallTime > 0){
+                            currentPortalCallTime--;
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+
+
 
             }
         }
