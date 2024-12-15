@@ -27,8 +27,6 @@ import static xyz.telosaddon.yuno.utils.BossBarUtils.bossBarMap;
 public class CallHotkey{
     private static KeyBinding keyBinding;
     private static int callCooldown = 0;
-    private static String lastBossFought = "";
-    private static int lastBossPortalTimer = 0;
 
     public static void init() {
         keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -42,26 +40,32 @@ public class CallHotkey{
             if (callCooldown > 0) {
                 callCooldown--;
             }
-            if (lastBossPortalTimer > 0) {
-                lastBossPortalTimer--;
-            }
 
             if (keyBinding.wasPressed()) {
                 if (callCooldown <=0 ) {
-                    if (!LocalAPI.getCurrentCharacterFighting().equals("")){
-                        lastBossFought = LocalAPI.getCurrentCharacterFighting();
-                        if (TelosAddon.getInstance().getConfig().getBoolean("CallHotkeyShout")) {
-                            Objects.requireNonNull(client.getNetworkHandler()).sendChatCommand("shout " + LocalAPI.getCurrentCharacterFighting().toLowerCase(Locale.ROOT) + " tp");
-                        }
-                        else{
-                            Objects.requireNonNull(client.getNetworkHandler()).sendChatMessage(LocalAPI.getCurrentCharacterFighting().toLowerCase(Locale.ROOT) + " tp");
-                        }
-                        callCooldown = 20 * 60; // 1 min cd
+
+                    String callString = "";
+                    if (!LocalAPI.getCurrentPortalCall().equals("")){
+                        String portalToCall = LocalAPI.getCurrentPortalCall();
+                        int timeLeft = LocalAPI.getCurrentPortalCallTime();
+                        callString = "tp "  + portalToCall.toLowerCase(Locale.ROOT) + " " + timeLeft + "s";
+                    }
+                    else if (!LocalAPI.getCurrentCharacterFighting().equals("")){
+                        callString = LocalAPI.getCurrentCharacterFighting().toLowerCase(Locale.ROOT) + " tp";
                     }
                     else{
                         if (client.player == null) return;
                         client.player.sendMessage(Text.of("§cYou can only use this hotkey near a boss!"), false);
+                        return;
                     }
+
+                    if (TelosAddon.getInstance().getConfig().getBoolean("CallHotkeyShout")) {
+                        Objects.requireNonNull(client.getNetworkHandler()).sendChatCommand("shout " + callString);
+                    }
+                    else{
+                        Objects.requireNonNull(client.getNetworkHandler()).sendChatMessage(callString);
+                    }
+                    callCooldown = 20 * 30; // 30s cd
                 }
                 else{
                     if (client.player == null) return;

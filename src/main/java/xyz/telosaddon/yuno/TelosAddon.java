@@ -37,7 +37,7 @@ import static xyz.telosaddon.yuno.utils.LocalAPI.updateAPI;
 
 public class TelosAddon implements ClientModInitializer  {
     public static final String MOD_NAME = "RealmsAddon";
-    public static final String MOD_VERSION = "v0.21e";
+    public static final String MOD_VERSION = "v0.3";
 
     public static final Logger LOGGER = Logger.getLogger(MOD_NAME);
     private final MinecraftClient mc = MinecraftClient.getInstance();

@@ -111,7 +111,7 @@ public class WaypointRenderer{
             int tooclosedist = 30;
             var lerp = clamp((float) (distance - 15)/tooclosedist , 0.1F , 1F);
             var fade = (int)(lerp * 255F);
-            System.out.println(fade);
+            //System.out.println(fade);
             int colorcode = new Color(255,255,255, (fade)).getRGB();
             int backgroundColorCode = new Color(0,0,0, (int) (fade * 0.3)).getRGB();
 
