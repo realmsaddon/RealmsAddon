@@ -14,8 +14,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.features.Features;
 import xyz.telosaddon.yuno.utils.config.Config;
 import xyz.telosaddon.yuno.utils.FontHelper;
+import xyz.telosaddon.yuno.utils.data.BossData;
 
 import java.util.*;
 import java.util.List;
@@ -129,8 +131,9 @@ public abstract class MixinInGameHud {
             infoList.add("Playtime§7: §f" + TelosAddon.getInstance().getPlaytimeText());
 
         if(spawnBossesSetting || isEditMode) {
-            for (String boss : TelosAddon.getInstance().getAliveBosses()) {
-                infoList.add("Boss Spawned§7: §f" + boss);
+            for (BossData bossData: Features.BOSS_TRACKER_FEATURE.getCurrentAlive()) {
+
+                infoList.add("Boss Spawned§7: §f" + bossData.label);
             }
             if(isEditMode) {
                 infoList.add("Boss Spawned§7: §fNAME");

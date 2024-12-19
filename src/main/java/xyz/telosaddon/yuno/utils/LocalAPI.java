@@ -76,7 +76,7 @@ public class LocalAPI {
 
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
-                // LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
+                LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
                 lastKnownBoss = currentCharacterFighting;
                 switch (bossBar.getName().hashCode()){
                     case -1083980771 -> currentCharacterFighting = "Chungus";
@@ -90,6 +90,7 @@ public class LocalAPI {
                     case 2035818623 -> currentCharacterFighting = "Freddy";
                     case -1258344668 -> currentCharacterFighting = "Anubis";
                     case -1240191621 -> currentCharacterFighting = "Hollowbane";
+                    case -1048713371 -> currentCharacterFighting = "Claus";
 
                     case 908391166 -> currentCharacterFighting = "Shadowflare";
                     case 1996713601 -> currentCharacterFighting = "Loa";
@@ -117,7 +118,7 @@ public class LocalAPI {
                     case 1997519880 -> currentCharacterFighting = "Thornwood Wargrove";
                     default -> currentCharacterFighting = "";
                 }
-                System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);
+                //System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);
                 // this means a boss has died recently.
                 if (!lastKnownBoss.equals(currentCharacterFighting) && currentCharacterFighting.equals("")) {
                     LOGGER.log(Level.INFO, "Boss has died");
@@ -144,7 +145,7 @@ public class LocalAPI {
                     // a boss portal has dropped, start timer
                     CompletableFuture.runAsync(() -> {
                         countdownLock = true;
-                        currentPortalCallTime = 32; // underestimate since this only updates every 1 s
+                        currentPortalCallTime = 32;
                         while(currentPortalCallTime > 0){
                             currentPortalCallTime--;
                             try {

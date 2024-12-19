@@ -10,7 +10,6 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import xyz.telosaddon.yuno.utils.LocalAPI;
-import xyz.telosaddon.yuno.utils.waypoints.Waypoint;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 public class TestHotkey {
     private static KeyBinding keyBinding;
 
-    public static final ArrayList<Waypoint> waypoints = new ArrayList<>();
     public static void init() {
         keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.telosaddon.test",
@@ -29,13 +27,6 @@ public class TestHotkey {
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (keyBinding.wasPressed()) {
-                ClientPlayerEntity player = client.player;
-                assert player != null;
-                //String bossPos = "new Waypoint(\"" + LocalAPI.getCurrentCharacterFighting() + "\", " + Math.round(player.getX()) + ", " +  Math.round(player.getY()) + ", " + " " + Math.round(player.getZ()) + ")";
-                //player.sendMessage(Text.of(bossPos));
-                waypoints.add(new Waypoint("test", player.getX(), player.getY(), player.getZ()));
-            }
         });
 
 

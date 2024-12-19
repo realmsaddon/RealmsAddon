@@ -26,7 +26,6 @@ import xyz.telosaddon.yuno.sound.SoundManager;
 import xyz.telosaddon.yuno.utils.BossBarUtils;
 import xyz.telosaddon.yuno.utils.config.Config;
 import xyz.telosaddon.yuno.sound.CustomSound;
-import xyz.telosaddon.yuno.utils.waypoints.WaypointManager;
 
 import java.util.*;
 
@@ -44,7 +43,6 @@ public class TelosAddon implements ClientModInitializer  {
     public static TelosAddon instance;
 
     private static final DiscordRPCManager rpcManager = new DiscordRPCManager();
-    private static final WaypointManager waypointManager = WaypointManager.getInstance();
     private SoundManager soundManager;
     private Config config;
     private Map<String, Integer> bagCounter;

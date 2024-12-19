@@ -122,7 +122,7 @@ public class Config {
         addDefault("FPSSetting", false);
         addDefault("PingSetting", false);
         addDefault("PlaytimeSetting", false);
-        addDefault("SpawnBossesSetting", false);
+        addDefault("BossTrackerFeatureEnabled", false);
         addDefault("SoundSetting", false);
         addDefault("Font", "Default");
 

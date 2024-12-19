@@ -17,6 +17,7 @@ import java.util.Objects;
 @Mixin(GameRenderer.class)
 public abstract class MixinGameRenderer {
 
+    // todo: move all of these functionalities into their own features, add listeners n stuff
     @Inject(method = "showFloatingItem", at = @At("HEAD"))
     private void showFloatingItem(ItemStack floatingItem, CallbackInfo ci) {
         if(!floatingItem.getComponents().isEmpty() && !floatingItem.getComponents().contains(DataComponentTypes.CUSTOM_MODEL_DATA)) return;

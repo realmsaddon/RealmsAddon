@@ -29,7 +29,7 @@ public class HomeTab extends AbstractTab{
         boolean fpsSetting = getConfig().getBoolean("FPSSetting");
         boolean pingSetting = getConfig().getBoolean("PingSetting");
         boolean playtimeSetting = getConfig().getBoolean("PlaytimeSetting");
-        boolean spawnBossesSetting = getConfig().getBoolean("SpawnBossesSetting");
+        boolean BossTrackerFeatureEnabled = getConfig().getBoolean("BossTrackerFeatureEnabled");
         boolean soundSetting = getConfig().getBoolean("SoundSetting");
         boolean discordRPCSetting = getConfig().getBoolean("DiscordRPCSetting");
         boolean RPCShowLocationSetting = getConfig().getBoolean("RPCShowLocationSetting");
@@ -65,8 +65,8 @@ public class HomeTab extends AbstractTab{
                 }).setToggled(playtimeSetting),
 
                 new CustomButton(8, 221, 150, 20, "Show Spawned Bosses", (button, toggled) -> {
-                    toggle("SpawnBossesSetting", button.getText(), toggled);
-                }).setToggled(spawnBossesSetting),
+                    toggle("BossTrackerFeatureEnabled", button.getText(), toggled);
+                }).setToggled(BossTrackerFeatureEnabled),
 
                 new CustomButton(8, 244, 150, 20, "Custom Bag Sounds", (button, toggled) -> {
                     toggle("SoundSetting", button.getText(), toggled);

@@ -12,15 +12,15 @@ public abstract class AbstractFeature {
 		this.featureName = featureName;
 	}
 
-	private String getEnabledKey(){
+	private String getEnabledKey() {
 		return featureName + "Enabled";
 	}
 
-	protected String getFeatureName(){
+	protected String getFeatureName() {
 		return this.featureName;
 	}
 
-	protected Config getConfig(){
+	protected Config getConfig() {
 		return this.config;
 	}
 
@@ -28,16 +28,15 @@ public abstract class AbstractFeature {
 		return config.getBoolean(getEnabledKey());
 	}
 
-	public void disable(){
+	public void disable() {
 		this.config.set(getEnabledKey(), false);
 	}
 
-	public void enable(){
+	public void enable() {
 		this.config.set(getEnabledKey(), true);
-
 	}
 
-	public void toggle(){
+	public void toggle() {
 		this.config.set(getEnabledKey(), !config.getBoolean(getEnabledKey()));
 
 	}

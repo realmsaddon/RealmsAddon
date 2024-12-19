@@ -16,9 +16,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.features.Features;
 import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
 import xyz.telosaddon.yuno.utils.config.Config;
-import xyz.telosaddon.yuno.utils.waypoints.WaypointManager;
 
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
@@ -47,25 +47,10 @@ public class MixinMessageHandler {
     @Unique
     private void onChat(Text text) {
         String s = text.getString().trim();
-        if(s.contains("has spawned at")) {
-            String[] args = s.split(" ");
-            String name = args[0];
-            TelosAddon.getInstance().addAliveBosses(name);
-            WaypointManager.getInstance().addAlive(name);
-        }
-
-        if(s.contains("has been defeated")) {
-            String[] args = s.split(" ");
-            String name = args[0];
-            if(TelosAddon.getInstance().getAliveBosses().contains(name)) {
-                TelosAddon.getInstance().removeAliveBoss(name);
-                WaypointManager.getInstance().removeAlive(name);
-            }
-        }
 
         if(s.contains("discord.telosrealms.com")){ // nexus check
-            TelosAddon.getInstance().getAliveBosses().clear();
-            WaypointManager.getInstance().clearAlive();
+            Features.BOSS_TRACKER_FEATURE.clearAlive();
+
             if (!TelosAddon.getInstance().getConfig().getBoolean("EnableJoinText") || TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player != null) {
