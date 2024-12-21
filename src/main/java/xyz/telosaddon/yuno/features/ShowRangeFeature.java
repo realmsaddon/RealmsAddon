@@ -13,10 +13,12 @@ import xyz.telosaddon.yuno.renderer.CircleRenderer;
 import xyz.telosaddon.yuno.renderer.IRenderer;
 import xyz.telosaddon.yuno.renderer.LineRenderer;
 import xyz.telosaddon.yuno.utils.ItemType;
-import xyz.telosaddon.yuno.utils.config.Config;
+import xyz.telosaddon.yuno.utils.config.TelosConfig;
 
 import java.util.List;
 import java.util.function.Function;
+
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
 public class ShowRangeFeature extends AbstractFeature {
 	private ItemStack previousItem = null;
@@ -25,10 +27,11 @@ public class ShowRangeFeature extends AbstractFeature {
 	private float radius = Float.NaN;
 
 
-	public ShowRangeFeature(Config config, Function<PlayerInventory, ItemStack> itemGetter, String itemSlotName) {
+	public ShowRangeFeature(TelosConfig config, Function<PlayerInventory, ItemStack> itemGetter, String itemSlotName) {
 		super(config, "Show" + itemSlotName + "RangeFeature");
 		this.itemGetter = itemGetter;
-		this.setRangeType(RangeViewType.valueOf(config.getString("Show" + itemSlotName + "RangeFeatureViewType")));
+		RangeViewType itemSlotRangeType = itemSlotName.equals("Main") ? CONFIG.showMainRangeFeatureViewType() : CONFIG.showOffHandRangeFeatureViewType();
+		this.setRangeType(itemSlotRangeType);
 	}
 
 	private float parseRadius(ItemStack itemStack) {
@@ -91,8 +94,10 @@ public class ShowRangeFeature extends AbstractFeature {
 				matrices,
 				vertexConsumers,
 				player,
-				this.getConfig().getInteger(this.getFeatureName() + "Color"),
-				this.getConfig().getDouble(this.getFeatureName() + "Height").floatValue() + dy));
+0,
+0));
+//				this.getConfig().getInteger(this.getFeatureName() + "Color"),
+//				this.getConfig().getDouble(this.getFeatureName() + "Height").floatValue() + dy));
 
 	}
 

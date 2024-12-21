@@ -1,43 +1,50 @@
 package xyz.telosaddon.yuno.features;
 
-import xyz.telosaddon.yuno.utils.config.Config;
+import xyz.telosaddon.yuno.utils.config.TelosConfig;
 
 public abstract class AbstractFeature {
 
-	private final Config config;
+	private final TelosConfig config;
 	private final String featureName;
+	private boolean enabled;
 
-	protected AbstractFeature(Config config, String featureName){
+	protected AbstractFeature(TelosConfig config, String featureName){
 		this.config = config;
 		this.featureName = featureName;
 	}
 
 	private String getEnabledKey() {
-		return featureName + "Enabled";
+		return featureName;
 	}
 
 	protected String getFeatureName() {
 		return this.featureName;
 	}
 
-	protected Config getConfig() {
+	protected TelosConfig getConfig() {
 		return this.config;
 	}
 
 	public boolean isEnabled() {
-		return config.getBoolean(getEnabledKey());
+		return enabled;
 	}
 
-	public void disable() {
-		this.config.set(getEnabledKey(), false);
+	protected void disable() {
+
 	}
 
-	public void enable() {
-		this.config.set(getEnabledKey(), true);
+	protected void enable() {
+
 	}
 
-	public void toggle() {
-		this.config.set(getEnabledKey(), !config.getBoolean(getEnabledKey()));
+	public void setToggle(boolean enabled) {
+		this.enabled = enabled;
+		if (enabled) {
+			enable();
+		} else {
+			disable();
+		}
+
 
 	}
 }

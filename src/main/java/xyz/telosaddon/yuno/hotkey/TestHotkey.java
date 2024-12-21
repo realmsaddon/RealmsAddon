@@ -19,15 +19,7 @@ public class TestHotkey {
     private static KeyBinding keyBinding;
 
     public static void init() {
-        keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.telosaddon.test",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_L,
-                "category.telosaddon"
-        ));
 
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-        });
 
 
     }

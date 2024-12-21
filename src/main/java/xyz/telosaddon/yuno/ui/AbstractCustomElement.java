@@ -4,13 +4,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.sound.SoundManager;
-import xyz.telosaddon.yuno.utils.config.Config;
+import xyz.telosaddon.yuno.utils.config.TelosConfig;
 
 public abstract class AbstractCustomElement implements CustomElement{
 
     private final MinecraftClient mc;
     private final TelosAddon ta;
-    private final Config config;
+    private final TelosConfig config;
     private final SoundManager soundManager;
 
     public AbstractCustomElement() {
@@ -40,7 +40,7 @@ public abstract class AbstractCustomElement implements CustomElement{
 
     public MinecraftClient getMinecraftClient() { return this.mc; }
     public TelosAddon getTelosAddon() { return this.ta; }
-    public Config getConfig() { return this.config; }
+    public TelosConfig getConfig() { return this.config; }
     public SoundManager getSoundManager() { return this.soundManager; }
 
 }

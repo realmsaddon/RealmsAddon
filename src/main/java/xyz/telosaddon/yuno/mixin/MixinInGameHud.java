@@ -15,15 +15,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.features.Features;
-import xyz.telosaddon.yuno.utils.config.Config;
+import xyz.telosaddon.yuno.utils.config.TelosConfig;
 import xyz.telosaddon.yuno.utils.FontHelper;
 import xyz.telosaddon.yuno.utils.data.BossData;
 
 import java.util.*;
 import java.util.List;
 
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 import static xyz.telosaddon.yuno.utils.LocalAPI.getCurrentClientPing;
-import static xyz.telosaddon.yuno.utils.TabListUtils.getPing;
 
 @Mixin(InGameHud.class)
 public abstract class MixinInGameHud {
@@ -49,77 +49,66 @@ public abstract class MixinInGameHud {
         int width = client.getWindow().getScaledWidth();
         //int height = client.getWindow().getScaledHeight();
 
-        Config config = TelosAddon.getInstance().getConfig();
+        TelosConfig config = TelosAddon.getInstance().getConfig();
 
-        if(config.getInteger("BagX") == -1)
-            config.set("BagX", width - 130);
+        if(CONFIG.bagX() == -1)
+            CONFIG.bagX(width - 130);
 
         boolean isEditMode = TelosAddon.getInstance().isEditMode();
-        String fontName = config.getString("Font");
+        String fontName = CONFIG.font();
 
-        boolean fpsSetting = config.getBoolean("FPSSetting");
-        boolean pingSetting = config.getBoolean("PingSetting");
-        boolean playtimeSetting = config.getBoolean("PlaytimeSetting");
-        boolean spawnBossesSetting = config.getBoolean("SpawnBossesSetting");
+        boolean fpsSetting = CONFIG.fpsSetting();
+        boolean pingSetting = CONFIG.pingSetting();
+        boolean playtimeSetting = CONFIG.playTimeSetting();
+        boolean spawnBossesSetting = CONFIG.bossTrackerFeatureEnabled();
 
-        int greenBags = config.getBoolean("LifetimeSetting") ? config.getInteger("GreenBags") : TelosAddon.getInstance().getBagCounter().get("GreenBags");
-        int goldBags = config.getBoolean("LifetimeSetting") ? config.getInteger("GoldBags") : TelosAddon.getInstance().getBagCounter().get("GoldBags");
-        int whiteBags = config.getBoolean("LifetimeSetting") ? config.getInteger("WhiteBags") : TelosAddon.getInstance().getBagCounter().get("WhiteBags");
-        int blackBags = config.getBoolean("LifetimeSetting") ? config.getInteger("BlackBags") : TelosAddon.getInstance().getBagCounter().get("BlackBags");
-        int eventBags = config.getBoolean("LifetimeSetting") ? config.getInteger("EventBags") : TelosAddon.getInstance().getBagCounter().get("EventBags");
-        int crosses = config.getBoolean("LifetimeSetting") ? config.getInteger("Crosses") : TelosAddon.getInstance().getBagCounter().get("Crosses");
-        int relics = config.getBoolean("LifetimeSetting") ? config.getInteger("Relics") : TelosAddon.getInstance().getBagCounter().get("Relics");
-        int runes = config.getBoolean("LifetimeSetting") ? config.getInteger("Runes") : TelosAddon.getInstance().getBagCounter().get("Runes");
-        int totalRuns = config.getBoolean("LifetimeSetting") ? config.getInteger("TotalRuns") : TelosAddon.getInstance().getBagCounter().get("TotalRuns");
-        int noWhitesRuns = config.getBoolean("LifetimeSetting") ? config.getInteger("NoWhiteRuns") : TelosAddon.getInstance().getBagCounter().get("NoWhiteRuns");
-        int noBlackRuns = config.getBoolean("LifetimeSetting") ? config.getInteger("NoBlackRuns") : TelosAddon.getInstance().getBagCounter().get("NoBlackRuns");
 
         List<String> bagTexts = new ArrayList<>();
-        if(config.getBoolean("GreenSetting") || isEditMode)
-            bagTexts.add("Green Bags§7: §f" + greenBags);
-        if(config.getBoolean("GoldSetting") || isEditMode)
-            bagTexts.add("Gold Bags§7: §f" + goldBags);
-        if(config.getBoolean("WhiteSetting") || isEditMode)
-            bagTexts.add("White Bags§7: §f" + whiteBags);
-        if(config.getBoolean("BlackSetting") || isEditMode)
-            bagTexts.add("Black Bags§7: §f" + blackBags);
-        if(config.getBoolean("EventSetting") || isEditMode)
-            bagTexts.add("Event Bags§7: §f" + eventBags);
-        if(config.getBoolean("CrossSetting") || isEditMode)
-            bagTexts.add("Crosses§7: §f" + crosses);
-        if(config.getBoolean("RelicSetting") || isEditMode)
-            bagTexts.add("Relics§7: §f" + relics);
-        if(config.getBoolean("RunesSetting") || isEditMode)
-            bagTexts.add("Runes§7: §f" + runes);
-        if(config.getBoolean("TotalRunSetting") || isEditMode)
-            bagTexts.add("Total Runs§7: §f" + totalRuns);
-        if(config.getBoolean("NoWhiteRunSetting") || isEditMode)
-            bagTexts.add("No Whites Runs§7: §f" + noWhitesRuns);
-        if(config.getBoolean("NoBlackRunSetting") || isEditMode)
-            bagTexts.add("No Black Runs§7: §f" + noBlackRuns);
+        if(CONFIG.greenSetting() || isEditMode)
+            bagTexts.add("Green Bags§7: §f" + CONFIG.greenBags());
+        if(CONFIG.goldSetting() || isEditMode)
+            bagTexts.add("Gold Bags§7: §f" + CONFIG.goldBags());
+        if(CONFIG.whiteSetting() || isEditMode)
+            bagTexts.add("White Bags§7: §f" + CONFIG.goldBags());
+        if(CONFIG.blackSetting()|| isEditMode)
+            bagTexts.add("Black Bags§7: §f" + CONFIG.blackBags());
+        if(CONFIG.eventSetting() || isEditMode)
+            bagTexts.add("Event Bags§7: §f" + CONFIG.eventBags());
+        if(CONFIG.crossSetting() || isEditMode)
+            bagTexts.add("Crosses§7: §f" + CONFIG.crosses());
+        if(CONFIG.relicSetting() || isEditMode)
+            bagTexts.add("Relics§7: §f" + CONFIG.relicSetting());
+        if(CONFIG.runesSetting() || isEditMode)
+            bagTexts.add("Runes§7: §f" + CONFIG.runes());
+        if(CONFIG.totalRunSetting() || isEditMode)
+            bagTexts.add("Total Runs§7: §f" + CONFIG.totalRuns());
+        if(CONFIG.noWhiteRunSetting() || isEditMode)
+            bagTexts.add("No Whites Runs§7: §f" + CONFIG.noWhiteRuns());
+        if(CONFIG.noBlackRunSetting() || isEditMode)
+            bagTexts.add("No Black Runs§7: §f" + CONFIG.noBlackRuns());
 
-        int bagY = config.getInteger("BagY");
-        int bagX = config.getInteger("BagX");
+        int bagY = CONFIG.bagY();
+        int bagX = CONFIG.bagX();
 
         int yBackground = bagY - 25;
         if(!bagTexts.isEmpty()) {
-            String title = config.getBoolean("LifetimeSetting") ? "Lifetime Stats" : "Session Stats";
-            context.fill(bagX, yBackground, bagX + 120, bagY + bagTexts.size() * 13 + 5, config.getInteger("FillColor"));
-            context.drawBorder(bagX, yBackground, 120, bagY - yBackground + bagTexts.size() * 13 + 5, config.getInteger("BorderColor"));
-            context.drawHorizontalLine(bagX + 10, bagX + 110, bagY - 4, config.getInteger("BorderColor"));
+            String title = CONFIG.lifetimeSetting() ? "Lifetime Stats" : "Session Stats";
+            context.fill(bagX, yBackground, bagX + 120, bagY + bagTexts.size() * 13 + 5, CONFIG.fillColor());
+            context.drawBorder(bagX, yBackground, 120, bagY - yBackground + bagTexts.size() * 13 + 5,CONFIG.borderColor());
+            context.drawHorizontalLine(bagX + 10, bagX + 110, bagY - 4, CONFIG.borderColor());
 
             int titleWidth = tr.getWidth(FontHelper.toCustomFont(title, fontName));
             int midX = (bagX + (bagX + 120)) / 2;
 
             //context.drawText(tr, toCustomFont(title), midX - titleWidth / 2, bagY - 15, config.getInteger("MenuColor"), false);
-            context.drawText(tr, FontHelper.toCustomFont(title, fontName), midX - titleWidth / 2, bagY - 15, config.getInteger("MenuColor"), true);
+            context.drawText(tr, FontHelper.toCustomFont(title, fontName), midX - titleWidth / 2, bagY - 15, CONFIG.menuColor(), true);
         }
         for(int i = 0; i < bagTexts.size(); i++) {
-            context.drawText(tr, FontHelper.toCustomFont(bagTexts.get(i), fontName), bagX + 10, bagY + (i * 13), config.getInteger("MenuColor"), true);
+            context.drawText(tr, FontHelper.toCustomFont(bagTexts.get(i), fontName), bagX + 10, bagY + (i * 13), CONFIG.menuColor(), true);
         }
 
-        int infoX = config.getInteger("InfoX");
-        int infoY = config.getInteger("InfoY");
+        int infoX = CONFIG.infoX();
+        int infoY = CONFIG.infoY();
         List<String> infoList = new ArrayList<>();
         if(fpsSetting || isEditMode)
             infoList.add("FPS§7: §f" + client.getCurrentFps());
@@ -160,7 +149,7 @@ public abstract class MixinInGameHud {
         }
 
         for(int i = 0; i < infoList.size(); i++)
-            context.drawText(tr, FontHelper.toCustomFont(infoList.get(i), fontName), infoX, infoY + i * 10, config.getInteger("MenuColor"), true);
+            context.drawText(tr, FontHelper.toCustomFont(infoList.get(i), fontName), infoX, infoY + i * 10, CONFIG.menuColor(), true);
     }
 
 

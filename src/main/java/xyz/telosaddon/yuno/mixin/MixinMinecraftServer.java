@@ -14,8 +14,6 @@ public class MixinMinecraftServer {
 
     @Inject(method = "createWorlds", at = @At("HEAD"))
     private void createWorlds(CallbackInfo ci) {
-        TelosAddon ta = TelosAddon.getInstance();
-        ta.clearAliveBosses();
         getInstance().getRpcManager().start();
     }
 

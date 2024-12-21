@@ -1,19 +1,9 @@
 package xyz.telosaddon.yuno;
 
-import com.mojang.brigadier.Message;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.HoverEvent;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import xyz.telosaddon.yuno.discordrpc.DiscordRPCManager;
 import xyz.telosaddon.yuno.hotkey.*;
@@ -24,19 +14,22 @@ import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
 import xyz.telosaddon.yuno.sound.SoundManager;
 
 import xyz.telosaddon.yuno.utils.BossBarUtils;
-import xyz.telosaddon.yuno.utils.config.Config;
+import xyz.telosaddon.yuno.utils.config.ModConfig;
+import xyz.telosaddon.yuno.utils.config.TelosConfig;
 import xyz.telosaddon.yuno.sound.CustomSound;
 
 import java.util.*;
 
 import java.util.logging.Logger;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
 import static xyz.telosaddon.yuno.utils.LocalAPI.updateAPI;
 
 public class TelosAddon implements ClientModInitializer  {
     public static final String MOD_NAME = "RealmsAddon";
     public static final String MOD_VERSION = "v0.3";
+    public static final String MOD_ID = "realmsaddon";
+
+    public static final ModConfig CONFIG = ModConfig.createAndLoad();
 
     public static final Logger LOGGER = Logger.getLogger(MOD_NAME);
     private final MinecraftClient mc = MinecraftClient.getInstance();
@@ -44,7 +37,7 @@ public class TelosAddon implements ClientModInitializer  {
 
     private static final DiscordRPCManager rpcManager = new DiscordRPCManager();
     private SoundManager soundManager;
-    private Config config;
+    private TelosConfig config;
     private Map<String, Integer> bagCounter;
     private long playTime = 0;
     private int tickCounter = 0;
@@ -69,7 +62,7 @@ public class TelosAddon implements ClientModInitializer  {
         TestHotkey.init();
     }
     public void stop() {
-        config.save();
+
         rpcManager.stop();
     }
     public void tick() {
@@ -77,9 +70,9 @@ public class TelosAddon implements ClientModInitializer  {
         ClientPlayerEntity player = mc.player;
         if(player == null) return;
 
-        if(mc.options.attackKey.isPressed() && config.getBoolean("SwingSetting") && isOnTelos()) {
+        if(mc.options.attackKey.isPressed() && CONFIG.swingSetting() && isOnTelos()) {
             boolean canSwing = !player.getItemCooldownManager().isCoolingDown(player.getMainHandStack());
-            if (!config.getBoolean("SwingIfNoCooldown") || canSwing) {
+            if (!CONFIG.swingIfNoCooldown()|| canSwing) {
                 player.swingHand(Hand.MAIN_HAND);
             }
         }
@@ -92,7 +85,7 @@ public class TelosAddon implements ClientModInitializer  {
             tickCounter++;
             if(tickCounter >= 20) {
                 playTime++;
-                config.addLong("TotalPlaytime", 1);
+                CONFIG.totalPlayTime(CONFIG.totalPlayTime() + 1);
                 tickCounter = 0;
 
             }
@@ -105,11 +98,11 @@ public class TelosAddon implements ClientModInitializer  {
     }
 
     public static TelosAddon getInstance() { return instance; }
-    public Config getConfig() { return config; }
+    public TelosConfig getConfig() { return config; }
     public SoundManager getSoundManager() { return soundManager; }
 
     public void toggleGamma(boolean b) {
-        Double newGamma = b ? config.getDouble("NewGamma") : config.getDouble("NormalGamma");
+        Double newGamma = b ? 1500D : 0D;
         mc.options.getGamma().setValue(newGamma);
     }
 
@@ -147,17 +140,11 @@ public class TelosAddon implements ClientModInitializer  {
         return false;
     }
 
-    public void addAliveBosses(String name) { this.aliveBosses.add(name); }
-    public void removeAliveBoss(String name) { this.aliveBosses.remove(name); }
-    public void clearAliveBosses() { this.aliveBosses.clear(); }
-    public List<String> getAliveBosses() { return this.aliveBosses; }
     public boolean isEditMode() { return this.editMode; }
     public void setEditMode(boolean value) { this.editMode = value; }
 
     @Override
     public void onInitializeClient() {
-        config = new Config();
-        config.load();
         instance = this;
 
         BossBarUtils.init();
@@ -170,7 +157,6 @@ public class TelosAddon implements ClientModInitializer  {
         soundManager.addSound(new CustomSound("button_click"));
         soundManager.addSound(new CustomSound("white_bag"));
         soundManager.addSound(new CustomSound("black_bag"));
-        aliveBosses = new ArrayList<>();
 
         this.showMainRangeFeature = new ShowMainRangeFeature(config);
         this.showOffHandFeature = new ShowOffHandFeature(config);
@@ -183,7 +169,8 @@ public class TelosAddon implements ClientModInitializer  {
     }
 
     public void run(){
-        if(config.getBoolean("GammaSetting")) {
+        // todo move to feature
+        if(CONFIG.gammaSetting()) {
             toggleGamma(true);
         }
     }

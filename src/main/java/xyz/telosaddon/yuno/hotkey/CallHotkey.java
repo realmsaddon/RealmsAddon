@@ -19,6 +19,7 @@ import xyz.telosaddon.yuno.utils.LocalAPI;
 import java.util.Locale;
 import java.util.Objects;
 
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 import static xyz.telosaddon.yuno.utils.BossBarUtils.bossBarMap;
 
 
@@ -59,7 +60,7 @@ public class CallHotkey{
                         return;
                     }
 
-                    if (TelosAddon.getInstance().getConfig().getBoolean("CallHotkeyShout")) {
+                    if (CONFIG.callHotkeyShout()) {
                         Objects.requireNonNull(client.getNetworkHandler()).sendChatCommand("shout " + callString);
                     }
                     else{

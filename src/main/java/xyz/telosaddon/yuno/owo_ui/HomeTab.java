@@ -3,11 +3,11 @@ package xyz.telosaddon.yuno.owo_ui;
 import io.wispforest.owo.ui.base.BaseUIModelScreen;
 import io.wispforest.owo.ui.component.ButtonComponent;
 import io.wispforest.owo.ui.component.CheckboxComponent;
+import io.wispforest.owo.ui.component.TextBoxComponent;
 import io.wispforest.owo.ui.container.FlowLayout;
 import net.minecraft.util.Identifier;
-import xyz.telosaddon.yuno.utils.config.Config;
 
-import java.util.function.Consumer;
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
 public class HomeTab extends BaseUIModelScreen<FlowLayout> {
     public HomeTab() {
@@ -31,19 +31,49 @@ public class HomeTab extends BaseUIModelScreen<FlowLayout> {
         });
 
         //the other buttons
-        rootComponent.childById(CheckboxComponent.class, "SwingSetting").onChanged(listener -> {
-            System.out.println("test");
-        });
-        rootComponent.childById(CheckboxComponent.class, "SwingIfNoCooldown");
-        rootComponent.childById(CheckboxComponent.class, "GammaSetting");
-        rootComponent.childById(CheckboxComponent.class, "FPSSetting");
-        rootComponent.childById(CheckboxComponent.class, "PingSetting");
-        rootComponent.childById(CheckboxComponent.class, "PlaytimeSetting");
-        rootComponent.childById(CheckboxComponent.class, "SpawnBossesSetting");
-        rootComponent.childById(CheckboxComponent.class, "SoundSetting");
-        rootComponent.childById(CheckboxComponent.class, "DiscordRPCSetting");
-        rootComponent.childById(CheckboxComponent.class, "DiscordDefaultStatusMessage");
-        rootComponent.childById(CheckboxComponent.class, "RPCShowLocationSetting");
-        rootComponent.childById(CheckboxComponent.class, "RPCShowFightingSetting");
+        rootComponent.childById(CheckboxComponent.class, "SwingSetting")
+                .checked(CONFIG.swingSetting())
+                .onChanged(CONFIG::swingSetting);
+        rootComponent.childById(CheckboxComponent.class, "SwingIfNoCooldown")
+                .checked(CONFIG.swingIfNoCooldown())
+                .onChanged(CONFIG::swingIfNoCooldown);
+
+        rootComponent.childById(CheckboxComponent.class, "GammaSetting")
+                .checked(CONFIG.gammaSetting())
+                .onChanged(CONFIG::gammaSetting);
+        rootComponent.childById(CheckboxComponent.class, "FPSSetting")
+                .checked(CONFIG.fpsSetting())
+                .onChanged(CONFIG::fpsSetting);
+        rootComponent.childById(CheckboxComponent.class, "PingSetting")
+                .checked(CONFIG.pingSetting())
+                .onChanged(CONFIG::pingSetting);
+        rootComponent.childById(CheckboxComponent.class, "PlaytimeSetting")
+                .checked(CONFIG.playTimeSetting())
+                .onChanged(CONFIG::playTimeSetting);
+        rootComponent.childById(CheckboxComponent.class, "SpawnBossesSetting")
+                .checked(CONFIG.bossTrackerFeatureEnabled())
+                .onChanged(CONFIG::bossTrackerFeatureEnabled);
+
+        rootComponent.childById(CheckboxComponent.class, "SoundSetting")
+                .checked(CONFIG.soundSetting())
+                .onChanged(CONFIG::soundSetting);
+
+        rootComponent.childById(CheckboxComponent.class, "DiscordRPCSetting")
+                .checked(CONFIG.discordRPCSetting())
+                .onChanged(CONFIG::discordRPCSetting);
+
+        rootComponent.childById(TextBoxComponent.class, "DiscordDefaultStatusMessage")
+                .text(CONFIG.discordDefaultStatusMessage())
+                .<TextBoxComponent>configure(textBox -> {
+                    var eventSrc = textBox.onChanged();
+                    eventSrc.subscribe(CONFIG::discordDefaultStatusMessage);
+                });
+
+        rootComponent.childById(CheckboxComponent.class, "RPCShowLocationSetting")
+                .checked(CONFIG.rpcShowLocationSetting())
+                .onChanged(CONFIG::rpcShowLocationSetting);
+        rootComponent.childById(CheckboxComponent.class, "RPCShowFightingSetting")
+                .checked(CONFIG.rpcShowFightingSetting())
+                .onChanged(CONFIG::rpcShowFightingSetting);
     }
 }
