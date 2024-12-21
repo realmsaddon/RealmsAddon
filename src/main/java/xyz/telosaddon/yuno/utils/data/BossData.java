@@ -10,62 +10,62 @@ import java.util.Optional;
 public enum BossData {
     ANUBIS(
             "Anubis",
-            new BlockPos(458, 0, -467),
+            new BlockPos(458, 204, -467),
             new CustomModelDataComponent(829068)
     ),
     ASTAROTH(
             "Astaroth",
-            new BlockPos(250, 0, 60),
+            new BlockPos(250, 217, 60),
             new CustomModelDataComponent(829064)
     ),
     CHUNGUS(
             "Chungus",
-            new BlockPos(61, 0, -490),
+            new BlockPos(61, 256, -490),
             new CustomModelDataComponent(829066)
     ),
     FREDDY(
             "Freddy",
-            new BlockPos(-136, 0, 653),
+            new BlockPos(-136, 200, 653),
             new CustomModelDataComponent(829067)
     ),
     GLUMI(
             "Glumi",
-            new BlockPos(339, 0, 552),
+            new BlockPos(339, 222, 552),
             new CustomModelDataComponent(829063)
     ),
     ILLARIUS(
             "Illarius",
-            new BlockPos(478, 0, -45),
+            new BlockPos(478, 200, -45),
             new CustomModelDataComponent(829065)
     ),
     LOTIL(
             "Lotil",
-            new BlockPos(-138, 0, 17),
+            new BlockPos(-138, 214, 17),
             new CustomModelDataComponent(829059)
     ),
     OOZUL(
             "Oozul",
-            new BlockPos(-424, 0, 91),
+            new BlockPos(-424, 195, 91),
             new CustomModelDataComponent(829060)
     ),
     TIDOL(
             "Tidol",
-            new BlockPos(-543, 0, 364),
+            new BlockPos(-543, 190, 364),
             new CustomModelDataComponent(829062)
     ),
     VALUS(
             "Valus",
-            new BlockPos(35, 0, 307),
+            new BlockPos(35, 210, 307),
             new CustomModelDataComponent(829061)
     ),
     HOLLOWBANE(
             "Hollowbane",
-            new BlockPos(232, 0, 696),
+            new BlockPos(232, 150, 696), // estimate i forgot what it was
             new CustomModelDataComponent(829103)
     ),
     CLAUS(
             "Claus",
-            new BlockPos(232, 0, 696), // todo
+            new BlockPos(10, 212, -121),
             new CustomModelDataComponent(829103)
     );;
 

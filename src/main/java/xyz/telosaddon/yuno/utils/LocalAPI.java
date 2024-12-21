@@ -25,9 +25,6 @@ public class LocalAPI {
     private static String currentClientPing = "";
     private static String lastKnownBoss = "";
     private static boolean countdownLock = false;
-
-
-
     private static String currentPortalCall = "";
     private static int currentPortalCallTime = 0;
 
@@ -76,7 +73,7 @@ public class LocalAPI {
 
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
-                LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
+                // LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
                 lastKnownBoss = currentCharacterFighting;
                 switch (bossBar.getName().hashCode()){
                     case -1083980771 -> currentCharacterFighting = "Chungus";

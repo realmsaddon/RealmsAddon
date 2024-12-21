@@ -21,6 +21,7 @@ public class RangeRenderer {
 	}
 
 	private static void draw(WorldRenderContext context) {
+
 		ClientPlayerEntity player = MinecraftClient.getInstance().player;
 		assert player != null;
 		var matrixStack = context.matrixStack();

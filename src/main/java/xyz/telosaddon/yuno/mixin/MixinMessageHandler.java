@@ -17,8 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.features.Features;
-import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
-import xyz.telosaddon.yuno.utils.config.Config;
+import xyz.telosaddon.yuno.utils.config.TelosConfig;
 
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
@@ -51,7 +50,7 @@ public class MixinMessageHandler {
         if(s.contains("discord.telosrealms.com")){ // nexus check
             Features.BOSS_TRACKER_FEATURE.clearAlive();
 
-            if (!TelosAddon.getInstance().getConfig().getBoolean("EnableJoinText") || TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
+            if (!CONFIG.enableJoinText()|| TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player != null) {
                 CompletableFuture.runAsync(() -> {
@@ -76,20 +75,13 @@ public class MixinMessageHandler {
 
         if(!s.equals("===============================================")) return;
         if (trackerBit = !trackerBit) return; // there's 2 bars in the kill message, and guess what datatype has 2 states
-        Config config = TelosAddon.getInstance().getConfig();
 
-        config.addInt("TotalRuns", 1);
-        config.addInt("NoWhiteRuns", 1);
-        config.addInt("NoBlackRuns", 1);
+        CONFIG.totalRuns(CONFIG.totalRuns() + 1);
+        CONFIG.noWhiteRuns(CONFIG.noWhiteRuns() + 1);
+        CONFIG.noBlackRuns(CONFIG.noBlackRuns() + 1);
 
-        int newValue = TelosAddon.getInstance().getBagCounter().get("TotalRuns");
-        TelosAddon.getInstance().getBagCounter().replace("TotalRuns", newValue + 1);
 
-        int newValue2 = TelosAddon.getInstance().getBagCounter().get("NoWhiteRuns");
-        TelosAddon.getInstance().getBagCounter().replace("NoWhiteRuns", newValue2 + 1);
 
-        int newBlackValue = TelosAddon.getInstance().getBagCounter().get("NoBlackRuns");
-        TelosAddon.getInstance().getBagCounter().replace("NoBlackRuns", newBlackValue + 1);
     }
 
 }

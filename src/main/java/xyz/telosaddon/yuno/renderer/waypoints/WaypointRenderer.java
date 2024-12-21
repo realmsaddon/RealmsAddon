@@ -38,7 +38,7 @@ public class WaypointRenderer{
         WorldRenderEvents.END.register(RENDER_IDENTIFIER, WaypointRenderer::render);
     }
 
-    // shamelessly stolen from https://github.com/PouekDEV/CList/blob/1.21.2/src/main/java/one/pouekdev/coordinatelist/CListClient.java
+
     public static Vec3d calculateRenderCoords(BlockPos waypoint, Camera camera, float distance) {
         double cameraX = (float)camera.getPos().x;
         double cameraY = (float)camera.getPos().y;
@@ -82,6 +82,7 @@ public class WaypointRenderer{
 
         VertexConsumerProvider.Immediate consumerProvider = client.getBufferBuilders().getEntityVertexConsumers();
         for(BossData bossData : Features.BOSS_TRACKER_FEATURE.getCurrentAlive()) {
+
             BlockPos waypoint = bossData.spawnPosition;
 
             Vec3d position = new Vec3d(waypoint.getX(), waypoint.getY(), waypoint.getZ());
@@ -128,7 +129,7 @@ public class WaypointRenderer{
                     backgroundColorCode,
                     LightmapTextureManager.MAX_LIGHT_COORDINATE
             );
-            if (distance > 30 && squaredDistance < 15000 ) {
+            if (distance > 30 ) {
                 textRenderer.draw(
                         Text.of(waypointString),
                         -textRenderer.getWidth(bossData.label) / 2.0F,

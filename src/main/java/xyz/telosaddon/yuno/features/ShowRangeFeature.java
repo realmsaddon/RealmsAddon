@@ -1,5 +1,6 @@
 package xyz.telosaddon.yuno.features;
 
+import io.wispforest.owo.config.Option;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -13,22 +14,23 @@ import xyz.telosaddon.yuno.renderer.CircleRenderer;
 import xyz.telosaddon.yuno.renderer.IRenderer;
 import xyz.telosaddon.yuno.renderer.LineRenderer;
 import xyz.telosaddon.yuno.utils.ItemType;
-import xyz.telosaddon.yuno.utils.config.Config;
 
 import java.util.List;
 import java.util.function.Function;
 
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
+
 public class ShowRangeFeature extends AbstractFeature {
 	private ItemStack previousItem = null;
-	private List<IRenderer> renderers;
+	protected List<IRenderer> renderers;
 	private final Function<PlayerInventory, ItemStack> itemGetter;
 	private float radius = Float.NaN;
 
 
-	public ShowRangeFeature(Config config, Function<PlayerInventory, ItemStack> itemGetter, String itemSlotName) {
-		super(config, "Show" + itemSlotName + "RangeFeature");
+	public ShowRangeFeature(Option.Key key, Function<PlayerInventory, ItemStack> itemGetter) {
+		super(key);
 		this.itemGetter = itemGetter;
-		this.setRangeType(RangeViewType.valueOf(config.getString("Show" + itemSlotName + "RangeFeatureViewType")));
+
 	}
 
 	private float parseRadius(ItemStack itemStack) {
@@ -48,6 +50,7 @@ public class ShowRangeFeature extends AbstractFeature {
 	}
 
 	private void checkItem(@NotNull ClientPlayerEntity player) {
+		//System.out.println("checking item");
 		var inventory = player.getInventory();
 		if (inventory == null) return;
 		ItemStack itemToCheck = this.itemGetter.apply(inventory);
@@ -75,6 +78,7 @@ public class ShowRangeFeature extends AbstractFeature {
 	}
 
 	public void tick() {
+
 		if (!this.isEnabled()) return;
 		var client = MinecraftClient.getInstance();
 		if (client.player == null) return;
@@ -87,16 +91,22 @@ public class ShowRangeFeature extends AbstractFeature {
 
 	public void draw(float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, ClientPlayerEntity player, float dy) {
 		if (!this.isEnabled()) return;
+
 		this.renderers.forEach(r -> r.draw(tickDelta,
 				matrices,
 				vertexConsumers,
 				player,
-				this.getConfig().getInteger(this.getFeatureName() + "Color"),
-				this.getConfig().getDouble(this.getFeatureName() + "Height").floatValue() + dy));
+CONFIG.showMainRangeFeatureColor(),
+0));
+//				this.getConfig().getInteger(this.getFeatureName() + "Color"),
+//				this.getConfig().getDouble(this.getFeatureName() + "Height").floatValue() + dy));
 
 	}
 
+
+
 	public void setRangeType(RangeViewType type) {
+		System.out.println("Setting range type to " + type);
 		this.renderers = switch (type) {
 			case CIRCLE -> List.of(new CircleRenderer());
 			case LINE -> List.of(new LineRenderer());

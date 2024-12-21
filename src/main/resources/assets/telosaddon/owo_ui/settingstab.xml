@@ -71,6 +71,28 @@
                                 <horizontal method="fixed">150</horizontal>
                             </sizing>
                         </button>
+                        <flow-layout direction="horizontal">
+                            <children>
+                                <label id="ChangeGUIColorLabel">
+                                    <text>Change GUI Color:</text>
+                                </label>
+                                <color-picker id = "ChangeGUIColorPicker">
+                                    <show-alpha>true</show-alpha>
+                                </color-picker>
+                            </children>
+                        </flow-layout>
+
+                        <flow-layout direction="horizontal">
+                            <children>
+                                <label id="ChangeFontLabel">
+                                    <text>Change GUI Font:</text>
+                                </label>
+                                <dropdown id="ChangeFontDropdown">
+
+                                </dropdown>
+
+                            </children>
+                        </flow-layout>
                     </children>
                 </flow-layout>
             </children>

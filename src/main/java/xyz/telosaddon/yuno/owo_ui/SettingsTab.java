@@ -1,5 +1,6 @@
 package xyz.telosaddon.yuno.owo_ui;
 
+import io.wispforest.owo.config.Option;
 import io.wispforest.owo.ui.base.BaseUIModelScreen;
 import io.wispforest.owo.ui.component.ButtonComponent;
 import io.wispforest.owo.ui.container.FlowLayout;
@@ -31,5 +32,6 @@ public class SettingsTab extends BaseUIModelScreen<FlowLayout> {
         rootComponent.childById(ButtonComponent.class, "Range").onPress(button -> {
             this.client.setScreen(new RangeTab(this));
         });
+
     }
 }

@@ -6,13 +6,14 @@ import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.text.Text;
+import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.event.HandledScreenRemovedCallback;
-import xyz.telosaddon.yuno.utils.config.Config;
 import xyz.telosaddon.yuno.utils.data.BossData;
 
 import java.util.HashSet;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
 
 public class BossTrackerFeature extends AbstractFeature{
 
@@ -23,8 +24,8 @@ public class BossTrackerFeature extends AbstractFeature{
 
     private final HashSet<BossData> currentAlive = new HashSet<>();
 
-    public BossTrackerFeature(Config config, String featureName) {
-        super(config, featureName);
+    public BossTrackerFeature() {
+        super(TelosAddon.CONFIG.keys.bossTrackerFeatureEnabled);
         ClientReceiveMessageEvents.GAME.register(this::onGameMessage);
         HandledScreenRemovedCallback.EVENT.register(this::onScreenClosed);
     }
