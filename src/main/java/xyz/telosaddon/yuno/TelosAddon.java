@@ -99,8 +99,7 @@ public class TelosAddon implements ClientModInitializer  {
     public SoundManager getSoundManager() { return soundManager; }
 
     public void toggleGamma(boolean b) {
-        Double newGamma = b ? 1500D : 0D;
-        mc.options.getGamma().setValue(newGamma);
+
     }
 
 

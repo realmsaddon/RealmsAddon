@@ -76,9 +76,12 @@
                                 <label id="ChangeGUIColorLabel">
                                     <text>Change GUI Color:</text>
                                 </label>
-                                <color-picker id = "ChangeGUIColorPicker">
-                                    <show-alpha>true</show-alpha>
-                                </color-picker>
+                                <text-box id="ChangeGUIColorField">
+                                    <text> </text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </text-box>
                             </children>
                         </flow-layout>
 

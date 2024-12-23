@@ -58,14 +58,26 @@ public class RangeTab extends BaseUIModelScreen<FlowLayout> {
                         (dropdown)->{
                             CONFIG.showMainRangeFeatureViewType(ShowRangeFeature.RangeViewType.BOTH);
                         });
-
-
-
-        rootComponent.childById(ColorPickerComponent.class, "MainHandColorPicker")
-                .selectedColor(Color.ofArgb(CONFIG.showMainRangeFeatureColor()))
-                .onChanged().subscribe((color) -> {
-                    CONFIG.showMainRangeFeatureColor(color.argb());
+        rootComponent.childById(TextBoxComponent.class, "MainHandColorField")
+                .text(Color.ofRgb(CONFIG.showMainRangeFeatureColor()).asHexString(false))
+                .<TextBoxComponent>configure(textBox -> {
+                    var eventSrc = textBox.onChanged();
+                    eventSrc.subscribe((input)->{
+                        try {
+                            int color = 0xFF000000 | SerializeUtils.parseHexRGB(input);
+                            CONFIG.showMainRangeFeatureColor(color);
+                        } catch (Exception e) {
+                            TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
+                        }
+                    });
                 });
+
+
+//        rootComponent.childById(ColorPickerComponent.class, "MainHandColorPicker")
+//                .selectedColor(Color.ofArgb(CONFIG.showMainRangeFeatureColor()))
+//                .onChanged().subscribe((color) -> {
+//                    CONFIG.showMainRangeFeatureColor(color.argb());
+//                });
 
 
         rootComponent.childById(CheckboxComponent.class, "OffHandShowRangeSetting")
@@ -88,11 +100,24 @@ public class RangeTab extends BaseUIModelScreen<FlowLayout> {
 
                             CONFIG.showOffHandRangeFeatureViewType(ShowRangeFeature.RangeViewType.BOTH);
                         });
-        rootComponent.childById(ColorPickerComponent.class, "OffHandColorPicker")
-                .selectedColor(Color.ofArgb(CONFIG.showOffHandRangeFeatureColor()))
-                .onChanged().subscribe((color) -> {
-                    CONFIG.showOffHandRangeFeatureColor(color.argb());
+        rootComponent.childById(TextBoxComponent.class, "OffHandColorField")
+                .text(Color.ofRgb(CONFIG.showOffHandRangeFeatureColor()).asHexString(false))
+                .<TextBoxComponent>configure(textBox -> {
+                    var eventSrc = textBox.onChanged();
+                    eventSrc.subscribe((input)->{
+                        try {
+                            int color = 0xFF000000 | SerializeUtils.parseHexRGB(input);
+                            CONFIG.showOffHandRangeFeatureColor(color);
+                        } catch (Exception e) {
+                            TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
+                        }
+                    });
                 });
+//        rootComponent.childById(ColorPickerComponent.class, "OffHandColorPicker")
+//                .selectedColor(Color.ofArgb(CONFIG.showOffHandRangeFeatureColor()))
+//                .onChanged().subscribe((color) -> {
+//                    CONFIG.showOffHandRangeFeatureColor(color.argb());
+//                });
 
 
 

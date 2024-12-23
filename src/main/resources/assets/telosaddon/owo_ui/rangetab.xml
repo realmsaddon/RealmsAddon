@@ -82,12 +82,25 @@
                                 <horizontal method="fixed">150</horizontal>
                             </sizing>
                         </dropdown>
-                        <label id="MainHandColorLabel">
-                            <text>Set Main Hand Range Color: </text>
-                        </label>
-                        <color-picker id="MainHandColorPicker">
-                            <show-alpha>true</show-alpha>
-                        </color-picker>
+<!--                        <label id="MainHandColorLabel">-->
+<!--                            <text>Set Main Hand Range Color: </text>-->
+<!--                        </label>-->
+<!--                        <color-picker id="MainHandColorPicker">-->
+<!--                            <show-alpha>true</show-alpha>-->
+<!--                        </color-picker>-->
+
+                        <flow-layout direction="horizontal">
+                            <children>
+                                <label id="MainHandColorLabel">
+                                    <text>Set Main Hand Range Color:</text>
+                                </label>
+                                <text-box id="MainHandColorField">
+                                    <text> </text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </text-box></children>
+                        </flow-layout>
 
 
 
@@ -101,17 +114,25 @@
                             <text>Off Hand Range Type</text>
                         </label>
                         <dropdown id="OffHandTypeDropdown">
-
                             <sizing>
                                 <horizontal method="fixed">150</horizontal>
                             </sizing>
                         </dropdown>
-                        <label id="OffHandColorLabel">
-                            <text>Set Main Hand Range Color: </text>
-                        </label>
-                        <color-picker id="OffHandColorPicker">
-                            <show-alpha>true</show-alpha>
-                        </color-picker>
+                        <flow-layout direction="horizontal">
+                            <children>
+                                <label id="OffHandColorLabel">
+                                    <text>Set Offhand Range Color: </text>
+                                </label>
+                                <text-box id="OffHandColorField">
+                                    <text> </text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </text-box></children>
+                        </flow-layout>
+<!--                        <color-picker id="OffHandColorPicker">-->
+<!--                            <show-alpha>true</show-alpha>-->
+<!--                        </color-picker>-->
 
                     </children>
                     <padding><all>10</all></padding>
