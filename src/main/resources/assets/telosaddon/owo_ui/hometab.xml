@@ -55,7 +55,7 @@
                     <children>
 
                             <checkbox id="SwingSetting">
-                                <text>Show Main Hand Range</text>
+                                <text>Auto Swing</text>
                                 <sizing>
                                     <horizontal method="fixed">150</horizontal>
                                 </sizing>
@@ -135,7 +135,7 @@
                                 </sizing>
                             </checkbox>
                             <checkbox id="ToggleHotkeyShoutSetting">
-                                <text>Toggle Hotkey Shout</text>
+                                <text>Call hotkey shout</text>
                                 <sizing>
                                     <horizontal method="fixed">150</horizontal>
                                 </sizing>
