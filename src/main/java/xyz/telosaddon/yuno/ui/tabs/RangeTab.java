@@ -1,109 +1,122 @@
-//package xyz.telosaddon.yuno.ui.tabs;
-//
-//import xyz.telosaddon.yuno.TelosAddon;
-//import xyz.telosaddon.yuno.features.ShowRangeFeature;
-//import xyz.telosaddon.yuno.ui.CustomElement;
-//import xyz.telosaddon.yuno.ui.CustomUiManager;
-//import xyz.telosaddon.yuno.ui.elements.CustomButton;
-//import xyz.telosaddon.yuno.ui.elements.CustomDropdown;
-//import xyz.telosaddon.yuno.ui.elements.CustomText;
-//import xyz.telosaddon.yuno.ui.elements.CustomTextField;
-//import xyz.telosaddon.yuno.utils.config.TelosConfig;
-//import xyz.telosaddon.yuno.utils.config.SerializeUtils;
-//
-//import java.util.Arrays;
-//import java.util.List;
-//
-//public class RangeTab extends AbstractTab {
-////	private final CustomUiManager uiManager;
-////	private List<CustomElement> elements;
-////	private final TelosConfig config;
-////
-////	public RangeTab(CustomUiManager uiManager) {
-////		this.uiManager = uiManager;
-////		this.config = TelosAddon.getInstance().getConfig();
-////	}
-////
-////	public void loadButtons() {
-////		boolean showMainRangeSetting = getConfig().getBoolean("ShowMainRangeFeatureEnabled");
-////		boolean showOffHandRangeSetting = getConfig().getBoolean("ShowOffHandRangeFeatureEnabled");
-////		double showMainRangeHeight = getConfig().getDouble("ShowMainRangeFeatureHeight");
-////		double showOffHandRangeHeight = getConfig().getDouble("ShowOffHandRangeFeatureHeight");
-////
-////		var mainRangeHeightField = new CustomTextField(8, 118, 150, 20, "" + showMainRangeHeight);
-////		var mainRangeColorField = new CustomTextField(8, 153, 150, 20, "#RRGGBB");
-////
-////		var offHandRangeHeightField = new CustomTextField(8, 234, 150, 20, "" + showOffHandRangeHeight);
-////		var offHandRangeColorField = new CustomTextField(8, 269, 150, 20, "#RRGGBB");
-////
-////		this.elements = Arrays.asList(
-////				// Main Hand
-////				new CustomButton(8, 83, 150, 20, "Show Main Hand's range", (button, toggled) -> {
-////					toggle("ShowMainRangeFeatureEnabled", button.getText(), toggled);
-////				}).setToggled(showMainRangeSetting),
-////				new CustomText(8, 106, "Main Hand's range circle's height:"),
-////				mainRangeHeightField,
-////				new CustomButton(163, 118, 40, 20, "Apply", (button) -> {
-////					String input = mainRangeHeightField.getText();
-////					try {
-////						float height = Float.parseFloat(input);
-////						config.set("ShowMainRangeFeatureHeight", (double) height);
-////					} catch (NumberFormatException e) {
-////						TelosAddon.getInstance().sendMessage("Wrong Format! Not a float!");
-////					}
-////				}).setTextInMiddle(true),
-////				new CustomDropdown<>(226, 118, 200, 20, "Mainhand range viewer type",
-////						List.of(ShowRangeFeature.RangeViewType.values()),
-////						((button, value) -> {
-////							TelosAddon.getInstance().getShowMainRangeFeature().setRangeType(value);
-////							TelosAddon.getInstance().getConfig().set("ShowMainRangeFeatureViewType", value.name());
-////						})),
-////				new CustomText(8, 141, "Main Hand's range circle's color:"),
-////				mainRangeColorField,
-////				new CustomButton(163, 153, 40, 20, "Apply", (button) -> {
-////					String input = mainRangeColorField.getText();
-////					try {
-////						int color = 0xFF000000 | SerializeUtils.parseHexRGB(input);
-////						config.set("ShowMainRangeFeatureColor", color);
-////					} catch (Exception e) {
-////						TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
-////					}
-////				}).setTextInMiddle(true),
-////
-////				// OffHand
-////				new CustomButton(8, 199, 150, 20, "Show Off Hand's range", (button, toggled) -> {
-////					toggle("ShowOffHandRangeFeatureEnabled", button.getText(), toggled);
-////				}).setToggled(showOffHandRangeSetting),
-////				new CustomText(8, 222, "Off Hand's range circle's height:"),
-////				offHandRangeHeightField,
-////				new CustomButton(163, 234, 40, 20, "Apply", (button) -> {
-////					String input = offHandRangeHeightField.getText();
-////					try {
-////						float height = Float.parseFloat(input);
-////						config.set("ShowOffHandRangeFeatureHeight", (double) height);
-////					} catch (NumberFormatException e) {
-////						TelosAddon.getInstance().sendMessage("Wrong Format! Not a float!");
-////					}
-////				}).setTextInMiddle(true),
-////				new CustomDropdown<>(226, 234, 200, 20, "Offhand range viewer type",
-////						List.of(ShowRangeFeature.RangeViewType.values()),
-////						((button, value) -> {
-////							TelosAddon.getInstance().getShowOffHandFeature().setRangeType(value);
-////							TelosAddon.getInstance().getConfig().set("ShowOffHandRangeFeatureViewType", value.name());
-////						})),
-////				new CustomText(8, 257, "Off Hand's range circle's color:"),
-////				offHandRangeColorField,
-////				new CustomButton(163, 269, 40, 20, "Apply", (button) -> {
-////					String input = offHandRangeColorField.getText();
-////					try {
-////						int color = 0xFF000000 | SerializeUtils.parseHexRGB(input);
-////						config.set("ShowOffHandRangeFeatureColor", color);
-////					} catch (Exception e) {
-////						TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
-////					}
-////				}).setTextInMiddle(true)
-////		);
-////
-////		uiManager.getCustomElements().addAll(this.elements);
-////	}
-//}
+package xyz.telosaddon.yuno.ui.tabs;
+
+import io.wispforest.owo.ui.base.BaseUIModelScreen;
+import io.wispforest.owo.ui.component.*;
+import io.wispforest.owo.ui.container.FlowLayout;
+import io.wispforest.owo.ui.core.Color;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
+import net.minecraft.client.gui.screen.Screen;
+import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.features.ShowRangeFeature;
+import xyz.telosaddon.yuno.utils.config.SerializeUtils;
+
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
+
+public class RangeTab extends BaseUIModelScreen<FlowLayout> {
+
+    private final Screen parent;
+
+    public RangeTab(@Nullable Screen parent) {
+        super(FlowLayout.class, DataSource.asset(Identifier.of("telosaddon", "rangetab")));
+        this.parent = parent;
+    }
+
+    @Override
+    protected void build(FlowLayout rootComponent) {
+        //tab buttons
+        rootComponent.childById(ButtonComponent.class, "Gui").onPress(button -> {
+            this.client.setScreen(new GuiTab(this));
+        });
+        rootComponent.childById(ButtonComponent.class, "Settings").onPress(button -> {
+            this.client.setScreen(new SettingsTab(this));
+        });
+        rootComponent.childById(ButtonComponent.class, "Home").onPress(button -> {
+            this.client.setScreen(new HomeTab());
+        });
+
+        rootComponent.childById(CheckboxComponent.class, "MainHandShowRangeSetting")
+                .checked(CONFIG.showMainRangeFeatureEnabled())
+                .onChanged(CONFIG::showMainRangeFeatureEnabled);
+        rootComponent.childById(DropdownComponent.class, "MainHandTypeDropdown")
+
+                .button(Text.of("Circle"),
+                        (button)->{
+                            CONFIG.showMainRangeFeatureViewType(ShowRangeFeature.RangeViewType.CIRCLE);
+                })
+                .button(Text.of("Line"),
+                        (dropdown)->{
+                            CONFIG.showMainRangeFeatureViewType(ShowRangeFeature.RangeViewType.LINE);
+                })
+                .button(Text.of("Both"),
+                        (dropdown)->{
+                            CONFIG.showMainRangeFeatureViewType(ShowRangeFeature.RangeViewType.BOTH);
+                        });
+        rootComponent.childById(TextBoxComponent.class, "MainHandColorField")
+                .text(Color.ofRgb(CONFIG.showMainRangeFeatureColor()).asHexString(false))
+                .<TextBoxComponent>configure(textBox -> {
+                    var eventSrc = textBox.onChanged();
+                    eventSrc.subscribe((input)->{
+                        try {
+                            int color = 0xFF000000 | SerializeUtils.parseHexRGB(input);
+                            CONFIG.showMainRangeFeatureColor(color);
+                        } catch (Exception e) {
+                            TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
+                        }
+                    });
+                });
+
+
+//        rootComponent.childById(ColorPickerComponent.class, "MainHandColorPicker")
+//                .selectedColor(Color.ofArgb(CONFIG.showMainRangeFeatureColor()))
+//                .onChanged().subscribe((color) -> {
+//                    CONFIG.showMainRangeFeatureColor(color.argb());
+//                });
+
+
+        rootComponent.childById(CheckboxComponent.class, "OffHandShowRangeSetting")
+                .checked(CONFIG.showOffHandRangeFeatureEnabled())
+                .onChanged(CONFIG::showOffHandRangeFeatureEnabled);
+        rootComponent.childById(DropdownComponent.class, "OffHandTypeDropdown")
+                .button(Text.of("Circle"),
+                        (dropdown)->{
+
+                            CONFIG.showOffHandRangeFeatureViewType(ShowRangeFeature.RangeViewType.CIRCLE);
+
+                        })
+                .button(Text.of("Line"),
+                        (dropdown)->{
+
+                            CONFIG.showOffHandRangeFeatureViewType(ShowRangeFeature.RangeViewType.LINE);
+                        })
+                .button(Text.of("Both"),
+                        (dropdown)->{
+
+                            CONFIG.showOffHandRangeFeatureViewType(ShowRangeFeature.RangeViewType.BOTH);
+                        });
+        rootComponent.childById(TextBoxComponent.class, "OffHandColorField")
+                .text(Color.ofRgb(CONFIG.showOffHandRangeFeatureColor()).asHexString(false))
+                .<TextBoxComponent>configure(textBox -> {
+                    var eventSrc = textBox.onChanged();
+                    eventSrc.subscribe((input)->{
+                        try {
+                            int color = 0xFF000000 | SerializeUtils.parseHexRGB(input);
+                            CONFIG.showOffHandRangeFeatureColor(color);
+                        } catch (Exception e) {
+                            TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
+                        }
+                    });
+                });
+//        rootComponent.childById(ColorPickerComponent.class, "OffHandColorPicker")
+//                .selectedColor(Color.ofArgb(CONFIG.showOffHandRangeFeatureColor()))
+//                .onChanged().subscribe((color) -> {
+//                    CONFIG.showOffHandRangeFeatureColor(color.argb());
+//                });
+
+
+
+    }
+
+
+}

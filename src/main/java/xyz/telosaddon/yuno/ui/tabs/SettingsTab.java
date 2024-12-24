@@ -1,83 +1,101 @@
-//package xyz.telosaddon.yuno.ui.tabs;
-//
-//import net.minecraft.client.MinecraftClient;
-//import xyz.telosaddon.yuno.TelosAddon;
-//import xyz.telosaddon.yuno.ui.CustomElement;
-//import xyz.telosaddon.yuno.ui.CustomUiManager;
-//import xyz.telosaddon.yuno.ui.elements.CustomButton;
-//import xyz.telosaddon.yuno.ui.elements.CustomDropdown;
-//import xyz.telosaddon.yuno.ui.elements.CustomText;
-//import xyz.telosaddon.yuno.ui.elements.CustomTextField;
-//import xyz.telosaddon.yuno.utils.config.TelosConfig;
-//import xyz.telosaddon.yuno.utils.config.SerializeUtils;
-//
-//import java.util.Arrays;
-//import java.util.List;
-//
-//import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
-//
-//public class SettingsTab extends AbstractTab{
-//
-//    private final MinecraftClient mc;
-//    private final TelosConfig config;
-//    private final CustomUiManager uiManager;
-//    private List<CustomElement> elements;
-//
-//    public SettingsTab(CustomUiManager uiManager) {
-//        this.uiManager = uiManager;
-//        this.config = TelosAddon.getInstance().getConfig();
-//        this.mc = MinecraftClient.getInstance();
-//
-//    }
-//
-//    public void loadButtons() {
-//
-//        var guiColorTextField = new CustomTextField(8, 95, 150, 20, "#000000");
-//        this.elements = Arrays.asList(
-//                new CustomText(8, 83, "Change Gui Color:"),
-//                guiColorTextField,
-//                new CustomButton(163, 95, 40, 20, "Apply", (button) -> {
-//                    String input = guiColorTextField.getText();
-//                    try {
-//                        int color = SerializeUtils.parseHexRGB(input);
-//                        CONFIG.menuColor(color);
-//                    } catch (Exception e) {
-//                        TelosAddon.getInstance().sendMessage("Wrong Format! Use #000000");
-//                    }
-//                }).setTextInMiddle(true),
-//                new CustomButton(8, 118, 150, 20, "Edit Display Positions", (button -> {
-//                    TelosAddon.getInstance().setEditMode(true);
-//                    this.uiManager.editMode();
-//                })).setTextInMiddle(true),
-//                new CustomButton(8, 141, 150, 20, "Reset Display Positions", (button -> {
-//                    CONFIG.infoX(4);
-//                    CONFIG.infoY(4);
-//                    CONFIG.bagX(-1);
-//                    CONFIG.bagY(60);
-//                })).setTextInMiddle(true),
-//                new CustomDropdown<>(8, 166, 150, 20, "Change Font", Arrays.asList(
-//                        "Default",
-//                        "Arial",
-//                        "Nokia CF",
-//                        "Roboto",
-//                        "Comic Sans",
-//                        "Silkscreen"
-//                ), ((button, value) -> {
-//                    switch (value) {
-//                        case "Nokia CF" -> CONFIG.font("nokiacf") ;
-//                        case "Roboto" -> CONFIG.font("roboto") ;
-//                        case "Silkscreen" -> CONFIG.font("silkscreen");
-//                        case "Arial" -> CONFIG.font("arial");
-//                        case "Comic Sans" -> CONFIG.font("comic_sans");
-//                        default -> CONFIG.font("default");
-//                    }
-//                }))
-//
-//
-//
-//        );
-//
-//        uiManager.getCustomElements().addAll(this.elements);
-//    }
-//
-//}
+package xyz.telosaddon.yuno.ui.tabs;
+
+import io.wispforest.owo.ui.base.BaseUIModelScreen;
+import io.wispforest.owo.ui.component.ButtonComponent;
+import io.wispforest.owo.ui.component.DropdownComponent;
+import io.wispforest.owo.ui.component.TextBoxComponent;
+import io.wispforest.owo.ui.container.FlowLayout;
+import io.wispforest.owo.ui.core.Color;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
+import net.minecraft.client.gui.screen.Screen;
+import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.ui.TelosMenu;
+import xyz.telosaddon.yuno.utils.config.SerializeUtils;
+
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
+
+public class SettingsTab extends BaseUIModelScreen<FlowLayout> {
+
+    private final Screen parent;
+
+    public SettingsTab(@Nullable Screen parent) {
+
+        super(FlowLayout.class, DataSource.asset(Identifier.of("telosaddon", "settingstab")));
+        this.parent = parent;
+    }
+
+    @Override
+    protected void build(FlowLayout rootComponent) {
+        //tab buttons
+        rootComponent.childById(ButtonComponent.class, "Gui").onPress(button -> {
+            this.client.setScreen(new GuiTab(this));
+        });
+        rootComponent.childById(ButtonComponent.class, "Home").onPress(button -> {
+            this.client.setScreen(new HomeTab());
+        });
+        rootComponent.childById(ButtonComponent.class, "Range").onPress(button -> {
+            this.client.setScreen(new RangeTab(this));
+        });
+
+
+        rootComponent.childById(ButtonComponent.class, "EditDisplayPosition").onPress(button -> {
+                TelosAddon.getInstance().setEditMode(true);
+                TelosMenu menu = new TelosMenu();
+                menu.getCustomUiManager().editMode(this);
+                this.client.setScreen(menu);
+
+        });
+
+        rootComponent.childById(ButtonComponent.class, "ResetDisplayPosition").onPress(button -> {
+                    CONFIG.infoX(4);
+                    CONFIG.infoY(4);
+                    CONFIG.bagX(-1);
+                    CONFIG.bagY(60);
+        });
+
+        rootComponent.childById(TextBoxComponent.class, "ChangeGUIColorField")
+                .text(Color.ofRgb(CONFIG.menuColor()).asHexString(false))
+                .<TextBoxComponent>configure(textBox -> {
+                    var eventSrc = textBox.onChanged();
+                    eventSrc.subscribe((input)->{
+                        try {
+                            int color = SerializeUtils.parseHexRGB(input);
+                            CONFIG.menuColor(color);
+                        } catch (Exception e) {
+                            TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
+                        }
+                    });
+                });
+
+        rootComponent.childById(DropdownComponent.class, "ChangeFontDropdown")
+
+                .button(Text.of("Nokia CF"),
+                        (button)->{
+                            CONFIG.font("nokiacf") ;
+                        })
+                .button(Text.of("Roboto"),
+                        (dropdown)->{
+                            CONFIG.font("roboto") ;
+                })
+                .button(Text.of("Silkscreen"),
+                        (dropdown)->{
+                            CONFIG.font("silkscreen");
+                })
+                .button(Text.of("Arial"),
+                        (dropdown)->{
+                            CONFIG.font("arial");
+                        })
+                .button(Text.of("Comic Sans"),
+                        (dropdown)->{
+                            CONFIG.font("comic_sans");
+                        })
+                .button(Text.of("Default"),
+                        (dropdown)->{
+                            CONFIG.font("default");
+                        });;
+
+
+    }
+}

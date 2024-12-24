@@ -3,13 +3,9 @@ package xyz.telosaddon.yuno.ui;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.Util;
 import xyz.telosaddon.yuno.TelosAddon;
-import xyz.telosaddon.yuno.owo_ui.SettingsTab;
-import xyz.telosaddon.yuno.owo_ui.TeleportTab;
+import xyz.telosaddon.yuno.ui.tabs.SettingsTab;
 import xyz.telosaddon.yuno.ui.elements.CustomButton;
-
-import xyz.telosaddon.yuno.utils.config.TelosConfig;
 
 import java.util.ArrayList;
 import java.util.List;

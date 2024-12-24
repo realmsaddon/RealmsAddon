@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.features.Features;
-import xyz.telosaddon.yuno.utils.config.TelosConfig;
+
 
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;

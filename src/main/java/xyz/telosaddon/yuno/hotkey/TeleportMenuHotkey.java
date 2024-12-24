@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
-import xyz.telosaddon.yuno.owo_ui.TeleportMenuScreen;
+import xyz.telosaddon.yuno.ui.tabs.TeleportMenuScreen;
 
 @Environment(EnvType.CLIENT)
 public class TeleportMenuHotkey {

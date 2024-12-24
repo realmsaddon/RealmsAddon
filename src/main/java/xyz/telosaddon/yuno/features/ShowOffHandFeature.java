@@ -3,7 +3,6 @@ package xyz.telosaddon.yuno.features;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
-import xyz.telosaddon.yuno.utils.config.TelosConfig;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 import xyz.telosaddon.yuno.utils.config.ConfigUtils;

@@ -14,11 +14,9 @@ import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
 import xyz.telosaddon.yuno.sound.SoundManager;
 
 import xyz.telosaddon.yuno.utils.BossBarUtils;
+import xyz.telosaddon.yuno.utils.config.ConfigTransferrer;
 import xyz.telosaddon.yuno.utils.config.ModConfig;
-import xyz.telosaddon.yuno.utils.config.TelosConfig;
 import xyz.telosaddon.yuno.sound.CustomSound;
-
-import java.util.*;
 
 import java.util.logging.Logger;
 
@@ -26,7 +24,7 @@ import static xyz.telosaddon.yuno.utils.LocalAPI.updateAPI;
 
 public class TelosAddon implements ClientModInitializer  {
     public static final String MOD_NAME = "RealmsAddon";
-    public static final String MOD_VERSION = "v0.3";
+    public static final String MOD_VERSION = "v0.3.0";
     public static final String MOD_ID = "realmsaddon";
 
     public static final ModConfig CONFIG = ModConfig.createAndLoad();
@@ -144,7 +142,7 @@ public class TelosAddon implements ClientModInitializer  {
         RangeRenderer.init();
         WaypointRenderer.init();
 
-
+        new ConfigTransferrer();
         new InitializeCommands().initializeCommands();
     }
 

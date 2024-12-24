@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.sound.SoundManager;
-import xyz.telosaddon.yuno.utils.config.TelosConfig;
+
 
 import java.util.Objects;
 

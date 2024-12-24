@@ -1,57 +1,35 @@
-//package xyz.telosaddon.yuno.ui.tabs;
-//
-//import net.minecraft.client.MinecraftClient;
-//import xyz.telosaddon.yuno.ui.CustomElement;
-//import xyz.telosaddon.yuno.ui.CustomUiManager;
-//import xyz.telosaddon.yuno.ui.elements.CustomButton;
-//import xyz.telosaddon.yuno.utils.LocalAPI;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import static xyz.telosaddon.yuno.utils.RealmUtils.nexusThenTp;
-//
-//public class TeleportTab{
-//    private final CustomUiManager uiManager;
-//    private List<CustomElement> elements;
-//
-//    public TeleportTab(CustomUiManager uiManager) {
-//        this.uiManager = uiManager;
-//        elements = new ArrayList<>();
-//        final String[] serverNames = {"Hub-1", "Hub-2", "Hub-3", "Hub-4", "Hub-5", "Hub-6", "Hub-7",
-//                "Galla", "Twilight", "Epenon", "Spire", "Eternia", "Terra", "Develyn",
-//                "Xeros", "Wahr", "Walms", "Yollixar", "Valoria", "Nymeris", "Kyndra",
-//                "Wynnthera", "Runedar", "Quinthor", "Pyrelia", "Ashburn", "Xelia", "Skyblock"};
-//
-//        for(int i = 0; i < 7; i++){
-//            for(int j = 0; j < 4; j++){
-//                int finalI = i;
-//                int finalJ = j;
-//                elements.add(new CustomButton(8 + i * (BTN_WIDTH + 7), 83 + j * (BTN_HEIGHT + 7), BTN_WIDTH, BTN_HEIGHT, serverNames[j*7+i], (button) -> {
-//                    joinWorld(serverNames[finalJ *7+ finalI]);
-//                }).setTextInMiddle(true));
-//            }
-//        }
-//    }
-//
-//    final int BTN_WIDTH = 55;
-//    final int BTN_HEIGHT = 20;
-//
-//    public void loadButtons() {
-//
-//        uiManager.getCustomElements().addAll(this.elements);
-//    }
-//
-//    private void joinWorld(String worldName){
-//        if (MinecraftClient.getInstance().player == null) return;
-//        MinecraftClient.getInstance().player.networkHandler.sendChatCommand("joinq " + worldName);
-//
-////        if (!LocalAPI.getCurrentCharacterWorld().contains("Hub")){
-////            nexusThenTp(worldName);
-////        }
-////        else{
-////            MinecraftClient.getInstance().player.networkHandler.sendChatCommand("joinq " + worldName);
-////        }
-//
-//    }
-//}
+package xyz.telosaddon.yuno.ui.tabs;
+
+import io.wispforest.owo.ui.base.BaseUIModelScreen;
+import io.wispforest.owo.ui.component.ButtonComponent;
+import io.wispforest.owo.ui.container.FlowLayout;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
+import net.minecraft.client.gui.screen.Screen;
+
+public class TeleportTab extends BaseUIModelScreen<FlowLayout> {
+
+    private final Screen parent;
+
+    public TeleportTab(@Nullable Screen parent) {
+        super(FlowLayout.class, DataSource.asset(Identifier.of("telosaddon", "teleporttab")));
+        this.parent = parent;
+    }
+
+    @Override
+    protected void build(FlowLayout rootComponent) {
+        //tab buttons
+        rootComponent.childById(ButtonComponent.class, "Gui").onPress(button -> {
+            this.client.setScreen(new GuiTab(this));
+        });
+        rootComponent.childById(ButtonComponent.class, "Settings").onPress(button -> {
+            this.client.setScreen(new SettingsTab(this));
+        });
+        rootComponent.childById(ButtonComponent.class, "Home").onPress(button -> {
+            this.client.setScreen(new HomeTab());
+        });
+        rootComponent.childById(ButtonComponent.class, "Range").onPress(button -> {
+            this.client.setScreen(new RangeTab(this));
+        });
+    }
+}

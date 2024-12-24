@@ -67,7 +67,12 @@ public enum BossData {
             "Claus",
             new BlockPos(10, 212, -121),
             new CustomModelDataComponent(829103)
-    );;
+    ),
+    ONYX(
+            "Onyx",
+                    new BlockPos(-15, 243, 88),
+            new CustomModelDataComponent(829103)
+    );;;
 
     public final String label;
     public final BlockPos spawnPosition;

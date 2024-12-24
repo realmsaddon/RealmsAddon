@@ -1,4 +1,4 @@
-package xyz.telosaddon.yuno.owo_ui;
+package xyz.telosaddon.yuno.ui.tabs;
 
 import io.wispforest.owo.ui.base.BaseOwoScreen;
 import io.wispforest.owo.ui.component.ButtonComponent;
@@ -40,13 +40,13 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
                                 Containers.grid(Sizing.content(), Sizing.content(),4,3)
 
                                         .<GridLayout>configure(layout ->{
-                                            for(int i = 0; i < 7; i++){
-                                                for(int j = 0; j < 4; j++) {
+                                            for(int i = 0; i < 4; i++){
+                                                for(int j = 0; j < 3; j++) {
                                                     int finalI = i;
                                                     int finalJ = j;
-                                                    layout.child(Components.button(Text.literal(serverNames[finalJ*7+finalI]), button -> {
+                                                    layout.child(Components.button(Text.literal(serverNames[finalJ*3+finalI]), button -> {
                                                         if (client == null || client.player == null) return;
-                                                        client.player.networkHandler.sendChatCommand("joinq " + serverNames[finalJ*7+finalI]);
+                                                        client.player.networkHandler.sendChatCommand("joinq " + serverNames[finalJ*3+finalI]);
                                                     }).renderer(ButtonComponent.Renderer.flat(
                                                             new java.awt.Color(0, 0, 0, 150).getRGB(),
                                                             CONFIG.fillColor(),

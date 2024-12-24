@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.features.Features;
-import xyz.telosaddon.yuno.utils.config.TelosConfig;
+
 import xyz.telosaddon.yuno.utils.FontHelper;
 import xyz.telosaddon.yuno.utils.data.BossData;
 

@@ -11,6 +11,7 @@ import xyz.telosaddon.yuno.event.HandledScreenRemovedCallback;
 import xyz.telosaddon.yuno.utils.data.BossData;
 
 import java.util.HashSet;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,7 @@ public class BossTrackerFeature extends AbstractFeature{
 
     private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
     private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at ([0-9.-]+), ([0-9.-]+), ([0-9.-]+)");
-    private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Onyx's Castle has opened");
+    private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Onyx's Castle will open in the centre of the realm in 60 seconds at");
     private static final Pattern BOSS_ITEM_NAME_PATTERN = Pattern.compile("^» \\[(\\w+)] «");
 
     private final HashSet<BossData> currentAlive = new HashSet<>();
@@ -47,7 +48,23 @@ public class BossTrackerFeature extends AbstractFeature{
         // todo: add onyx timer hud item
 
         if(ONYX_PORTAL_OPEN_MESSAGE_PATTERN.matcher(s).find()){
-            currentAlive.clear();
+
+            CompletableFuture.runAsync(() -> {
+                try {
+                    currentAlive.clear();
+                    currentAlive.add(BossData.ONYX);
+
+                    int countdown = 90;
+                    while (countdown > 0) {
+                        countdown--;
+                        if (!currentAlive.contains(BossData.ONYX)) return;
+                        Thread.sleep(1000);
+                    }
+                    currentAlive.clear();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 

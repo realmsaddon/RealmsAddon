@@ -8,7 +8,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import xyz.telosaddon.yuno.TelosAddon;
-import xyz.telosaddon.yuno.utils.config.TelosConfig;
+
 import xyz.telosaddon.yuno.utils.FontHelper;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;

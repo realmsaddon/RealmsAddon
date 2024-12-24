@@ -3,8 +3,12 @@
     <components>
         <flow-layout direction="vertical">
             <children>
+                <label>
+                    <text>RealmsAddon v0.3.0</text>
+                </label>
                 <flow-layout direction="horizontal">
                     <children>
+
                         <button id="Home">
                             <text>Home</text>
                             <margins>
@@ -27,16 +31,6 @@
                         </button>
                         <button id="Settings">
                             <text>Settings</text>
-                            <margins>
-                                <left>5</left>
-                                <top>5</top>
-                            </margins>
-                            <sizing>
-                                <horizontal method="fixed">100</horizontal>
-                            </sizing>
-                        </button>
-                        <button id="Teleport">
-                            <text>Teleport</text>
                             <margins>
                                 <left>5</left>
                                 <top>5</top>
