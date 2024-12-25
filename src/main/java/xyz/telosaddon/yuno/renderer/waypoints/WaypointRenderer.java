@@ -13,19 +13,16 @@ import net.minecraft.client.util.BufferAllocator;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.ColorHelper;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
+import xyz.telosaddon.yuno.features.Features;
 import xyz.telosaddon.yuno.hotkey.TestHotkey;
 import xyz.telosaddon.yuno.renderer.LineRenderer;
 import xyz.telosaddon.yuno.renderer.RangeRenderer;
 import xyz.telosaddon.yuno.utils.MathUtil;
-import xyz.telosaddon.yuno.utils.waypoints.Waypoint;
-import xyz.telosaddon.yuno.utils.waypoints.WaypointManager;
+import xyz.telosaddon.yuno.utils.data.BossData;
 
 
 import java.awt.*;
@@ -41,8 +38,8 @@ public class WaypointRenderer{
         WorldRenderEvents.END.register(RENDER_IDENTIFIER, WaypointRenderer::render);
     }
 
-    // shamelessly stolen from https://github.com/PouekDEV/CList/blob/1.21.2/src/main/java/one/pouekdev/coordinatelist/CListClient.java
-    public static Vec3d calculateRenderCoords(Waypoint waypoint, Camera camera, float distance) {
+
+    public static Vec3d calculateRenderCoords(BlockPos waypoint, Camera camera, float distance) {
         double cameraX = (float)camera.getPos().x;
         double cameraY = (float)camera.getPos().y;
         double cameraZ = (float)camera.getPos().z;
@@ -84,8 +81,9 @@ public class WaypointRenderer{
         BufferBuilder buffer = tessellator.begin(VertexFormat.DrawMode.LINES, VertexFormats.POSITION_TEXTURE_COLOR);
 
         VertexConsumerProvider.Immediate consumerProvider = client.getBufferBuilders().getEntityVertexConsumers();
-        for(Waypoint waypoint : WaypointManager.getInstance().getAliveWaypoints() ) {
+        for(BossData bossData : Features.BOSS_TRACKER_FEATURE.getCurrentAlive()) {
 
+            BlockPos waypoint = bossData.spawnPosition;
 
             Vec3d position = new Vec3d(waypoint.getX(), waypoint.getY(), waypoint.getZ());
             double squaredDistance = camera.getPos().squaredDistanceTo(position);
@@ -100,7 +98,7 @@ public class WaypointRenderer{
             matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(camera.getPitch()));
             matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(camera.getYaw() + 180.0F));
             matrixStack.translate(renderCoords.x, renderCoords.y, renderCoords.z);
-            float scale = (float) (0.1F);
+            float scale = (0.1F);
 
             matrixStack.multiply(camera.getRotation());
 
@@ -111,17 +109,17 @@ public class WaypointRenderer{
             int tooclosedist = 30;
             var lerp = clamp((float) (distance - 15)/tooclosedist , 0.1F , 1F);
             var fade = (int)(lerp * 255F);
-            System.out.println(fade);
+            //System.out.println(fade);
             int colorcode = new Color(255,255,255, (fade)).getRGB();
             int backgroundColorCode = new Color(0,0,0, (int) (fade * 0.3)).getRGB();
 
-            String waypointString = waypoint.getName() + " (" +  (int) distance + "m" + ")";
+            String waypointString = bossData.label + " (" +  (int) distance + "m" + ")";
             RenderSystem.depthMask(false);
             RenderSystem.disableCull();
             RenderSystem.disableBlend();
             textRenderer.draw(
                     Text.of(waypointString),
-                    -textRenderer.getWidth(waypoint.getName()) / 2.0F,
+                    -textRenderer.getWidth(bossData.label) / 2.0F,
                     (float) 0,
                     colorcode,
                     false,
@@ -131,10 +129,10 @@ public class WaypointRenderer{
                     backgroundColorCode,
                     LightmapTextureManager.MAX_LIGHT_COORDINATE
             );
-            if (distance > 30 && squaredDistance < 15000 ) {
+            if (distance > 30 ) {
                 textRenderer.draw(
                         Text.of(waypointString),
-                        -textRenderer.getWidth(waypoint.getName()) / 2.0F,
+                        -textRenderer.getWidth(bossData.label) / 2.0F,
                         (float) 0,
                         -1,
                         false,
@@ -145,6 +143,8 @@ public class WaypointRenderer{
                         LightmapTextureManager.MAX_LIGHT_COORDINATE
                 );
             }
+
+            //todo: render the boss icon
             RenderSystem.depthMask(true);
             RenderSystem.enableCull();
             RenderSystem.enableBlend();

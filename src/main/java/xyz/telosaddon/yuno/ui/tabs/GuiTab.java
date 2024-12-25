@@ -1,97 +1,85 @@
 package xyz.telosaddon.yuno.ui.tabs;
 
-import xyz.telosaddon.yuno.TelosAddon;
-import xyz.telosaddon.yuno.ui.CustomElement;
-import xyz.telosaddon.yuno.ui.elements.CustomButton;
-import xyz.telosaddon.yuno.ui.CustomUiManager;
-import xyz.telosaddon.yuno.utils.config.Config;
+import io.wispforest.owo.ui.base.BaseUIModelScreen;
+import io.wispforest.owo.ui.component.ButtonComponent;
+import io.wispforest.owo.ui.component.CheckboxComponent;
+import io.wispforest.owo.ui.container.FlowLayout;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
+import net.minecraft.client.gui.screen.Screen;
 
-import java.util.Arrays;
-import java.util.List;
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
-public class GuiTab {
+public class GuiTab extends BaseUIModelScreen<FlowLayout> {
 
-    private final Config config;
-    private final CustomUiManager uiManager;
-    private List<CustomElement> elements;
+    private final Screen parent;
 
-    public GuiTab(CustomUiManager uiManager) {
-        config = TelosAddon.getInstance().getConfig();
-        this.uiManager = uiManager;
+    public GuiTab(@Nullable Screen parent) {
+        super(FlowLayout.class, DataSource.asset(Identifier.of("telosaddon", "guitab")));
+        this.parent = parent;
     }
 
-    public void loadButtons() {
-        boolean greenSetting = config.getBoolean("GreenSetting");
-        boolean goldSetting = config.getBoolean("GoldSetting");
-        boolean whiteSetting = config.getBoolean("WhiteSetting");
-        boolean blackSetting = config.getBoolean("BlackSetting");
-        boolean xMasSetting = config.getBoolean("EventSetting");
-        boolean crossSetting = config.getBoolean("CrossSetting");
-        boolean relicSetting = config.getBoolean("RelicSetting");
-        boolean runesSetting = config.getBoolean("RunesSetting");
-        boolean totalRunSetting = config.getBoolean("TotalRunSetting");
-        boolean noWhiteRunSetting = config.getBoolean("NoWhiteRunSetting");
-        boolean noBlackRunSetting = config.getBoolean("NoBlackRunSetting");
-        boolean lifetimeSetting = config.getBoolean("LifetimeSetting");
+    @Override
+    protected void build(FlowLayout rootComponent) {
+        //tab buttons
+        rootComponent.childById(ButtonComponent.class, "Home").onPress(button -> {
+            this.client.setScreen(new HomeTab());
+        });
+        rootComponent.childById(ButtonComponent.class, "Settings").onPress(button -> {
+            this.client.setScreen(new SettingsTab(this));
+        });
+        rootComponent.childById(ButtonComponent.class, "Range").onPress(button -> {
+            this.client.setScreen(new RangeTab(this));
+        });
 
-        this.elements = Arrays.asList(
+        rootComponent.childById(CheckboxComponent.class, "GreenSetting")
+                .checked(CONFIG.greenSetting())
+                .onChanged(CONFIG::greenSetting);
 
-                new CustomButton(8, 83, 150, 20, "GreenBag Counter", (button, toggled) -> {
-                    toggle("GreenSetting", button.getText(), toggled);
-                }).setToggled(greenSetting),
+        rootComponent.childById(CheckboxComponent.class, "GoldSetting")
+                .checked(CONFIG.goldSetting())
+                .onChanged(CONFIG::goldSetting);
 
-                new CustomButton(8, 106, 150, 20, "GoldBag Counter", (button, toggled) -> {
-                    toggle("GoldSetting", button.getText(), toggled);
-                }).setToggled(goldSetting),
+        rootComponent.childById(CheckboxComponent.class, "WhiteSetting")
+                .checked(CONFIG.whiteSetting())
+                .onChanged(CONFIG::whiteSetting);
 
-                new CustomButton(8, 129, 150, 20, "WhiteBag Counter", (button, toggled) -> {
-                    toggle("WhiteSetting", button.getText(), toggled);
-                }).setToggled(whiteSetting),
+        rootComponent.childById(CheckboxComponent.class, "BlackSetting")
+                .checked(CONFIG.blackSetting())
+                .onChanged(CONFIG::blackSetting);
 
-                new CustomButton(8, 152, 150, 20, "BlackBag Counter", (button, toggled) -> {
-                    toggle("BlackSetting", button.getText(), toggled);
-                }).setToggled(blackSetting),
 
-                new CustomButton(8, 175, 150, 20, "EventBag Counter", (button, toggled) -> {
-                    toggle("EventSetting", button.getText(), toggled);
-                }).setToggled(xMasSetting),
+        rootComponent.childById(CheckboxComponent.class, "EventSetting")
+                .checked(CONFIG.eventSetting())
+                .onChanged(CONFIG::eventSetting);
 
-                new CustomButton(8, 198, 150, 20, "Cross Counter", (button, toggled) -> {
-                    toggle("CrossSetting", button.getText(), toggled);
-                }).setToggled(crossSetting),
+        rootComponent.childById(CheckboxComponent.class, "CrossSetting")
+                .checked(CONFIG.crossSetting())
+                .onChanged(CONFIG::crossSetting);
 
-                new CustomButton(8, 221, 150, 20, "Relic Counter", (button, toggled) -> {
-                    toggle("RelicSetting", button.getText(), toggled);
-                }).setToggled(relicSetting),
-                new CustomButton(8, 244, 150, 20, "Runes Counter", (button, toggled) -> {
-                    toggle("RunesSetting", button.getText(), toggled);
-                }).setToggled(runesSetting),
+        rootComponent.childById(CheckboxComponent.class, "RelicSetting")
+                .checked(CONFIG.relicSetting())
+                .onChanged(CONFIG::relicSetting);
 
-                new CustomButton(8, 267, 150, 20, "Total Boss Runs", (button, toggled) -> {
-                    toggle("TotalRunSetting", button.getText(), toggled);
-                }).setToggled(totalRunSetting),
 
-                new CustomButton(175, 83, 150, 20, "No Whites Runs", (button, toggled) -> {
-                    toggle("NoWhiteRunSetting", button.getText(), toggled);
-                }).setToggled(noWhiteRunSetting),
+        rootComponent.childById(CheckboxComponent.class, "RunesSetting")
+                .checked(CONFIG.runesSetting())
+                .onChanged(CONFIG::runesSetting);
 
-                new CustomButton(175, 106, 150, 20, "No Black Runs", (button, toggled) -> {
-                    toggle("NoBlackRunSetting", button.getText(), toggled);
-                }).setToggled(noBlackRunSetting),
+        rootComponent.childById(CheckboxComponent.class, "TotalRunSetting")
+                .checked(CONFIG.totalRunSetting())
+                .onChanged(CONFIG::totalRunSetting);
 
-                new CustomButton(175, 129, 150, 20, "Lifetime Counter", (button, toggled) -> {
-                    toggle("LifetimeSetting", button.getText(), toggled);
-                }).setToggled(lifetimeSetting)
+        rootComponent.childById(CheckboxComponent.class, "NoWhiteRunSetting")
+                .checked(CONFIG.noWhiteRunSetting())
+                .onChanged(CONFIG::noWhiteRunSetting);
 
-        );
+        rootComponent.childById(CheckboxComponent.class, "NoBlackRunSetting")
+                .checked(CONFIG.noBlackRunSetting())
+                .onChanged(CONFIG::noBlackRunSetting);
 
-        uiManager.getCustomElements().addAll(this.elements);
+        rootComponent.childById(CheckboxComponent.class, "LifetimeSetting")
+                .checked(CONFIG.lifetimeSetting())
+                .onChanged(CONFIG::lifetimeSetting);
     }
-
-    public void toggle(String name, String btnName, boolean toggled) {
-        config.set(name, toggled);
-        String toggleText = toggled ? "§6Set §7'§f" + btnName + "§7' §6to §a§lTRUE§7!" : "§6Set §7'§f" + btnName + "§7' §6to §c§lFALSE§7!";
-        TelosAddon.getInstance().sendMessage(toggleText);
-    }
-
 }

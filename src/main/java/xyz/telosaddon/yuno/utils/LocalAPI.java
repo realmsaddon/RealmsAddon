@@ -3,9 +3,11 @@ package xyz.telosaddon.yuno.utils;
 import net.minecraft.entity.boss.BossBar;
 import xyz.telosaddon.yuno.TelosAddon;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
 import static xyz.telosaddon.yuno.utils.BossBarUtils.bossBarMap;
@@ -21,11 +23,13 @@ public class LocalAPI {
     private static String currentCharacterArea = "";
     private static String currentCharacterFighting = "";
     private static String currentClientPing = "";
+    private static String lastKnownBoss = "";
+    private static boolean countdownLock = false;
+    private static String currentPortalCall = "";
+    private static int currentPortalCallTime = 0;
 
-    //todo make async
     public static void updateAPI(){
         CompletableFuture.runAsync(() -> {
-            // todo: add lock
                 if (!TelosAddon.getInstance().isOnTelos()) return;
                 Optional<String> info = TabListUtils.getCharInfo();
                 if (info.isEmpty()) return;
@@ -55,20 +59,25 @@ public class LocalAPI {
     }
 
     private static void updateCharacterArea(){
-        if (bossBarMap != null) {
-            Object[] preArray = bossBarMap.values().toArray();
-            if (preArray.length > 5 && preArray[1] instanceof BossBar && preArray[3] instanceof BossBar) {
 
-                BossBar areaBar = (BossBar) preArray[3];
+        if (bossBarMap != null) {
+
+            Object[] preArray = bossBarMap.values().toArray();
+
+            if (preArray.length == 5 && preArray[0] instanceof BossBar && preArray[1] instanceof BossBar) {
+
+                BossBar areaBar = (BossBar) preArray[0];
                 String area = stripAllFormatting(areaBar.getName().getString());
+
                 currentCharacterArea = area.replaceAll("[^a-zA-z ']+", ""); // idk why but theres numbers at the end so we gotta trim that off
 
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
-                //LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
+                // LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
+                lastKnownBoss = currentCharacterFighting;
                 switch (bossBar.getName().hashCode()){
                     case -1083980771 -> currentCharacterFighting = "Chungus";
-                    case 452824575 -> currentCharacterFighting = "Illarious";
+                    case 452824575 -> currentCharacterFighting = "Illarius";
                     case 2125535338 -> currentCharacterFighting = "Astaroth";
                     case -1083975966 -> currentCharacterFighting = "Glumi";
                     case 2125159587 -> currentCharacterFighting = "Lotil";
@@ -76,8 +85,9 @@ public class LocalAPI {
                     case 1757112170 -> currentCharacterFighting = "Valus";
                     case 1472054207 -> currentCharacterFighting = "Oozul";
                     case 2035818623 -> currentCharacterFighting = "Freddy";
-                    case -1258344668 -> currentCharacterFighting = "Anubis"; //bugged
+                    case -1258344668 -> currentCharacterFighting = "Anubis";
                     case -1240191621 -> currentCharacterFighting = "Hollowbane";
+                    case -1048713371 -> currentCharacterFighting = "Claus";
 
                     case 908391166 -> currentCharacterFighting = "Shadowflare";
                     case 1996713601 -> currentCharacterFighting = "Loa";
@@ -105,6 +115,49 @@ public class LocalAPI {
                     case 1997519880 -> currentCharacterFighting = "Thornwood Wargrove";
                     default -> currentCharacterFighting = "";
                 }
+                //System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);
+                // this means a boss has died recently.
+                if (!lastKnownBoss.equals(currentCharacterFighting) && currentCharacterFighting.equals("")) {
+                    LOGGER.log(Level.INFO, "Boss has died");
+                    System.out.println(lastKnownBoss);
+                    switch (lastKnownBoss){
+                        case "Chungus" -> currentPortalCall = "void";
+                        case "Illarius" -> currentPortalCall = "loa";
+                        case "Astaroth" -> currentPortalCall = "shatters";
+                        case "Glumi" -> currentPortalCall = "fungal";
+                        case "Lotil" -> currentPortalCall = "omni";
+                        case "Tidol" -> currentPortalCall =  "corsairs";
+                        case "Valus" -> currentPortalCall = "cultists";
+                        case "Oozul" -> currentPortalCall = "chronos";
+                        case "Freddy" -> currentPortalCall = "pizza";
+                        case "Anubis" -> currentPortalCall = "alair";
+                        case "Defender" -> currentPortalCall = "cprov";
+
+                        default -> currentPortalCall = "";
+                    }
+                    lastKnownBoss = "";
+                    if (currentPortalCall.isEmpty() || countdownLock){
+                        return;
+                    }
+                    // a boss portal has dropped, start timer
+                    CompletableFuture.runAsync(() -> {
+                        countdownLock = true;
+                        currentPortalCallTime = 32;
+                        while(currentPortalCallTime > 0){
+                            currentPortalCallTime--;
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        currentPortalCall = "";
+                        countdownLock = false;
+
+                    });
+                }
+
+
 
             }
         }
@@ -136,5 +189,12 @@ public class LocalAPI {
 
     public static String getCurrentClientPing() {
         return currentClientPing;
+    }
+    public static String getCurrentPortalCall() {
+        return currentPortalCall;
+    }
+
+    public static int getCurrentPortalCallTime() {
+        return currentPortalCallTime;
     }
 }

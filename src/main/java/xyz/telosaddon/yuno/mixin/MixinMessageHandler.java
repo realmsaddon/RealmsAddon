@@ -16,9 +16,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.telosaddon.yuno.TelosAddon;
-import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
-import xyz.telosaddon.yuno.utils.config.Config;
-import xyz.telosaddon.yuno.utils.waypoints.WaypointManager;
+import xyz.telosaddon.yuno.features.Features;
+
 
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
@@ -47,26 +46,11 @@ public class MixinMessageHandler {
     @Unique
     private void onChat(Text text) {
         String s = text.getString().trim();
-        if(s.contains("has spawned at")) {
-            String[] args = s.split(" ");
-            String name = args[0];
-            TelosAddon.getInstance().addAliveBosses(name);
-            WaypointManager.getInstance().addAlive(name);
-        }
-
-        if(s.contains("has been defeated")) {
-            String[] args = s.split(" ");
-            String name = args[0];
-            if(TelosAddon.getInstance().getAliveBosses().contains(name)) {
-                TelosAddon.getInstance().removeAliveBoss(name);
-                WaypointManager.getInstance().removeAlive(name);
-            }
-        }
 
         if(s.contains("discord.telosrealms.com")){ // nexus check
-            TelosAddon.getInstance().getAliveBosses().clear();
-            WaypointManager.getInstance().clearAlive();
-            if (!TelosAddon.getInstance().getConfig().getBoolean("EnableJoinText") || TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
+            Features.BOSS_TRACKER_FEATURE.clearAlive();
+
+            if (!CONFIG.enableJoinText()|| TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player != null) {
                 CompletableFuture.runAsync(() -> {
@@ -91,20 +75,13 @@ public class MixinMessageHandler {
 
         if(!s.equals("===============================================")) return;
         if (trackerBit = !trackerBit) return; // there's 2 bars in the kill message, and guess what datatype has 2 states
-        Config config = TelosAddon.getInstance().getConfig();
 
-        config.addInt("TotalRuns", 1);
-        config.addInt("NoWhiteRuns", 1);
-        config.addInt("NoBlackRuns", 1);
+        CONFIG.totalRuns(CONFIG.totalRuns() + 1);
+        CONFIG.noWhiteRuns(CONFIG.noWhiteRuns() + 1);
+        CONFIG.noBlackRuns(CONFIG.noBlackRuns() + 1);
 
-        int newValue = TelosAddon.getInstance().getBagCounter().get("TotalRuns");
-        TelosAddon.getInstance().getBagCounter().replace("TotalRuns", newValue + 1);
 
-        int newValue2 = TelosAddon.getInstance().getBagCounter().get("NoWhiteRuns");
-        TelosAddon.getInstance().getBagCounter().replace("NoWhiteRuns", newValue2 + 1);
 
-        int newBlackValue = TelosAddon.getInstance().getBagCounter().get("NoBlackRuns");
-        TelosAddon.getInstance().getBagCounter().replace("NoBlackRuns", newBlackValue + 1);
     }
 
 }

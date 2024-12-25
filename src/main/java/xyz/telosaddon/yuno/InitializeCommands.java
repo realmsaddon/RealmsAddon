@@ -14,6 +14,7 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.arg
 
 public class InitializeCommands {
 
+
     Boolean isInGuildChat = false;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 

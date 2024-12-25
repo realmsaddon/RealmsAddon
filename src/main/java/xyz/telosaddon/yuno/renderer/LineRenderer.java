@@ -67,7 +67,7 @@ public class LineRenderer implements IRenderer{
 					false,
 					true,
 					RenderLayer.MultiPhaseParameters.builder()
-							.program(RenderPhase.COLOR_PROGRAM)
+							.program(RenderPhase.POSITION_COLOR_PROGRAM)
 							.lineWidth(new RenderPhase.LineWidth(OptionalDouble.of(10f)))
 							.layering(RenderPhase.VIEW_OFFSET_Z_LAYERING)
 							.transparency(RenderPhase.NO_TRANSPARENCY)

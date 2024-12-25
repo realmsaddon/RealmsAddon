@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;
+import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.ui.AbstractCustomElement;
 import xyz.telosaddon.yuno.utils.FontHelper;
 
@@ -69,27 +70,27 @@ public class CustomButton extends AbstractCustomElement {
         this.hovered = context.scissorContains(mouseX, mouseY)
                 && isHovered(mouseX, mouseY);
 
-        int fillColor = this.hovered ? new Color(0, 0, 0, 150).getRGB() : getConfig().getInteger("FillColor");
+        int fillColor = this.hovered ? new Color(0, 0, 0, 150).getRGB() : TelosAddon.CONFIG.fillColor();
 
         context.fill(this.x, this.y, this.x + this.width, this.y + this.height, fillColor);
-        context.drawBorder(this.x, this.y, this.width, this.height, getConfig().getInteger("BorderColor"));
+        context.drawBorder(this.x, this.y, this.width, this.height, TelosAddon.CONFIG.borderColor());
 
         if(this.isOnTab)
-            context.drawHorizontalLine(this.x + 5, this.x + this.width - 8, this.y + this.height - 5, addAlpha(getConfig().getInteger("MenuColor"), 200));
+            context.drawHorizontalLine(this.x + 5, this.x + this.width - 8, this.y + this.height - 5, addAlpha(TelosAddon.CONFIG.menuColor(), 200));
 
         if(this.onToggle != null) {
             int boxSize = 10;
             int boxX = this.x + this.width - boxSize - 5;
             int boxY = this.y + (this.height - boxSize) / 2;
 
-            int boxColor = addAlpha(getConfig().getInteger("MenuColor"), 200);
+            int boxColor = addAlpha(TelosAddon.CONFIG.menuColor(), 200);
             context.drawBorder(boxX, boxY,  boxSize, boxSize, boxColor);
             if(toggled) {
                 context.fill(boxX + 2, boxY + 2, boxX + boxSize - 2, boxY + boxSize - 2, boxColor);
             }
         }
 
-        Text buttonText = FontHelper.toCustomFont(this.text, getConfig().getString("Font"));
+        Text buttonText = FontHelper.toCustomFont(this.text, TelosAddon.CONFIG.font());
         int textX = this.x + 4;
 
         if(this.textInMiddle)

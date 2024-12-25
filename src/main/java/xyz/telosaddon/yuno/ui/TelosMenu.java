@@ -8,9 +8,10 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import xyz.telosaddon.yuno.TelosAddon;
-import xyz.telosaddon.yuno.utils.config.Config;
+
 import xyz.telosaddon.yuno.utils.FontHelper;
 
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 import static xyz.telosaddon.yuno.TelosAddon.MOD_VERSION;
 
 
@@ -18,19 +19,17 @@ import static xyz.telosaddon.yuno.TelosAddon.MOD_VERSION;
 public class TelosMenu extends Screen {
 
     private final MinecraftClient mc;
-    private final CustomUiManager customUiManager;
-    private final Config config;
 
+
+    private final CustomUiManager customUiManager;
+
+    public CustomUiManager getCustomUiManager() {
+        return customUiManager;
+    }
     public TelosMenu() {
         super(Text.literal("Realms Menu"));
         this.mc = MinecraftClient.getInstance();
-        this.config = TelosAddon.getInstance().getConfig();
         this.customUiManager = new CustomUiManager();
-    }
-
-    @Override
-    protected void init() {
-        this.customUiManager.switchTab(Tabs.HOME);
     }
 
     @Override
@@ -42,7 +41,7 @@ public class TelosMenu extends Screen {
             drawTitle(context, tr);
 
             String bugString = "§cPlease report bugs to §7'§4pixelizedgaming§7'§c on Discord§7!";
-            Text bugText = FontHelper.toCustomFont(bugString, config.getString("Font"));
+            Text bugText = FontHelper.toCustomFont(bugString, CONFIG.font());
             int bugTextWidth = tr.getWidth(bugText);
             context.drawText(tr, bugText, width - bugTextWidth - 4, height - 12, 0xFFFFFF, true);
         }
@@ -64,28 +63,28 @@ public class TelosMenu extends Screen {
 
         boolean isEditMode = TelosAddon.getInstance().isEditMode();
         if(isEditMode) {
-            int infoX = config.getInteger("InfoX");
-            int infoY = config.getInteger("InfoY");
+            int infoX = CONFIG.infoX();
+            int infoY = CONFIG.infoY();
             int infoWidth = TelosAddon.getInstance().infoWidth;
             int infoHeight = TelosAddon.getInstance().infoHeight;
 
-            int bagX = config.getInteger("BagX");
-            int bagY = config.getInteger("BagY");
+            int bagX = CONFIG.bagX();
+            int bagY = CONFIG.bagY();
             int bagWidth = TelosAddon.getInstance().bagWidth;
             int bagHeight = TelosAddon.getInstance().bagHeight;
 
             if(mouseX >= infoX + 10 && mouseY >= infoY + 10  && mouseX < infoX + infoWidth + 10 && mouseY < infoY + infoHeight + 10) {
 
-                config.set("InfoX", (int) mouseX - infoWidth / 2);
-                config.set("InfoY", (int) mouseY - infoHeight / 2);
+                CONFIG.infoX((int) mouseX - infoWidth / 2);
+                CONFIG.infoY((int) mouseY - infoHeight / 2);
 
                 return true;
             }
 
             if(mouseX >= bagX + 10 && mouseY >= bagY + 10  && mouseX < bagX + bagWidth + 10 && mouseY < bagY + bagHeight + 10) {
 
-                config.set("BagX", (int) mouseX - bagWidth / 2);
-                config.set("BagY", (int) mouseY - bagHeight / 2);
+                CONFIG.bagX((int) mouseX - bagWidth / 2);
+                CONFIG.bagY((int) mouseY - bagHeight / 2);
 
                 return true;
             }
@@ -119,12 +118,12 @@ public class TelosMenu extends Screen {
 
     private void drawTitle(DrawContext context, TextRenderer tr) {
         String title = "Realms Addon | BETA-" + MOD_VERSION;
-        Text titleText = FontHelper.toCustomFont(title, config.getString("Font"));
+        Text titleText = FontHelper.toCustomFont(title, CONFIG.font());
 
         float titleScale = 1.5f;
         context.getMatrices().push();
         context.getMatrices().scale(titleScale, titleScale, titleScale);
-        context.drawText(tr, titleText, (int) (10 / titleScale), (int) (35 / titleScale), config.getInteger("MenuColor"), true);
+        context.drawText(tr, titleText, (int) (10 / titleScale), (int) (35 / titleScale), CONFIG.menuColor(), true);
         context.getMatrices().pop();
     }
 

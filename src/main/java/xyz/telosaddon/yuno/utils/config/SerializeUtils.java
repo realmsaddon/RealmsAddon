@@ -20,4 +20,5 @@ public class SerializeUtils {
 		input = input.substring(1);
 		return Integer.parseInt(input, 16);
 	}
+
 }

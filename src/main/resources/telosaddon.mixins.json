@@ -5,15 +5,16 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AccessorBossBars",
+    "MixinHandledScreen",
     "MixinInGameHud",
-    "MixinMinecraftClient",
+    "MixinMinecraftClient"
   ],
   "client": [
     "MixinGameRenderer",
     "MixinLightmapTextureManager",
     "MixinMessageHandler",
     "MixinMinecraftServer",
-    "MixinSimpleOption",
+    "MixinSimpleOption"
   ],
   "injectors": {
     "defaultRequire": 1

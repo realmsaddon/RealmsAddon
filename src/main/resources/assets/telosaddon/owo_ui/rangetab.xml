@@ -3,6 +3,9 @@
     <components>
         <flow-layout direction="vertical">
             <children>
+                <label>
+                    <text>RealmsAddon v0.3.0</text>
+                </label>
                 <flow-layout direction="horizontal">
                     <children>
                         <button id="Home">
@@ -35,16 +38,6 @@
                                 <horizontal method="fixed">100</horizontal>
                             </sizing>
                         </button>
-                        <button id="Teleport">
-                            <text>Teleport</text>
-                            <margins>
-                                <left>5</left>
-                                <top>5</top>
-                            </margins>
-                            <sizing>
-                                <horizontal method="fixed">100</horizontal>
-                            </sizing>
-                        </button>
                         <button id="Range">
                             <text>Range</text>
                             <margins>
@@ -63,6 +56,79 @@
                             <text>Range tab</text>
                         </label>
                     </children>
+                </flow-layout>
+
+
+                <flow-layout direction="vertical">
+                    <children>
+                        <checkbox id="MainHandShowRangeSetting">
+                            <text>Show Main Hand Range</text>
+                            <sizing>
+                                <horizontal method="fixed">150</horizontal>
+                            </sizing>
+                        </checkbox>
+                        <label id="MainHandTypeLabel">
+                            <text>Main Hand Range Type</text>
+                        </label>
+                        <dropdown id="MainHandTypeDropdown">
+                            <sizing>
+                                <horizontal method="fixed">150</horizontal>
+                            </sizing>
+                        </dropdown>
+<!--                        <label id="MainHandColorLabel">-->
+<!--                            <text>Set Main Hand Range Color: </text>-->
+<!--                        </label>-->
+<!--                        <color-picker id="MainHandColorPicker">-->
+<!--                            <show-alpha>true</show-alpha>-->
+<!--                        </color-picker>-->
+
+                        <flow-layout direction="horizontal">
+                            <children>
+                                <label id="MainHandColorLabel">
+                                    <text>Set Main Hand Range Color:</text>
+                                </label>
+                                <text-box id="MainHandColorField">
+                                    <text> </text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </text-box></children>
+                        </flow-layout>
+
+
+
+                        <checkbox id="OffHandShowRangeSetting">
+                            <text>Off Hand Show Range</text>
+                            <sizing>
+                                <horizontal method="fixed">150</horizontal>
+                            </sizing>
+                        </checkbox>
+                        <label id="OffHandTypeLabel">
+                            <text>Off Hand Range Type</text>
+                        </label>
+                        <dropdown id="OffHandTypeDropdown">
+                            <sizing>
+                                <horizontal method="fixed">150</horizontal>
+                            </sizing>
+                        </dropdown>
+                        <flow-layout direction="horizontal">
+                            <children>
+                                <label id="OffHandColorLabel">
+                                    <text>Set Offhand Range Color: </text>
+                                </label>
+                                <text-box id="OffHandColorField">
+                                    <text> </text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </text-box></children>
+                        </flow-layout>
+<!--                        <color-picker id="OffHandColorPicker">-->
+<!--                            <show-alpha>true</show-alpha>-->
+<!--                        </color-picker>-->
+
+                    </children>
+                    <padding><all>10</all></padding>
                 </flow-layout>
             </children>
             <surface>

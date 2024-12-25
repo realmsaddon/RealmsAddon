@@ -12,6 +12,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
+
 public class DiscordRPCManager implements IPCListener {
 
     private static final long APPLICATION_ID = 1290485474452045865L;
@@ -63,7 +65,7 @@ public class DiscordRPCManager implements IPCListener {
 
     public void updatePresence() {
         if (!isActive()) return;
-        if (!TelosAddon.getInstance().isOnTelos() || !TelosAddon.getInstance().getConfig().getBoolean("DiscordRPCSetting")){
+        if (!TelosAddon.getInstance().isOnTelos() || !CONFIG.discordRPCSetting()){
             client.sendRichPresence(null);
             return;
         }
@@ -80,7 +82,7 @@ public class DiscordRPCManager implements IPCListener {
     }
 
     private String getDetailsString(){
-        if (TelosAddon.getInstance().getConfig().getBoolean("RPCShowLocationSetting")){
+        if (CONFIG.rpcShowLocationSetting()){
             return LocalAPI.getCurrentCharacterWorld() + " | " + LocalAPI.getCurrentCharacterArea();
         } else{
             return "In an Unknown Place";
@@ -88,9 +90,9 @@ public class DiscordRPCManager implements IPCListener {
     }
 
     private String getStateString(){
-        return (LocalAPI.getCurrentCharacterFighting().length() > 0 && TelosAddon.getInstance().getConfig().getBoolean("RPCShowFightingSetting")
+        return (LocalAPI.getCurrentCharacterFighting().length() > 0 && CONFIG.rpcShowLocationSetting())
                 ? ("Fighting " + LocalAPI.getCurrentCharacterFighting())
-                : TelosAddon.getInstance().getConfig().getString("DiscordDefaultStatusMessage"));
+                : CONFIG.discordDefaultStatusMessage();
     }
     @Override
     public void onReady(IPCClient client) {

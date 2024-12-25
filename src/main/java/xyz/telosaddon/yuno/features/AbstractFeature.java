@@ -1,44 +1,40 @@
 package xyz.telosaddon.yuno.features;
 
-import xyz.telosaddon.yuno.utils.config.Config;
+import io.wispforest.owo.config.Option;
+
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
+import static xyz.telosaddon.yuno.utils.config.ConfigUtils.addConfigBinding;
 
 public abstract class AbstractFeature {
 
-	private final Config config;
-	private final String featureName;
+	private boolean enabled;
 
-	protected AbstractFeature(Config config, String featureName){
-		this.config = config;
-		this.featureName = featureName;
+	protected AbstractFeature(Option.Key configKey){
+		addConfigBinding(configKey, this::setToggle);
 	}
 
-	private String getEnabledKey(){
-		return featureName + "Enabled";
-	}
-
-	protected String getFeatureName(){
-		return this.featureName;
-	}
-
-	protected Config getConfig(){
-		return this.config;
-	}
 
 	public boolean isEnabled() {
-		return config.getBoolean(getEnabledKey());
+		return enabled;
 	}
 
-	public void disable(){
-		this.config.set(getEnabledKey(), false);
-	}
-
-	public void enable(){
-		this.config.set(getEnabledKey(), true);
+	protected void disable() {
 
 	}
 
-	public void toggle(){
-		this.config.set(getEnabledKey(), !config.getBoolean(getEnabledKey()));
+	protected void enable() {
+
+	}
+
+	public void setToggle(boolean enabled) {
+		this.enabled = enabled;
+		System.out.println("Feature " + this.getClass().getSimpleName() + " is now " + (enabled ? "enabled" : "disabled"));
+		if (enabled) {
+			enable();
+		} else {
+			disable();
+		}
+
 
 	}
 }

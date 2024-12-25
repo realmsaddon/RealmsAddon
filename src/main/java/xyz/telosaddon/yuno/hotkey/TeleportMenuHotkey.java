@@ -4,12 +4,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.entity.player.PlayerInventory;
 import org.lwjgl.glfw.GLFW;
-import xyz.telosaddon.yuno.ui.TelosMenu;
 import xyz.telosaddon.yuno.ui.tabs.TeleportMenuScreen;
 
 @Environment(EnvType.CLIENT)

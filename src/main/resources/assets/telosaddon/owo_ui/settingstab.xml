@@ -3,6 +3,9 @@
     <components>
         <flow-layout direction="vertical">
             <children>
+                <label>
+                    <text>RealmsAddon v0.3.0</text> <!--todo make this not hardcoded-->
+                </label>
                 <flow-layout direction="horizontal">
                     <children>
                         <button id="Home">
@@ -27,16 +30,6 @@
                         </button>
                         <button id="Settings">
                             <text>Settings</text>
-                            <margins>
-                                <left>5</left>
-                                <top>5</top>
-                            </margins>
-                            <sizing>
-                                <horizontal method="fixed">100</horizontal>
-                            </sizing>
-                        </button>
-                        <button id="Teleport">
-                            <text>Teleport</text>
                             <margins>
                                 <left>5</left>
                                 <top>5</top>
@@ -71,6 +64,31 @@
                                 <horizontal method="fixed">150</horizontal>
                             </sizing>
                         </button>
+                        <flow-layout direction="horizontal">
+                            <children>
+                                <label id="ChangeGUIColorLabel">
+                                    <text>Change GUI Color:</text>
+                                </label>
+                                <text-box id="ChangeGUIColorField">
+                                    <text> </text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </text-box>
+                            </children>
+                        </flow-layout>
+
+                        <flow-layout direction="horizontal">
+                            <children>
+                                <label id="ChangeFontLabel">
+                                    <text>Change GUI Font:</text>
+                                </label>
+                                <dropdown id="ChangeFontDropdown">
+
+                                </dropdown>
+
+                            </children>
+                        </flow-layout>
                     </children>
                 </flow-layout>
             </children>
