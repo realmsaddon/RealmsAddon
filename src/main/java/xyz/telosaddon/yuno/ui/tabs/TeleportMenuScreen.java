@@ -14,10 +14,10 @@ import xyz.telosaddon.yuno.TelosAddon;
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
 public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
-    final String[] serverNames = {"Hubs",
+    final String[] serverNames = {
             "Ashburn", "Bayou", "Cedar", "Dakota",
-            "Eternia", "Terra", "Develyn", // insert eu servers here
-            "Asura", "Bayan", "Chantura"};
+            "Astra", "Balkan", "Creska", "Draskov", // insert eu servers here
+            "Asura", "Bayan", "Chantura", "", ""};
 
 
     @Override
@@ -37,16 +37,16 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
                 Containers.verticalFlow(Sizing.content(), Sizing.content())
                         .child(Components.label(Text.literal("Teleport Menu")))
                         .child(
-                                Containers.grid(Sizing.content(), Sizing.content(),4,3)
+                                Containers.grid(Sizing.content(), Sizing.content(),3,4)
 
                                         .<GridLayout>configure(layout ->{
                                             for(int i = 0; i < 4; i++){
                                                 for(int j = 0; j < 3; j++) {
                                                     int finalI = i;
                                                     int finalJ = j;
-                                                    layout.child(Components.button(Text.literal(serverNames[finalJ*3+finalI]), button -> {
+                                                    layout.child(Components.button(Text.literal(serverNames[finalJ*4+finalI]), button -> {
                                                         if (client == null || client.player == null) return;
-                                                        client.player.networkHandler.sendChatCommand("joinq " + serverNames[finalJ*3+finalI]);
+                                                        client.player.networkHandler.sendChatCommand("joinq " + serverNames[finalJ*4+finalI]);
                                                     }).renderer(ButtonComponent.Renderer.flat(
                                                             new java.awt.Color(0, 0, 0, 150).getRGB(),
                                                             CONFIG.fillColor(),

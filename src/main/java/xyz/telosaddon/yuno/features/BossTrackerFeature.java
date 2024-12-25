@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
-public class BossTrackerFeature extends AbstractFeature{
+public class BossTrackerFeature extends ToggleableFeature{
 
     private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
     private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at ([0-9.-]+), ([0-9.-]+), ([0-9.-]+)");
@@ -92,7 +92,6 @@ public class BossTrackerFeature extends AbstractFeature{
             if (!bossItemNameMatcher.find()) {
                 continue;
             }
-
             var loreData = stack.getComponents().get(DataComponentTypes.LORE);
 
             if (loreData == null) {

@@ -20,10 +20,6 @@ public class ShowMainRangeFeature extends ShowRangeFeature {
 		System.out.println("ShowMainRangeFeature enable");
 		this.setRangeType(TelosAddon.CONFIG.showMainRangeFeatureViewType());
 	}
-	@Override()
-	public boolean isEnabled(){
-		return TelosAddon.CONFIG.showMainRangeFeatureEnabled();
-	}
 
 
 	@Override

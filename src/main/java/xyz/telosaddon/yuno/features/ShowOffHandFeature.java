@@ -20,10 +20,6 @@ public class ShowOffHandFeature extends ShowRangeFeature {
 		this.setRangeType(CONFIG.showOffHandRangeFeatureViewType());
 	}
 
-	@Override()
-	public boolean isEnabled(){
-		return CONFIG.showOffHandRangeFeatureEnabled();
-	}
 
 	@Override
 	public void draw(float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, ClientPlayerEntity player, float dy) {

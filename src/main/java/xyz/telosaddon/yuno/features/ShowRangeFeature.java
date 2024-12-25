@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
-public class ShowRangeFeature extends AbstractFeature {
+public class ShowRangeFeature extends ToggleableFeature {
 	private ItemStack previousItem = null;
 	protected List<IRenderer> renderers;
 	private final Function<PlayerInventory, ItemStack> itemGetter;
