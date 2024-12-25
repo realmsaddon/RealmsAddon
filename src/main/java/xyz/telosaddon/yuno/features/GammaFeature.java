@@ -6,8 +6,8 @@ import xyz.telosaddon.yuno.TelosAddon;
 import static xyz.telosaddon.yuno.utils.TabListUtils.mc;
 
 
-public class GammaFeature extends AbstractFeature{
-    protected GammaFeature() {
+public class GammaFeature extends ToggleableFeature{
+    GammaFeature() {
         super(TelosAddon.CONFIG.keys.gammaSetting);
     }
 

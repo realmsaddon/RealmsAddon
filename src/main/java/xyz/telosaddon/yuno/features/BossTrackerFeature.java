@@ -25,7 +25,7 @@ public class BossTrackerFeature extends ToggleableFeature{
 
     private final HashSet<BossData> currentAlive = new HashSet<>();
 
-    public BossTrackerFeature() {
+    BossTrackerFeature() {
         super(TelosAddon.CONFIG.keys.bossTrackerFeatureEnabled);
         ClientReceiveMessageEvents.GAME.register(this::onGameMessage);
         HandledScreenRemovedCallback.EVENT.register(this::onScreenClosed);
