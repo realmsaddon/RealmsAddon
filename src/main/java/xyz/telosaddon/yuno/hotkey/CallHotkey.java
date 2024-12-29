@@ -46,13 +46,14 @@ public class CallHotkey{
                 if (callCooldown <=0 ) {
 
                     String callString = "";
-                    if (!LocalAPI.getCurrentPortalCall().equals("")){
+
+                    if (!LocalAPI.getCurrentCharacterFighting().equals("")){
+                        callString = LocalAPI.getCurrentCharacterFighting().toLowerCase(Locale.ROOT) + " tp";
+                    }
+                    else if (!LocalAPI.getCurrentPortalCall().equals("")){
                         String portalToCall = LocalAPI.getCurrentPortalCall();
                         int timeLeft = LocalAPI.getCurrentPortalCallTime();
                         callString = "tp "  + portalToCall.toLowerCase(Locale.ROOT) + " " + timeLeft + "s";
-                    }
-                    else if (!LocalAPI.getCurrentCharacterFighting().equals("")){
-                        callString = LocalAPI.getCurrentCharacterFighting().toLowerCase(Locale.ROOT) + " tp";
                     }
                     else{
                         if (client.player == null) return;

@@ -64,6 +64,7 @@ public class TelosAddon implements ClientModInitializer  {
 
         ClientPlayerEntity player = mc.player;
         if(player == null) return;
+        if(!isOnTelos()) return;
 
         if(mc.options.attackKey.isPressed() && CONFIG.swingSetting() && isOnTelos()) {
             boolean canSwing = !player.getItemCooldownManager().isCoolingDown(player.getMainHandStack());
@@ -75,16 +76,17 @@ public class TelosAddon implements ClientModInitializer  {
         this.showMainRangeFeature.tick();
         this.showOffHandFeature.tick();
 
-        if(isOnTelos()) {
-            updateAPI();
-            tickCounter++;
-            if(tickCounter >= 20) {
-                playTime++;
-                CONFIG.totalPlayTime(CONFIG.totalPlayTime() + 1);
-                tickCounter = 0;
 
-            }
+        updateAPI();
+
+        tickCounter++;
+        if(tickCounter >= 20) {
+            playTime++;
+            CONFIG.totalPlayTime(CONFIG.totalPlayTime() + 1);
+            tickCounter = 0;
+
         }
+
 
     }
 
@@ -96,9 +98,6 @@ public class TelosAddon implements ClientModInitializer  {
 
     public SoundManager getSoundManager() { return soundManager; }
 
-    public void toggleGamma(boolean b) {
-
-    }
 
 
 
@@ -144,13 +143,6 @@ public class TelosAddon implements ClientModInitializer  {
 
         new ConfigTransferrer();
         new InitializeCommands().initializeCommands();
-    }
-
-    public void run(){
-        // todo move to feature
-        if(CONFIG.gammaSetting()) {
-            toggleGamma(true);
-        }
     }
 
     public ShowOffHandFeature getShowOffHandFeature() {

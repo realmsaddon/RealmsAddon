@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 public class BossTrackerFeature extends ToggleableFeature{
 
     private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
-    private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at ([0-9.-]+), ([0-9.-]+), ([0-9.-]+)");
-    private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Onyx's Castle will open in the centre of the realm in 60 seconds at");
+    private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at");
+    private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Onyx's Castle has opened at");
     private static final Pattern BOSS_ITEM_NAME_PATTERN = Pattern.compile("^» \\[(\\w+)] «");
 
     private final HashSet<BossData> currentAlive = new HashSet<>();
@@ -54,13 +54,12 @@ public class BossTrackerFeature extends ToggleableFeature{
                     currentAlive.clear();
                     currentAlive.add(BossData.ONYX);
 
-                    int countdown = 90;
+                    int countdown = 60;
                     while (countdown > 0) {
                         countdown--;
-                        if (!currentAlive.contains(BossData.ONYX)) return;
                         Thread.sleep(1000);
                     }
-                    currentAlive.clear();
+                    currentAlive.remove(BossData.ONYX);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

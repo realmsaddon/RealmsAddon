@@ -6,7 +6,6 @@ import xyz.telosaddon.yuno.TelosAddon;
 import java.util.Objects;
 
 public class ToggleableFeature extends AbstractFeature{
-    Option.Key configKey;
 
     protected ToggleableFeature(Option.Key configKey) {
         super(configKey);

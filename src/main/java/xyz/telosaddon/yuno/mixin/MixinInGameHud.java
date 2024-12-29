@@ -69,7 +69,7 @@ public abstract class MixinInGameHud {
         if(CONFIG.goldSetting() || isEditMode)
             bagTexts.add("Gold Bags§7: §f" + CONFIG.goldBags());
         if(CONFIG.whiteSetting() || isEditMode)
-            bagTexts.add("White Bags§7: §f" + CONFIG.goldBags());
+            bagTexts.add("White Bags§7: §f" + CONFIG.whiteBags());
         if(CONFIG.blackSetting()|| isEditMode)
             bagTexts.add("Black Bags§7: §f" + CONFIG.blackBags());
         if(CONFIG.eventSetting() || isEditMode)
