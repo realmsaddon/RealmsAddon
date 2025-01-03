@@ -77,5 +77,10 @@ public class HomeTab extends BaseUIModelScreen<FlowLayout> {
         rootComponent.childById(CheckboxComponent.class, "ToggleHotkeyShoutSetting")
                 .checked(CONFIG.callHotkeyShout())
                 .onChanged(CONFIG::callHotkeyShout);
+
+
+        rootComponent.childById(CheckboxComponent.class, "BossWaypointsSetting")
+                .checked(CONFIG.bossWaypointsSetting())
+                .onChanged(CONFIG::bossWaypointsSetting);
     }
 }

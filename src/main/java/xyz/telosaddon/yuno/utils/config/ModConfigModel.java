@@ -60,6 +60,7 @@ public class ModConfigModel {
     public boolean pingSetting = false;
     public boolean playTimeSetting = false;
     public boolean bossTrackerFeatureEnabled = false;
+    public boolean bossWaypointsSetting = false;
     public boolean soundSetting = false;
     public String font = "Default";
 

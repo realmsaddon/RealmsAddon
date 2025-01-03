@@ -30,6 +30,7 @@ import java.util.Locale;
 
 import static net.minecraft.client.render.RenderPhase.DISABLE_CULLING;
 import static net.minecraft.client.render.RenderPhase.TEXT_PROGRAM;
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
 public class WaypointRenderer{
     private static final Identifier RENDER_IDENTIFIER = Identifier.of("showteloswaypoints", "waypoints");
@@ -82,7 +83,7 @@ public class WaypointRenderer{
 
         VertexConsumerProvider.Immediate consumerProvider = client.getBufferBuilders().getEntityVertexConsumers();
         for(BossData bossData : Features.BOSS_TRACKER_FEATURE.getCurrentAlive()) {
-
+            if(!CONFIG.bossWaypointsSetting()) return;
             BlockPos waypoint = bossData.spawnPosition;
 
             Vec3d position = new Vec3d(waypoint.getX(), waypoint.getY(), waypoint.getZ());

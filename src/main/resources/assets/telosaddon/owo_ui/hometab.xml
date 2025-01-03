@@ -98,6 +98,12 @@
                                     <horizontal method="fixed">150</horizontal>
                                 </sizing>
                             </checkbox>
+                            <checkbox id="BossWaypointsSetting">
+                                <text>Show Boss Waypoints</text>
+                                <sizing>
+                                    <horizontal method="fixed">150</horizontal>
+                                </sizing>
+                            </checkbox>
                             <checkbox id="SoundSetting">
                                 <text>Custom Bag Sounds</text>
                                 <sizing>
