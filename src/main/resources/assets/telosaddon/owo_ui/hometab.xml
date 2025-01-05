@@ -4,7 +4,7 @@
         <flow-layout direction="vertical">
             <children>
                 <label>
-                    <text>RealmsAddon v0.3.0</text>
+                    <text>RealmsAddon v0.3.1</text>
                 </label>
                 <flow-layout direction="horizontal">
                     <children>
