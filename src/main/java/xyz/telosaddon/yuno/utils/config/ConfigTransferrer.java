@@ -12,7 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-
+/**
+ * Transfers v0.2 configs to the new v0.3 format used by our new config library
+ *
+ */
 public class ConfigTransferrer {
 
 

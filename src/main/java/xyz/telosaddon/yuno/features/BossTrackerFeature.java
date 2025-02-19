@@ -11,7 +11,9 @@ import xyz.telosaddon.yuno.event.HandledScreenRemovedCallback;
 import xyz.telosaddon.yuno.utils.data.BossData;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -23,7 +25,7 @@ public class BossTrackerFeature extends ToggleableFeature{
     private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Onyx's Castle has opened at");
     private static final Pattern BOSS_ITEM_NAME_PATTERN = Pattern.compile("^» \\[(\\w+)] «");
 
-    private final HashSet<BossData> currentAlive = new HashSet<>();
+    private final Set<BossData> currentAlive = ConcurrentHashMap.newKeySet();
 
     BossTrackerFeature() {
         super(TelosAddon.CONFIG.keys.bossTrackerFeatureEnabled);
@@ -132,7 +134,7 @@ public class BossTrackerFeature extends ToggleableFeature{
         return bossData.isPresent() && currentAlive.contains(bossData.get());
     }
 
-    public HashSet<BossData> getCurrentAlive (){
+    public Set<BossData> getCurrentAlive (){
         return currentAlive;
     }
 
