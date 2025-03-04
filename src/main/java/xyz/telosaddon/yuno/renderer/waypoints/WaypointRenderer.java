@@ -70,7 +70,6 @@ public class WaypointRenderer{
             prz = wz;
         }
         return new Vec3d(prx,pry + 1,prz).subtract(camera.getPos());
-
     }
     public static void render(WorldRenderContext context){
 

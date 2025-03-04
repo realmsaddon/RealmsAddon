@@ -18,25 +18,27 @@ public class TabListUtils {
     public static final String levelPattern = "^Class:.+$";
     public static final String serverPattern = "^Server:\\s.+$";
 
-    public static Optional<String> getPing(){
-        Optional<String> ping = getLineMatches(pingPattern);
+    public static Optional<String> getPattern(String pattern){
+        Optional<String> ping = getLineMatches(pattern);
         if(ping.isEmpty()) return Optional.empty();
         String result = ping.get().split(": ")[1];
         return Optional.of(result);
+    }
+
+    public static Optional<String> getPing(){
+        return getPattern(pingPattern);
     }
 
     public static Optional<String> getServer(){
-        Optional<String> ping = getLineMatches(serverPattern);
-        if(ping.isEmpty()) return Optional.empty();
-        String result = ping.get().split(": ")[1];
-        return Optional.of(result);
+        return getPattern(serverPattern);
     }
 
     public static Optional<String> getCharInfo(){
-        Optional<String> ping = getLineMatches(levelPattern);
-        if(ping.isEmpty()) return Optional.empty();
-        String result = ping.get().split(":")[1];
-        return Optional.of(result);
+        return getPattern(levelPattern);
+    }
+
+    public static Optional<String> getFame(){
+        return getPattern(famePattern);
     }
 
     public static Optional<List<String>> getTabList(){

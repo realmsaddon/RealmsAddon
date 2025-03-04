@@ -54,7 +54,7 @@ public class RangeTab extends BaseUIModelScreen<FlowLayout> {
                             CONFIG.showMainRangeFeatureViewType(ShowRangeFeature.RangeViewType.BOTH);
                         });
         rootComponent.childById(TextBoxComponent.class, "MainHandColorField")
-                .text(Color.ofRgb(CONFIG.showMainRangeFeatureColor()).asHexString(false))
+                .text(Color.ofRgb(CONFIG.showMainRangeFeatureColor()).asHexString(true))
                 .<TextBoxComponent>configure(textBox -> {
                     var eventSrc = textBox.onChanged();
                     eventSrc.subscribe((input)->{

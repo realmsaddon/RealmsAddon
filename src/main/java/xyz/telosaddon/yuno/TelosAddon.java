@@ -9,6 +9,7 @@ import xyz.telosaddon.yuno.discordrpc.DiscordRPCManager;
 import xyz.telosaddon.yuno.hotkey.*;
 import xyz.telosaddon.yuno.features.ShowMainRangeFeature;
 import xyz.telosaddon.yuno.features.ShowOffHandFeature;
+import xyz.telosaddon.yuno.renderer.HitboxRenderer;
 import xyz.telosaddon.yuno.renderer.RangeRenderer;
 import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
 import xyz.telosaddon.yuno.sound.SoundManager;
@@ -54,7 +55,7 @@ public class TelosAddon implements ClientModInitializer  {
         MenuHotkey.init();
         TeleportMenuHotkey.init();
         CallHotkey.init();
-        TestHotkey.init();
+        HitboxHotkey.init();
     }
     public void stop() {
 
@@ -135,6 +136,7 @@ public class TelosAddon implements ClientModInitializer  {
 
         RangeRenderer.init();
         WaypointRenderer.init();
+        HitboxRenderer.init();
 
         new ConfigTransferrer();
         new InitializeCommands().initializeCommands();
