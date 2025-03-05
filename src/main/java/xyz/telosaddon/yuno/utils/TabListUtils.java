@@ -21,7 +21,7 @@ public class TabListUtils {
     public static Optional<String> getPattern(String pattern){
         Optional<String> ping = getLineMatches(pattern);
         if(ping.isEmpty()) return Optional.empty();
-        String result = ping.get().split(": ")[1];
+        String result = ping.get().split(":")[1];
         return Optional.of(result);
     }
 

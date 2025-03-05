@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.Perspective;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
@@ -31,7 +32,7 @@ public class HitboxRenderer {
 
     public static void render(WorldRenderContext context) {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (!showHitboxIndicator) return;
+        if (!showHitboxIndicator || client.options.getPerspective() != Perspective.THIRD_PERSON_BACK) return;
 
 
         MatrixStack matrices = context.matrixStack();
