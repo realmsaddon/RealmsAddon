@@ -18,6 +18,8 @@ import org.joml.Vector3f;
 import xyz.telosaddon.yuno.hotkey.TestHotkey;
 import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
 
+import static xyz.telosaddon.yuno.hotkey.HitboxHotkey.showHitboxIndicator;
+
 public class HitboxRenderer {
 
 
@@ -29,7 +31,7 @@ public class HitboxRenderer {
 
     public static void render(WorldRenderContext context) {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (!TestHotkey.showHitboxIndicator) return;
+        if (!showHitboxIndicator) return;
 
 
         MatrixStack matrices = context.matrixStack();
