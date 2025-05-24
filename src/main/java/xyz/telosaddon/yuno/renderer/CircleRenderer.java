@@ -1,9 +1,13 @@
 package xyz.telosaddon.yuno.renderer;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.DepthTestFunction;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
@@ -111,21 +115,26 @@ public class CircleRenderer implements IRenderer{
 			String name = "showtelosrange_circle_" + VertexFormat.DrawMode.QUADS.name().toLowerCase(Locale.ROOT);
 
 			return RenderLayer.of(name,
-					VertexFormats.POSITION_COLOR,
-					VertexFormat.DrawMode.QUADS,
 					1536,
 					false,
 					true,
+					RenderPipeline.builder(RenderPipelines.POSITION_COLOR_SNIPPET)
+							.withCull(false)
+							.withVertexFormat(VertexFormats.POSITION_COLOR, VertexFormat.DrawMode.QUADS)
+							.withDepthTestFunction(DepthTestFunction.LEQUAL_DEPTH_TEST)
+							.withLocation(Identifier.of(TelosAddon.MOD_ID, "pipelines/showrange_line" ))
+							.build(),
 					RenderLayer.MultiPhaseParameters.builder()
-							.program(POSITION_COLOR_PROGRAM)
+							.lightmap(RenderPhase.ENABLE_LIGHTMAP)
+							.overlay(RenderPhase.ENABLE_OVERLAY_COLOR)
+							.lineWidth(RenderPhase.FULL_LINE_WIDTH)
 							.layering(VIEW_OFFSET_Z_LAYERING)
-							.transparency(NO_TRANSPARENCY)
 							.target(ITEM_ENTITY_TARGET)
-							.writeMaskState(ALL_MASK)
-							.cull(DISABLE_CULLING)
-//							.lightmap(ENABLE_LIGHTMAP)
-//							.overlay(ENABLE_OVERLAY_COLOR)
-//							.depthTest(LEQUAL_DEPTH_TEST)
+							//.program(POSITION_COLOR_PROGRAM)
+
+							//.transparency(NO_TRANSPARENCY)
+
+							//.writeMaskState(ALL_MASK)
 							.build(false)
 			);
 		}

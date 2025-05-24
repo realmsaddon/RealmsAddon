@@ -41,23 +41,15 @@ public class NexusHotkey {
         MinecraftClient client = MinecraftClient.getInstance();
         assert client.player != null;
         PlayerInventory inv = client.player.getInventory();
-        int invslot = inv.selectedSlot;
+        int invslot = inv.getSelectedSlot();
         for (int i = 0; i < 9; i++) {
             ItemStack item = inv.getStack(i);
             if (item.getName().getString().hashCode() == 1307700015){ // hacky solution but it works
-                invslot = i;
+                inv.setSelectedSlot(i);
             }
         }
-        int savedNexusSlot = invslot;
-        inv.setSelectedSlot(savedNexusSlot);
         assert client.interactionManager != null;
         client.interactionManager.interactItem(client.player, client.player.getActiveHand());
     }
 
-    private static void scrollToSlot(PlayerInventory inv, int slot){
-        int diff = inv.selectedSlot - slot;
-        int dist = Math.abs(diff);
-        for(int j = 0; j <  dist; j++) {
-        }
-    }
 }

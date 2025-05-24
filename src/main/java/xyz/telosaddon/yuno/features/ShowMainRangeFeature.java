@@ -11,7 +11,7 @@ import xyz.telosaddon.yuno.TelosAddon;
 public class ShowMainRangeFeature extends ShowRangeFeature {
 
 	public ShowMainRangeFeature() {
-		super(TelosAddon.CONFIG.keys.showMainRangeFeatureEnabled, PlayerInventory::getMainHandStack);
+		super(TelosAddon.CONFIG.keys.showMainRangeFeatureEnabled, PlayerInventory::getSelectedStack);
 		this.setRangeType(TelosAddon.CONFIG.showMainRangeFeatureViewType());
 		ConfigUtils.addConfigBinding(TelosAddon.CONFIG.keys.showMainRangeFeatureViewType, this::setRangeType);
 	}

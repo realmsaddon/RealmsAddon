@@ -9,6 +9,7 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,6 +20,8 @@ import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.features.Features;
 
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
 
@@ -61,13 +64,17 @@ public class MixinMessageHandler {
                     }
                     client.player.sendMessage(Text.of("§6[§e" + MOD_NAME + MOD_VERSION + "§6]" +
                             "\n§ePlease note this is a third party mod and is not affiliated with Telos Realms. "), false);
-                    client.player.sendMessage(Text.literal("§eFor bugs, support, and other questions, please join our discord: §f§nhttps://discord.gg/2pa42RxuaF")
-                            .setStyle(Style.EMPTY
-                                    // Set the click event to open the URL
-                                    .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/2pa42RxuaF"))
-                                    // Optional: Set a hover text when the player hovers over the link
-                                    .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("Join our discord!")))
-                            ), false);
+                    try {
+                        client.player.sendMessage(Text.literal("§eFor bugs, support, and other questions, please join our discord: §f§nhttps://discord.gg/2pa42RxuaF")
+                                .setStyle(Style.EMPTY
+                                        // Set the click event to open the URL
+                                        .withClickEvent(new ClickEvent.OpenUrl(new URI("https://discord.gg/2pa42RxuaF")))
+                                        // Optional: Set a hover text when the player hovers over the link
+                                        .withHoverEvent(new HoverEvent.ShowText(Text.literal("Join our discord!")))
+                                ), false);
+                    } catch (Exception e) {
+                        LOGGER.warning(e.getMessage());
+                    }
 
                 });
             }

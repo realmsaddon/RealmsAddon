@@ -1,6 +1,7 @@
 package xyz.telosaddon.yuno.renderer.waypoints;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.event.Event;
@@ -28,8 +29,7 @@ import xyz.telosaddon.yuno.utils.data.BossData;
 import java.awt.*;
 import java.util.Locale;
 
-import static net.minecraft.client.render.RenderPhase.DISABLE_CULLING;
-import static net.minecraft.client.render.RenderPhase.TEXT_PROGRAM;
+
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
 public class WaypointRenderer{
@@ -114,9 +114,9 @@ public class WaypointRenderer{
             int backgroundColorCode = new Color(0,0,0, (int) (fade * 0.3)).getRGB();
 
             String waypointString = bossData.label + " (" +  (int) distance + "m" + ")";
-            RenderSystem.depthMask(false);
-            RenderSystem.disableCull();
-            RenderSystem.disableBlend();
+//            RenderSystem.depthMask(false);
+//            RenderSystem.disableCull();
+//            RenderSystem.disableBlend();
             textRenderer.draw(
                     Text.of(waypointString),
                     -textRenderer.getWidth(bossData.label) / 2.0F,
@@ -145,9 +145,9 @@ public class WaypointRenderer{
             }
 
             //todo: render the boss icon
-            RenderSystem.depthMask(true);
-            RenderSystem.enableCull();
-            RenderSystem.enableBlend();
+//            RenderSystem.depthMask(true);
+//            RenderSystem.enableCull();
+//            RenderSystem.enableBlend();
             matrixStack.pop();
 
         }
@@ -159,17 +159,17 @@ public class WaypointRenderer{
     public static float clamp(float value, float min, float max) {
         return max > value ? Math.max(value, min) : max;
     }
-    public static final RenderLayer WAYPOINT_TEXT_LAYER = RenderLayer.of(
-            "waypoint_text_layer",
-            VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL,
-            VertexFormat.DrawMode.QUADS,
-            256,
-            RenderLayer.MultiPhaseParameters.builder()
-                    .program(TEXT_PROGRAM)
-                    .transparency(RenderLayer.Transparency.TRANSLUCENT_TRANSPARENCY)
-                    .depthTest(RenderLayer.DepthTest.ALWAYS_DEPTH_TEST)
-                    .cull(DISABLE_CULLING)
-                    .lightmap(RenderLayer.Lightmap.ENABLE_LIGHTMAP)
-                    .build(true)
-    );
+//    public static final RenderLayer WAYPOINT_TEXT_LAYER = RenderLayer.of(
+//            "waypoint_text_layer",
+//            VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL,
+//            VertexFormat.DrawMode.QUADS,
+//            256,
+//            RenderLayer.MultiPhaseParameters.builder()
+//                    .program(TEXT_PROGRAM)
+//                    .transparency(RenderLayer.Transparency.TRANSLUCENT_TRANSPARENCY)
+//                    .depthTest(RenderLayer.DepthTest.ALWAYS_DEPTH_TEST)
+//                    .cull(DISABLE_CULLING)
+//                    .lightmap(RenderLayer.Lightmap.ENABLE_LIGHTMAP)
+//                    .build(true)
+//    );
 }

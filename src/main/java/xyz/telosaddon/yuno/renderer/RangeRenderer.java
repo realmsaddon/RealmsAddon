@@ -28,7 +28,7 @@ public class RangeRenderer {
 		assert matrixStack != null;
 
 
-		float tickDelta = context.tickCounter().getTickDelta(false);
+		float tickDelta = context.tickCounter().getTickProgress(false);
 		double px = MathHelper.lerp(tickDelta, player.lastRenderX, player.getX());
 		double py = MathHelper.lerp(tickDelta, player.lastRenderY, player.getY());
 		double pz = MathHelper.lerp(tickDelta, player.lastRenderZ, player.getZ());

@@ -9,7 +9,7 @@ import xyz.telosaddon.yuno.utils.config.ConfigUtils;
 
 public class ShowOffHandFeature extends ShowRangeFeature {
 	public ShowOffHandFeature() {
-		super(CONFIG.keys.showOffHandRangeFeatureEnabled, (inv -> inv.offHand.get(0)));
+		super(CONFIG.keys.showOffHandRangeFeatureEnabled, (inv -> inv.player.getOffHandStack()));
 		this.setRangeType(CONFIG.showOffHandRangeFeatureViewType());
 		ConfigUtils.addConfigBinding(CONFIG.keys.showOffHandRangeFeatureViewType, this::setRangeType);
 	}

@@ -1,13 +1,23 @@
 package xyz.telosaddon.yuno.renderer;
 
+import com.mojang.blaze3d.pipeline.BlendFunction;
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.DepthTestFunction;
+import com.mojang.blaze3d.platform.LogicOp;
+import com.mojang.blaze3d.platform.PolygonMode;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gl.UniformType;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3f;
+import xyz.telosaddon.yuno.TelosAddon;
 
 import java.util.Locale;
 import java.util.OptionalDouble;
@@ -61,20 +71,23 @@ public class LineRenderer implements IRenderer{
 
 			return RenderLayer.of(
 					name,
-					VertexFormats.POSITION_COLOR,
-					VertexFormat.DrawMode.QUADS,
 					1536,
 					false,
 					true,
+
+					RenderPipeline.builder(RenderPipelines.POSITION_COLOR_SNIPPET)
+							.withCull(false)
+							.withVertexFormat(VertexFormats.POSITION_COLOR, VertexFormat.DrawMode.QUADS)
+							.withDepthTestFunction(DepthTestFunction.LEQUAL_DEPTH_TEST)
+							.withLocation(Identifier.of(TelosAddon.MOD_ID, "pipelines/showrange_line" ))
+							.build(),
 					RenderLayer.MultiPhaseParameters.builder()
-							.program(RenderPhase.POSITION_COLOR_PROGRAM)
+							//.program(RenderPhase.POSITION_COLOR_PROGRAM)
+							//.writeMaskState(ALL_MASK)
+							//.transparency(RenderPhase.NO_TRANSPARENCY)
 							.lineWidth(new RenderPhase.LineWidth(OptionalDouble.of(10f)))
 							.layering(RenderPhase.VIEW_OFFSET_Z_LAYERING)
-							.transparency(RenderPhase.NO_TRANSPARENCY)
 							.target(ITEM_ENTITY_TARGET)
-							.writeMaskState(ALL_MASK)
-							.cull(DISABLE_CULLING)
-							.depthTest(RenderPhase.LEQUAL_DEPTH_TEST)
 							.build(false));
 		}
 
@@ -83,5 +96,8 @@ public class LineRenderer implements IRenderer{
 		private LineRendererPhases(String name, Runnable beginAction, Runnable endAction) {
 			super(name, beginAction, endAction);
 		}
+
 	}
+
+
 }

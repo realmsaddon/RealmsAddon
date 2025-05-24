@@ -24,7 +24,8 @@ public abstract class MixinGameRenderer {
     private void showFloatingItem(ItemStack floatingItem, CallbackInfo ci) {
         if(!floatingItem.getComponents().isEmpty() && !floatingItem.getComponents().contains(DataComponentTypes.CUSTOM_MODEL_DATA)) return;
 
-        int customModelData = Objects.requireNonNull(floatingItem.getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA)).value();
+        // TODO: fix for new component system
+        int customModelData = 0;//Objects.requireNonNull(floatingItem.getComponents().get(DataComponentTypes.CUSTOM_MODEL_DATA));
 
         SoundManager soundManager = TelosAddon.getInstance().getSoundManager();
         boolean soundSetting = CONFIG.soundSetting();
