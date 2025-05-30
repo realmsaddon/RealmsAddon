@@ -90,7 +90,7 @@
                             </sizing>
                         </checkbox>
                         <checkbox id="RelicSetting">
-                            <text>Relic Counter</text>
+                            <text>Voidbound Counter</text>
                             <sizing>
                                 <horizontal method="fixed">150</horizontal>
                             </sizing>

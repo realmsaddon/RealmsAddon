@@ -36,17 +36,17 @@ public class LocalAPI {
 
                 String[] charInfo = info.get().split(" ");
                 if (charInfo.length < 4) return;
-
-                switch (charInfo[0].hashCode()) {
+                // something something mastery
+                switch (charInfo[1].hashCode()) {
                     case 880 -> currentCharacterType = "Normal";
                     case 881 -> currentCharacterType = "Hardcore";
-                    case 882 -> currentCharacterType = "Softcore";
+                    case 882 -> currentCharacterType = "Seasonal";
                     default -> // 1771717 -> 1771734 inclusive
                             currentCharacterType = "GHardcore";
                 }
                 try {
-                    currentCharacterLevel = Integer.parseInt(charInfo[2]);
-                    currentCharacterClass = charInfo[3];
+                    currentCharacterLevel = Integer.parseInt(charInfo[3]);
+                    currentCharacterClass = charInfo[4];
 
                 }catch (Exception e){
                     e.printStackTrace();

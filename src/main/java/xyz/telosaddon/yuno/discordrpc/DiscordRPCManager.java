@@ -69,6 +69,8 @@ public class DiscordRPCManager implements IPCListener {
             client.sendRichPresence(null);
             return;
         }
+
+
         String largeImageDescription = "telosrealms.com";
         String smallImageDescription = LocalAPI.getCurrentCharacterType() + " Lv" + LocalAPI.getCurrentCharacterLevel() + " " + LocalAPI.getCurrentCharacterClass();
         RichPresence presence = new RichPresence.Builder()
