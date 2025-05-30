@@ -77,7 +77,7 @@ public abstract class MixinInGameHud {
         if(CONFIG.crossSetting() || isEditMode)
             bagTexts.add("Crosses§7: §f" + CONFIG.crosses());
         if(CONFIG.relicSetting() || isEditMode)
-            bagTexts.add("Relics§7: §f" + CONFIG.relics());
+            bagTexts.add("Voidbounds§7: §f" + CONFIG.relics());
         if(CONFIG.runesSetting() || isEditMode)
             bagTexts.add("Runes§7: §f" + CONFIG.runes());
         if(CONFIG.totalRunSetting() || isEditMode)
