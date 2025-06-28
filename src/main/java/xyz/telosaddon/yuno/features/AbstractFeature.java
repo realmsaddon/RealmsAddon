@@ -1,6 +1,5 @@
 package xyz.telosaddon.yuno.features;
 
-import io.wispforest.owo.config.Option;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 import static xyz.telosaddon.yuno.utils.config.ConfigUtils.addConfigBinding;

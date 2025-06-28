@@ -38,7 +38,7 @@ public class RealmUtils {
     public static Future<Void> nexusThenTp(String worldName){
         return CompletableFuture.supplyAsync(()-> {
             String worldToJoin = worldName;
-            NexusHotkey.useNexus();
+            NexusHotkey.useMount();
             int waitTime = 15;
             while (!LocalAPI.getCurrentCharacterWorld().contains("Hub")){
                 try {

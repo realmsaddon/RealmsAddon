@@ -11,11 +11,12 @@ repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
     maven { url 'https://maven.wispforest.io/releases/' }
-    // Add repositories to retrieve artifacts from in here.
-    // You should only use this when depending on other mods because
-    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-    // for more information about repositories.
+    maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://maven.terraformersmc.com/releases/" }
+    maven {
+        name = "Gegy"
+        url = uri("https://maven.gegy.dev")
+    }
 }
 
 
@@ -29,8 +30,12 @@ dependencies {
     include implementation('org.slf4j:slf4j-api:2.0.7')
     include implementation('com.kohlschutter.junixsocket:junixsocket-common:2.6.2')
     include implementation('com.kohlschutter.junixsocket:junixsocket-native-common:2.6.2')
-    annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
-    include "io.wispforest:owo-sentinel:${project.owo_version}"
+    include(modImplementation("dev.lambdaurora:spruceui:${project.spruceui_version}"))
+    modApi("me.shedaniel.cloth:cloth-config-fabric:19.0.147") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+//    annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
+//    include "io.wispforest:owo-sentinel:${project.owo_version}"
     }
 
 processResources {

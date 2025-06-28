@@ -6,8 +6,9 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
-import xyz.telosaddon.yuno.ui.tabs.HomeTab;
+//import xyz.telosaddon.yuno.ui.tabs.HomeTab;
 
 @Environment(EnvType.CLIENT)
 public class MenuHotkey {
@@ -23,7 +24,8 @@ public class MenuHotkey {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (keyBinding.wasPressed()) {
-                client.setScreen(new HomeTab());
+                assert client.player != null;
+                client.player.sendMessage(Text.of("TODO"), false);
             }
         });
     }

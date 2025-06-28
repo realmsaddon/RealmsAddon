@@ -9,11 +9,8 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import org.lwjgl.glfw.GLFW;
 import xyz.telosaddon.yuno.TelosAddon;
-
-import java.nio.charset.StandardCharsets;
 
 import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
 
@@ -23,7 +20,7 @@ public class NexusHotkey {
 
     public static void init() {
         keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.telosaddon.nexus",
+                "key.telosaddon.mount",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_V,
                 "category.telosaddon"
@@ -31,17 +28,16 @@ public class NexusHotkey {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (keyBinding.wasPressed()) {
-                TelosAddon.getInstance().sendMessage("Nexus hotkey pressed!");
-                LOGGER.info("Nexus hotkey pressed!");
-                useNexus();
+                TelosAddon.getInstance().sendMessage("Mount hotkey pressed!");
+                LOGGER.info("Mount hotkey pressed!");
+                useMount();
             }
         });
     }
-    public static void useNexus(){
+    public static void useMount(){
         MinecraftClient client = MinecraftClient.getInstance();
         assert client.player != null;
         PlayerInventory inv = client.player.getInventory();
-        int invslot = inv.getSelectedSlot();
         for (int i = 0; i < 9; i++) {
             ItemStack item = inv.getStack(i);
             if (item.getName().getString().hashCode() == 1307700015){ // hacky solution but it works

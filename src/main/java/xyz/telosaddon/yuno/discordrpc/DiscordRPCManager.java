@@ -65,7 +65,7 @@ public class DiscordRPCManager implements IPCListener {
 
     public void updatePresence() {
         if (!isActive()) return;
-        if (!TelosAddon.getInstance().isOnTelos() || !CONFIG.discordRPCSetting()){
+        if (!TelosAddon.getInstance().isOnTelos() || !CONFIG.discordRPCSetting){
             client.sendRichPresence(null);
             return;
         }
@@ -84,7 +84,7 @@ public class DiscordRPCManager implements IPCListener {
     }
 
     private String getDetailsString(){
-        if (CONFIG.rpcShowLocationSetting()){
+        if (CONFIG.rpcShowLocationSetting){
             return LocalAPI.getCurrentCharacterWorld() + " | " + LocalAPI.getCurrentCharacterArea();
         } else{
             return "In an Unknown Place";
@@ -92,9 +92,9 @@ public class DiscordRPCManager implements IPCListener {
     }
 
     private String getStateString(){
-        return (LocalAPI.getCurrentCharacterFighting().length() > 0 && CONFIG.rpcShowLocationSetting())
+        return (LocalAPI.getCurrentCharacterFighting().length() > 0 && CONFIG.rpcShowLocationSetting)
                 ? ("Fighting " + LocalAPI.getCurrentCharacterFighting())
-                : CONFIG.discordDefaultStatusMessage();
+                : CONFIG.discordDefaultStatusMessage;
     }
     @Override
     public void onReady(IPCClient client) {

@@ -1,17 +1,25 @@
 package xyz.telosaddon.yuno.utils.config;
 
-import io.wispforest.owo.config.annotation.Config;
-import io.wispforest.owo.config.annotation.Modmenu;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
 import xyz.telosaddon.yuno.features.ShowRangeFeature;
 
 import java.awt.*;
 
 import static xyz.telosaddon.yuno.TelosAddon.MOD_ID;
 
-@Modmenu(modId = MOD_ID)
-@Config(name = MOD_ID, wrapperName = "ModConfig")
-public class ModConfigModel {
-    public String modVersion = "v0.3.0";
+@Config(name = MOD_ID)
+public class ModConfigModel implements ConfigData {
+
+    private static ModConfigModel instance;
+
+    public static ModConfigModel getInstance() {
+        if (instance == null)
+            instance = AutoConfig.getConfigHolder(ModConfigModel.class).getConfig();
+        return instance;
+    }
+    public String modVersion = "v0.3.21";
 
     public int greenBags = 0;
     public int goldBags = 0;

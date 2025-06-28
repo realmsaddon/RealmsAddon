@@ -1,5 +1,7 @@
 package xyz.telosaddon.yuno;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -15,9 +17,9 @@ import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
 import xyz.telosaddon.yuno.sound.SoundManager;
 
 import xyz.telosaddon.yuno.utils.BossBarUtils;
-import xyz.telosaddon.yuno.utils.config.ConfigTransferrer;
-import xyz.telosaddon.yuno.utils.config.ModConfig;
+//import xyz.telosaddon.yuno.utils.config.ModConfig;
 import xyz.telosaddon.yuno.sound.CustomSound;
+import xyz.telosaddon.yuno.utils.config.ModConfigModel;
 
 import java.util.logging.Logger;
 
@@ -25,10 +27,11 @@ import static xyz.telosaddon.yuno.utils.LocalAPI.updateAPI;
 
 public class TelosAddon implements ClientModInitializer  {
     public static final String MOD_NAME = "RealmsAddon";
-    public static final String MOD_VERSION = "v0.3.2";
+    public static final String MOD_VERSION = "v0.3.21";
     public static final String MOD_ID = "realmsaddon";
 
-    public static final ModConfig CONFIG = ModConfig.createAndLoad();
+
+    public static final ModConfigModel CONFIG = ModConfigModel.getInstance();
 
     public static final Logger LOGGER = Logger.getLogger(MOD_NAME);
     private final MinecraftClient mc = MinecraftClient.getInstance();
@@ -50,6 +53,7 @@ public class TelosAddon implements ClientModInitializer  {
     private ShowOffHandFeature showOffHandFeature;
 
 
+    // todo: move these to their own features and init them in features class
     public void initHotkeys(){
         NexusHotkey.init();
         MenuHotkey.init();
@@ -64,14 +68,10 @@ public class TelosAddon implements ClientModInitializer  {
     public void tick() {
 
         ClientPlayerEntity player = mc.player;
-        if(player == null) return;
-        if(!isOnTelos()) return;
-
-
+        if(!isOnTelos() || player == null) return;
 
         this.showMainRangeFeature.tick();
         this.showOffHandFeature.tick();
-
 
         updateAPI();
 
@@ -119,7 +119,7 @@ public class TelosAddon implements ClientModInitializer  {
     @Override
     public void onInitializeClient() {
         instance = this;
-
+        AutoConfig.register(ModConfigModel.class, GsonConfigSerializer::new);
         BossBarUtils.init();
         rpcManager.start();
         initHotkeys();
@@ -138,7 +138,6 @@ public class TelosAddon implements ClientModInitializer  {
         WaypointRenderer.init();
         HitboxRenderer.init();
 
-        new ConfigTransferrer();
         new InitializeCommands().initializeCommands();
     }
 
