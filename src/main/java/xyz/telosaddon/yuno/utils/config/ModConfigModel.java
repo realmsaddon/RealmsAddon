@@ -1,5 +1,6 @@
 package xyz.telosaddon.yuno.utils.config;
 
+import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
@@ -16,6 +17,10 @@ public class ModConfigModel implements ConfigData, ModMenuApi {
 
     private static ModConfigModel instance;
 
+    @Override
+    public ConfigScreenFactory<?> getModConfigScreenFactory() {
+        return parent -> AutoConfig.getConfigScreen(this.getClass(), parent).get();
+    }
     public static ModConfigModel getInstance() {
         if (instance == null){
             init();

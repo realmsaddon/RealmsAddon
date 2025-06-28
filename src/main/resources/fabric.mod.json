@@ -17,6 +17,9 @@
   "entrypoints": {
     "client": [
       "xyz.telosaddon.yuno.TelosAddon"
+    ],
+    "modmenu": [
+      "xyz.telosaddon.yuno.utils.config.ModConfigModel"
     ]
   },
   "mixins": [

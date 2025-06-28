@@ -33,7 +33,7 @@ public class LocalAPI {
                 if (!TelosAddon.getInstance().isOnTelos()) return;
                 Optional<String> info = TabListUtils.getCharInfo();
                 if (info.isEmpty()) return;
-                LOGGER.info(info.get());
+
                 String[] charInfo = info.get().split(" ");
                 if (charInfo.length < 4) return;
                 // something something mastery
@@ -45,8 +45,8 @@ public class LocalAPI {
                             currentCharacterType = "GHardcore";
                 }
                 try {
-                    currentCharacterLevel = Integer.parseInt(charInfo[3]);
-                    currentCharacterClass = charInfo[4];
+                    currentCharacterLevel = Integer.parseInt(charInfo[2]);
+                    currentCharacterClass = charInfo[3];
 
                 }catch (Exception e){
                     e.printStackTrace();

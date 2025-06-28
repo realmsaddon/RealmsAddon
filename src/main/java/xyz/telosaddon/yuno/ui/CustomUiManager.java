@@ -76,7 +76,7 @@ public class CustomUiManager {
         this.customElements.add(customElement);
     }
 
-    public void editMode(Screen currentTab) {
+    public void editMode() {
 
         this.addCustomElement(new CustomButton(8, mc.getWindow().getScaledHeight() - 28, 150, 20, "Done", (button) -> {
             TelosAddon.getInstance().setEditMode(false);

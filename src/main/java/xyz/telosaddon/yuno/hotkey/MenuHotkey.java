@@ -8,6 +8,8 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
+import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.ui.TelosMenu;
 //import xyz.telosaddon.yuno.ui.tabs.HomeTab;
 
 @Environment(EnvType.CLIENT)
@@ -25,6 +27,10 @@ public class MenuHotkey {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (keyBinding.wasPressed()) {
                 assert client.player != null;
+                TelosAddon.getInstance().setEditMode(true);
+                TelosMenu menu = new TelosMenu();
+                menu.getCustomUiManager().editMode();
+                client.setScreen(menu);
                 client.player.sendMessage(Text.of("TODO"), false);
             }
         });
