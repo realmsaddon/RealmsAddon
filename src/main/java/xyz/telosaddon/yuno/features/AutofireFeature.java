@@ -11,9 +11,8 @@ import static xyz.telosaddon.yuno.utils.TabListUtils.mc;
 public class AutofireFeature extends ToggleableFeature{
     AutofireFeature() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            // todo: move to toggleablefeature
             ClientPlayerEntity player = client.player;
-            if(mc.options.attackKey.isPressed() && isEnabled() && TelosAddon.getInstance().isOnTelos()) {
+            if(mc.options.attackKey.isPressed() && TelosAddon.getInstance().isOnTelos()) {
                 boolean canSwing = !player.getItemCooldownManager().isCoolingDown(player.getMainHandStack());
                 if (!TelosAddon.CONFIG.swingIfNoCooldown|| canSwing) {
                     player.swingHand(Hand.MAIN_HAND);
