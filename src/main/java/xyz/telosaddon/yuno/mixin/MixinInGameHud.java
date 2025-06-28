@@ -51,64 +51,64 @@ public abstract class MixinInGameHud {
 
 
 
-        if(CONFIG.bagX() == -1)
-            CONFIG.bagX(width - 130);
+        if(CONFIG.bagX == -1)
+            CONFIG.bagX = width - 130;
 
         boolean isEditMode = TelosAddon.getInstance().isEditMode();
-        String fontName = CONFIG.font();
+        String fontName = CONFIG.font;
 
-        boolean fpsSetting = CONFIG.fpsSetting();
-        boolean pingSetting = CONFIG.pingSetting();
-        boolean playtimeSetting = CONFIG.playTimeSetting();
-        boolean spawnBossesSetting = CONFIG.bossTrackerFeatureEnabled();
+        boolean fpsSetting = CONFIG.fpsSetting;
+        boolean pingSetting = CONFIG.pingSetting;
+        boolean playtimeSetting = CONFIG.playTimeSetting;
+        boolean spawnBossesSetting = CONFIG.bossTrackerFeatureEnabled;
 
 
         List<String> bagTexts = new ArrayList<>();
-        if(CONFIG.greenSetting() || isEditMode)
-            bagTexts.add("Green Bags§7: §f" + CONFIG.greenBags());
-        if(CONFIG.goldSetting() || isEditMode)
-            bagTexts.add("Gold Bags§7: §f" + CONFIG.goldBags());
-        if(CONFIG.whiteSetting() || isEditMode)
-            bagTexts.add("White Bags§7: §f" + CONFIG.whiteBags());
-        if(CONFIG.blackSetting()|| isEditMode)
-            bagTexts.add("Black Bags§7: §f" + CONFIG.blackBags());
-        if(CONFIG.eventSetting() || isEditMode)
-            bagTexts.add("Event Bags§7: §f" + CONFIG.eventBags());
-        if(CONFIG.crossSetting() || isEditMode)
-            bagTexts.add("Crosses§7: §f" + CONFIG.crosses());
-        if(CONFIG.relicSetting() || isEditMode)
-            bagTexts.add("Voidbounds§7: §f" + CONFIG.relics());
-        if(CONFIG.runesSetting() || isEditMode)
-            bagTexts.add("Runes§7: §f" + CONFIG.runes());
-        if(CONFIG.totalRunSetting() || isEditMode)
-            bagTexts.add("Total Runs§7: §f" + CONFIG.totalRuns());
-        if(CONFIG.noWhiteRunSetting() || isEditMode)
-            bagTexts.add("No Whites Runs§7: §f" + CONFIG.noWhiteRuns());
-        if(CONFIG.noBlackRunSetting() || isEditMode)
-            bagTexts.add("No Black Runs§7: §f" + CONFIG.noBlackRuns());
+        if(CONFIG.greenSetting || isEditMode)
+            bagTexts.add("Green Bags§7: §f" + CONFIG.greenBags);
+        if(CONFIG.goldSetting || isEditMode)
+            bagTexts.add("Gold Bags§7: §f" + CONFIG.goldBags);
+        if(CONFIG.whiteSetting || isEditMode)
+            bagTexts.add("White Bags§7: §f" + CONFIG.whiteBags);
+        if(CONFIG.blackSetting|| isEditMode)
+            bagTexts.add("Black Bags§7: §f" + CONFIG.blackBags);
+        if(CONFIG.eventSetting || isEditMode)
+            bagTexts.add("Event Bags§7: §f" + CONFIG.eventBags);
+        if(CONFIG.crossSetting || isEditMode)
+            bagTexts.add("Crosses§7: §f" + CONFIG.crosses);
+        if(CONFIG.relicSetting || isEditMode)
+            bagTexts.add("Voidbounds§7: §f" + CONFIG.relics);
+        if(CONFIG.runesSetting || isEditMode)
+            bagTexts.add("Runes§7: §f" + CONFIG.runes);
+        if(CONFIG.totalRunSetting || isEditMode)
+            bagTexts.add("Total Runs§7: §f" + CONFIG.totalRuns);
+        if(CONFIG.noWhiteRunSetting || isEditMode)
+            bagTexts.add("No Whites Runs§7: §f" + CONFIG.noWhiteRuns);
+        if(CONFIG.noBlackRunSetting || isEditMode)
+            bagTexts.add("No Black Runs§7: §f" + CONFIG.noBlackRuns);
 
-        int bagY = CONFIG.bagY();
-        int bagX = CONFIG.bagX();
+        int bagY = CONFIG.bagY;
+        int bagX = CONFIG.bagX;
 
         int yBackground = bagY - 25;
         if(!bagTexts.isEmpty()) {
-            String title = CONFIG.lifetimeSetting() ? "Lifetime Stats" : "Session Stats";
-            context.fill(bagX, yBackground, bagX + 120, bagY + bagTexts.size() * 13 + 5, CONFIG.fillColor());
-            context.drawBorder(bagX, yBackground, 120, bagY - yBackground + bagTexts.size() * 13 + 5,CONFIG.borderColor());
-            context.drawHorizontalLine(bagX + 10, bagX + 110, bagY - 4, CONFIG.borderColor());
+            String title = CONFIG.lifetimeSetting ? "Lifetime Stats" : "Session Stats";
+            context.fill(bagX, yBackground, bagX + 120, bagY + bagTexts.size() * 13 + 5, CONFIG.fillColor);
+            context.drawBorder(bagX, yBackground, 120, bagY - yBackground + bagTexts.size() * 13 + 5,CONFIG.borderColor);
+            context.drawHorizontalLine(bagX + 10, bagX + 110, bagY - 4, CONFIG.borderColor);
 
             int titleWidth = tr.getWidth(FontHelper.toCustomFont(title, fontName));
             int midX = (bagX + (bagX + 120)) / 2;
 
             //context.drawText(tr, toCustomFont(title), midX - titleWidth / 2, bagY - 15, config.getInteger("MenuColor"), false);
-            context.drawText(tr, FontHelper.toCustomFont(title, fontName), midX - titleWidth / 2, bagY - 15, CONFIG.menuColor(), true);
+            context.drawText(tr, FontHelper.toCustomFont(title, fontName), midX - titleWidth / 2, bagY - 15, CONFIG.menuColor, true);
         }
         for(int i = 0; i < bagTexts.size(); i++) {
-            context.drawText(tr, FontHelper.toCustomFont(bagTexts.get(i), fontName), bagX + 10, bagY + (i * 13), CONFIG.menuColor(), true);
+            context.drawText(tr, FontHelper.toCustomFont(bagTexts.get(i), fontName), bagX + 10, bagY + (i * 13), CONFIG.menuColor, true);
         }
 
-        int infoX = CONFIG.infoX();
-        int infoY = CONFIG.infoY();
+        int infoX = CONFIG.infoX;
+        int infoY = CONFIG.infoY;
         List<String> infoList = new ArrayList<>();
         if(fpsSetting || isEditMode)
             infoList.add("FPS§7: §f" + client.getCurrentFps());
@@ -149,7 +149,7 @@ public abstract class MixinInGameHud {
         }
 
         for(int i = 0; i < infoList.size(); i++)
-            context.drawText(tr, FontHelper.toCustomFont(infoList.get(i), fontName), infoX, infoY + i * 10, CONFIG.menuColor(), true);
+            context.drawText(tr, FontHelper.toCustomFont(infoList.get(i), fontName), infoX, infoY + i * 10, CONFIG.menuColor, true);
     }
 
 

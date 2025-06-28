@@ -6,7 +6,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
 import xyz.telosaddon.yuno.discordrpc.DiscordRPCManager;
 import xyz.telosaddon.yuno.hotkey.*;
 import xyz.telosaddon.yuno.features.ShowMainRangeFeature;
@@ -31,7 +30,7 @@ public class TelosAddon implements ClientModInitializer  {
     public static final String MOD_ID = "realmsaddon";
 
 
-    public static final ModConfigModel CONFIG = ModConfigModel.getInstance();
+    public static ModConfigModel CONFIG;
 
     public static final Logger LOGGER = Logger.getLogger(MOD_NAME);
     private final MinecraftClient mc = MinecraftClient.getInstance();
@@ -55,7 +54,7 @@ public class TelosAddon implements ClientModInitializer  {
 
     // todo: move these to their own features and init them in features class
     public void initHotkeys(){
-        NexusHotkey.init();
+        MountHotkey.init();
         MenuHotkey.init();
         TeleportMenuHotkey.init();
         CallHotkey.init();
@@ -78,7 +77,7 @@ public class TelosAddon implements ClientModInitializer  {
         tickCounter++;
         if(tickCounter >= 20) {
             playTime++;
-            CONFIG.totalPlayTime(CONFIG.totalPlayTime() + 1);
+            CONFIG.totalPlayTime = CONFIG.totalPlayTime + 1;
             tickCounter = 0;
 
         }
@@ -120,6 +119,7 @@ public class TelosAddon implements ClientModInitializer  {
     public void onInitializeClient() {
         instance = this;
         AutoConfig.register(ModConfigModel.class, GsonConfigSerializer::new);
+        CONFIG = ModConfigModel.getInstance();
         BossBarUtils.init();
         rpcManager.start();
         initHotkeys();

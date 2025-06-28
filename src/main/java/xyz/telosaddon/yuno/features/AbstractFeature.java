@@ -2,15 +2,13 @@ package xyz.telosaddon.yuno.features;
 
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
-import static xyz.telosaddon.yuno.utils.config.ConfigUtils.addConfigBinding;
+//import static xyz.telosaddon.yuno.utils.config.ConfigUtils.addConfigBinding;
 
 public abstract class AbstractFeature {
 
 	private boolean enabled;
 
-	protected AbstractFeature(Option.Key configKey){
-		addConfigBinding(configKey, this::setToggle);
-	}
+	protected AbstractFeature(){}
 
 
 	public boolean isEnabled() {

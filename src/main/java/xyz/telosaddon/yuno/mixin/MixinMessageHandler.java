@@ -59,7 +59,7 @@ public class MixinMessageHandler {
         if(s.contains("discord.telosrealms.com")){ // nexus check
             Features.BOSS_TRACKER_FEATURE.clearAlive();
 
-            if (!CONFIG.enableJoinText()|| TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
+            if (!CONFIG.enableJoinText|| TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player != null) {
                 CompletableFuture.runAsync(() -> {
@@ -95,9 +95,9 @@ public class MixinMessageHandler {
         if (trackerBit = !trackerBit) return; // there's 2 bars in the kill message
 
 
-        CONFIG.totalRuns(CONFIG.totalRuns() + 1);
-        CONFIG.noWhiteRuns(CONFIG.noWhiteRuns() + 1);
-        CONFIG.noBlackRuns(CONFIG.noBlackRuns() + 1);
+        CONFIG.totalRuns++;
+        CONFIG.noWhiteRuns++;
+        CONFIG.noBlackRuns++;
 
 
 

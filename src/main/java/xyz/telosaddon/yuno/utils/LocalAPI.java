@@ -33,7 +33,7 @@ public class LocalAPI {
                 if (!TelosAddon.getInstance().isOnTelos()) return;
                 Optional<String> info = TabListUtils.getCharInfo();
                 if (info.isEmpty()) return;
-
+                LOGGER.info(info.get());
                 String[] charInfo = info.get().split(" ");
                 if (charInfo.length < 4) return;
                 // something something mastery

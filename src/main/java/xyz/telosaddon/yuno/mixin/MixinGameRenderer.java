@@ -32,30 +32,30 @@ public abstract class MixinGameRenderer {
                 + "| path: " + cmd.getPath());
 
         SoundManager soundManager = TelosAddon.getInstance().getSoundManager();
-        boolean soundSetting = CONFIG.soundSetting();
+        boolean soundSetting = CONFIG.soundSetting;
         switch (cmd.getPath()) {
             case "entity/pouch/royal_totem" -> {
-                CONFIG.whiteBags(CONFIG.whiteBags() + 1);
+                CONFIG.whiteBags = (CONFIG.whiteBags + 1);
 
-                CONFIG.noWhiteRuns(0);
+                CONFIG.noWhiteRuns = (0);
 
                 if(soundSetting)
                     soundManager.playSound("white_bag");
 
             }
             case "entity/pouch/bloodshot_totem" -> {
-                CONFIG.blackBags(CONFIG.blackBags() + 1);
-                CONFIG.noBlackRuns(0);
+                CONFIG.blackBags = (CONFIG.blackBags + 1);
+                CONFIG.noBlackRuns = (0);
 
                 if(soundSetting)
                     soundManager.playSound("black_bag");
 
             }
-            case "entity/pouch/companion_totem  " -> CONFIG.goldBags(CONFIG.goldBags() + 1);
-            case "entity/pouch/unholy_totem"  -> CONFIG.crosses(CONFIG.crosses() + 1);
-            case "entity/pouch/halloween_totem","entity/pouch/valentine_totem", "entity/pouch/christmas_totem" -> {CONFIG.eventBags(CONFIG.eventBags() + 1);}
-            case "entity/pouch/voidbound_totem" -> CONFIG.relics(CONFIG.relics() + 1);
-            case "entity/pouch/rune_totem" -> CONFIG.runes(CONFIG.runes() + 1);
+            case "entity/pouch/companion_totem  " -> CONFIG.goldBags = (CONFIG.goldBags + 1);
+            case "entity/pouch/unholy_totem"  -> CONFIG.crosses = (CONFIG.crosses + 1);
+            case "entity/pouch/halloween_totem","entity/pouch/valentine_totem", "entity/pouch/christmas_totem" -> {CONFIG.eventBags = (CONFIG.eventBags + 1);}
+            case "entity/pouch/voidbound_totem" -> CONFIG.relics = (CONFIG.relics + 1);
+            case "entity/pouch/rune_totem" -> CONFIG.runes = (CONFIG.runes + 1);
             default -> {
             }
         }

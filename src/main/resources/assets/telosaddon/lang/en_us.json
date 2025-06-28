@@ -2,7 +2,7 @@
   "category.telosaddon" : "Realms Addon",
   "key.telosaddon.call": "Call Hotkey",
   "key.telosaddon.menu": "Menu Hotkey",
-  "key.telosaddon.nexus": "Nexus Hotkey",
+  "key.telosaddon.mount": "Mount Hotkey",
   "key.telosaddon.tpmenu": "TP Menu Hotkey",
   "key.telosaddon.hitboxes": "Show hitbox hotkey"
 }

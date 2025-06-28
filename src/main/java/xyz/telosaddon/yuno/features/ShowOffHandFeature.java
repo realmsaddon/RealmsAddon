@@ -5,19 +5,22 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
+
+import net.minecraft.entity.player.PlayerInventory;
 import xyz.telosaddon.yuno.utils.config.ConfigUtils;
 
 public class ShowOffHandFeature extends ShowRangeFeature {
 	public ShowOffHandFeature() {
-		super(CONFIG.keys.showOffHandRangeFeatureEnabled, (inv -> inv.player.getOffHandStack()));
-		this.setRangeType(CONFIG.showOffHandRangeFeatureViewType());
-		ConfigUtils.addConfigBinding(CONFIG.keys.showOffHandRangeFeatureViewType, this::setRangeType);
+        super(PlayerInventory::getSelectedStack);
+//		super(CONFIG.keys.showOffHandRangeFeatureEnabled, (inv -> inv.player.getOffHandStack()));
+		this.setRangeType(CONFIG.showOffHandRangeFeatureViewType);
+//		ConfigUtils.addConfigBinding(CONFIG.keys.showOffHandRangeFeatureViewType, this::setRangeType);
 	}
 
 	@Override()
 	public void enable(){
 		super.enable();
-		this.setRangeType(CONFIG.showOffHandRangeFeatureViewType());
+		this.setRangeType(CONFIG.showOffHandRangeFeatureViewType);
 	}
 
 
@@ -29,8 +32,8 @@ public class ShowOffHandFeature extends ShowRangeFeature {
 				matrices,
 				vertexConsumers,
 				player,
-				CONFIG.showOffHandRangeFeatureColor(),
-				(float) (CONFIG.showOffHandRangeFeatureHeight() + dy)));
+				CONFIG.showOffHandRangeFeatureColor,
+				(float) (CONFIG.showOffHandRangeFeatureHeight + dy)));
 
 	}
 }

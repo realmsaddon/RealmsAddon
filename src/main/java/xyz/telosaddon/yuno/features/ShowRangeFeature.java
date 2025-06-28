@@ -1,6 +1,6 @@
 package xyz.telosaddon.yuno.features;
 
-import io.wispforest.owo.config.Option;
+//import io.wispforest.owo.config.Option;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -26,14 +26,12 @@ public class ShowRangeFeature extends ToggleableFeature {
 	private final Function<PlayerInventory, ItemStack> itemGetter;
 	private float radius = Float.NaN;
 
+    public ShowRangeFeature(Function<PlayerInventory, ItemStack> itemGetter) {
+        this.itemGetter = itemGetter;
+    }
 
-	public ShowRangeFeature(Option.Key key, Function<PlayerInventory, ItemStack> itemGetter) {
-		super(key);
-		this.itemGetter = itemGetter;
 
-	}
-
-	private float parseRadius(ItemStack itemStack) {
+    private float parseRadius(ItemStack itemStack) {
 		var loreComponent = itemStack.getComponents().get(DataComponentTypes.LORE);
 		if (loreComponent == null) return Float.NaN;
 		for (var line : loreComponent.lines()) {
@@ -96,7 +94,7 @@ public class ShowRangeFeature extends ToggleableFeature {
 				matrices,
 				vertexConsumers,
 				player,
-CONFIG.showMainRangeFeatureColor(),
+CONFIG.showMainRangeFeatureColor,
 0));
 //				this.getConfig().getInteger(this.getFeatureName() + "Color"),
 //				this.getConfig().getDouble(this.getFeatureName() + "Height").floatValue() + dy));

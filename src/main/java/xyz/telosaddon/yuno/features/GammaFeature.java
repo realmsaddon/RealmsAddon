@@ -1,6 +1,6 @@
 package xyz.telosaddon.yuno.features;
 
-import io.wispforest.owo.config.Option;
+
 import xyz.telosaddon.yuno.TelosAddon;
 
 import static xyz.telosaddon.yuno.utils.TabListUtils.mc;
@@ -8,7 +8,12 @@ import static xyz.telosaddon.yuno.utils.TabListUtils.mc;
 
 public class GammaFeature extends ToggleableFeature{
     GammaFeature() {
-        super(TelosAddon.CONFIG.keys.gammaSetting);
+        if (TelosAddon.CONFIG.gammaSetting){
+            mc.options.getGamma().setValue(1500D);
+        }
+        else{
+            mc.options.getGamma().setValue(100D);
+        }
     }
 
 

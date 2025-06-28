@@ -2,7 +2,7 @@ package xyz.telosaddon.yuno.utils;
 
 import net.minecraft.client.MinecraftClient;
 import xyz.telosaddon.yuno.TelosAddon;
-import xyz.telosaddon.yuno.hotkey.NexusHotkey;
+import xyz.telosaddon.yuno.hotkey.MountHotkey;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
@@ -38,7 +38,7 @@ public class RealmUtils {
     public static Future<Void> nexusThenTp(String worldName){
         return CompletableFuture.supplyAsync(()-> {
             String worldToJoin = worldName;
-            NexusHotkey.useMount();
+            MountHotkey.useMount();
             int waitTime = 15;
             while (!LocalAPI.getCurrentCharacterWorld().contains("Hub")){
                 try {

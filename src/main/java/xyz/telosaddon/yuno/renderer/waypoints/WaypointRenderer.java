@@ -82,7 +82,7 @@ public class WaypointRenderer{
 
         VertexConsumerProvider.Immediate consumerProvider = client.getBufferBuilders().getEntityVertexConsumers();
         for(BossData bossData : Features.BOSS_TRACKER_FEATURE.getCurrentAlive()) {
-            if(!CONFIG.bossWaypointsSetting()) return;
+            if(!CONFIG.bossWaypointsSetting) return;
             BlockPos waypoint = bossData.spawnPosition;
 
             Vec3d position = new Vec3d(waypoint.getX(), waypoint.getY(), waypoint.getZ());

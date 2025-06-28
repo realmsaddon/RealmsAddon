@@ -10,7 +10,8 @@ public enum ItemType {
 	EX_HERALD_ESSENCE,
 	NEXUS,
 	UT_AYAHUASCA_FLASK,
-	EX_AYAHUASCA_FLASK;
+	EX_AYAHUASCA_FLASK,
+	OBELISK;
 
 	public static @Nullable ItemType fromItemStack(ItemStack item){
 		String name = item.getName().getString().trim();
@@ -19,12 +20,13 @@ public enum ItemType {
 			return UT_HERALD_ESSENCE;
 		if(trimmedName.equals("\uD83E\uDF46"))
 			return EX_HERALD_ESSENCE;
-		if(trimmedName.equals("\uD83F\uDC10"))
-			return NEXUS;
+		if(trimmedName.equals("\uD83F\uDC09"))
+			return OBELISK;
 		if(trimmedName.equals("\uD83E\uDF9D"))
 			return UT_AYAHUASCA_FLASK;
 		if(trimmedName.equals("\uD83E\uDF9C"))
 			return EX_AYAHUASCA_FLASK;
+
 
 		return null;
 	}

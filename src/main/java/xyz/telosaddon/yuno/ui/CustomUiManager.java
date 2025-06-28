@@ -4,7 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import xyz.telosaddon.yuno.TelosAddon;
-import xyz.telosaddon.yuno.ui.tabs.SettingsTab;
+//import xyz.telosaddon.yuno.ui.tabs.SettingsTab;
 import xyz.telosaddon.yuno.ui.elements.CustomButton;
 
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class CustomUiManager {
 
         this.addCustomElement(new CustomButton(8, mc.getWindow().getScaledHeight() - 28, 150, 20, "Done", (button) -> {
             TelosAddon.getInstance().setEditMode(false);
-            this.client.setScreen(new SettingsTab(currentTab));
+//            this.client.setScreen(new SettingsTab(currentTab));
         }).setTextInMiddle(true));
     }
 

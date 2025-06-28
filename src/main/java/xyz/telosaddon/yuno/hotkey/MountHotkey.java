@@ -11,11 +11,12 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
 import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.utils.ItemType;
 
 import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
 
 @Environment(EnvType.CLIENT)
-public class NexusHotkey {
+public class MountHotkey {
     private static KeyBinding keyBinding;
 
     public static void init() {
@@ -40,7 +41,7 @@ public class NexusHotkey {
         PlayerInventory inv = client.player.getInventory();
         for (int i = 0; i < 9; i++) {
             ItemStack item = inv.getStack(i);
-            if (item.getName().getString().hashCode() == 1307700015){ // hacky solution but it works
+            if (ItemType.fromItemStack(item) == ItemType.OBELISK){ // hacky solution but it works
                 inv.setSelectedSlot(i);
             }
         }

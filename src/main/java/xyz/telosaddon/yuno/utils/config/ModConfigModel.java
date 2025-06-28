@@ -1,8 +1,10 @@
 package xyz.telosaddon.yuno.utils.config;
 
+import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import xyz.telosaddon.yuno.features.ShowRangeFeature;
 
 import java.awt.*;
@@ -10,14 +12,21 @@ import java.awt.*;
 import static xyz.telosaddon.yuno.TelosAddon.MOD_ID;
 
 @Config(name = MOD_ID)
-public class ModConfigModel implements ConfigData {
+public class ModConfigModel implements ConfigData, ModMenuApi {
 
     private static ModConfigModel instance;
 
     public static ModConfigModel getInstance() {
-        if (instance == null)
-            instance = AutoConfig.getConfigHolder(ModConfigModel.class).getConfig();
+        if (instance == null){
+            init();
+
+        }
         return instance;
+    }
+
+    public static void init(){
+        instance = AutoConfig.getConfigHolder(ModConfigModel.class).getConfig();
+
     }
     public String modVersion = "v0.3.21";
 
@@ -48,27 +57,27 @@ public class ModConfigModel implements ConfigData {
     public int bagY = 60;
 
     public boolean greenSetting = false;
-    public boolean goldSetting = false;
-    public boolean whiteSetting = false;
-    public boolean blackSetting = false;
+    public boolean goldSetting = true;
+    public boolean whiteSetting = true;
+    public boolean blackSetting = true;
     public boolean eventSetting = false;
     public boolean crossSetting = false;
     public boolean relicSetting = false;
     public boolean runesSetting = false;
     public boolean totalRunSetting = false;
-    public boolean noWhiteRunSetting = false;
-    public boolean noBlackRunSetting = false;
-    public boolean lifetimeSetting = false;
+    public boolean noWhiteRunSetting = true;
+    public boolean noBlackRunSetting = true;
+    public boolean lifetimeSetting = true;
     public boolean enableJoinText = true;
-    public boolean callHotkeyShout = true;
+    public boolean callHotkeyShout = false;
 
-    public boolean swingSetting = false;
-    public boolean gammaSetting = false;
-    public boolean fpsSetting = false;
-    public boolean pingSetting = false;
+    public boolean swingSetting = true;
+    public boolean gammaSetting = true;
+    public boolean fpsSetting = true;
+    public boolean pingSetting = true;
     public boolean playTimeSetting = false;
-    public boolean bossTrackerFeatureEnabled = false;
-    public boolean bossWaypointsSetting = false;
+    public boolean bossTrackerFeatureEnabled = true;
+    public boolean bossWaypointsSetting = true;
     public boolean soundSetting = false;
     public String font = "Default";
 

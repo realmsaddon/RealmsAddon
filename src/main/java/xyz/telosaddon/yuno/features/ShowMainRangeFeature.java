@@ -11,14 +11,15 @@ import xyz.telosaddon.yuno.TelosAddon;
 public class ShowMainRangeFeature extends ShowRangeFeature {
 
 	public ShowMainRangeFeature() {
-		super(TelosAddon.CONFIG.keys.showMainRangeFeatureEnabled, PlayerInventory::getSelectedStack);
-		this.setRangeType(TelosAddon.CONFIG.showMainRangeFeatureViewType());
-		ConfigUtils.addConfigBinding(TelosAddon.CONFIG.keys.showMainRangeFeatureViewType, this::setRangeType);
+        super(PlayerInventory::getSelectedStack);
+
+        this.setRangeType(TelosAddon.CONFIG.showMainRangeFeatureViewType);
+		// ConfigUtils.addConfigBinding(TelosAddon.CONFIG.keys.showMainRangeFeatureViewType, this::setRangeType);
 	}
 	@Override()
 	public void enable(){
 		System.out.println("ShowMainRangeFeature enable");
-		this.setRangeType(TelosAddon.CONFIG.showMainRangeFeatureViewType());
+		this.setRangeType(TelosAddon.CONFIG.showMainRangeFeatureViewType);
 	}
 
 
@@ -30,8 +31,8 @@ public class ShowMainRangeFeature extends ShowRangeFeature {
 				matrices,
 				vertexConsumers,
 				player,
-				TelosAddon.CONFIG.showMainRangeFeatureColor(),
-				(float) (TelosAddon.CONFIG.showMainRangeFeatureHeight() + dy)));
+				TelosAddon.CONFIG.showMainRangeFeatureColor,
+				(float) (TelosAddon.CONFIG.showMainRangeFeatureHeight + dy)));
 
 	}
 }

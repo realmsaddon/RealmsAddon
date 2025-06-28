@@ -41,7 +41,7 @@ public class TelosMenu extends Screen {
             drawTitle(context, tr);
 
             String bugString = "§cPlease report bugs to §7'§4pixelizedgaming§7'§c on Discord§7!";
-            Text bugText = FontHelper.toCustomFont(bugString, CONFIG.font());
+            Text bugText = FontHelper.toCustomFont(bugString, CONFIG.font);
             int bugTextWidth = tr.getWidth(bugText);
             context.drawText(tr, bugText, width - bugTextWidth - 4, height - 12, 0xFFFFFF, true);
         }
@@ -63,28 +63,28 @@ public class TelosMenu extends Screen {
 
         boolean isEditMode = TelosAddon.getInstance().isEditMode();
         if(isEditMode) {
-            int infoX = CONFIG.infoX();
-            int infoY = CONFIG.infoY();
+            int infoX = CONFIG.infoX;
+            int infoY = CONFIG.infoY;
             int infoWidth = TelosAddon.getInstance().infoWidth;
             int infoHeight = TelosAddon.getInstance().infoHeight;
 
-            int bagX = CONFIG.bagX();
-            int bagY = CONFIG.bagY();
+            int bagX = CONFIG.bagX;
+            int bagY = CONFIG.bagY;
             int bagWidth = TelosAddon.getInstance().bagWidth;
             int bagHeight = TelosAddon.getInstance().bagHeight;
 
             if(mouseX >= infoX + 10 && mouseY >= infoY + 10  && mouseX < infoX + infoWidth + 10 && mouseY < infoY + infoHeight + 10) {
 
-                CONFIG.infoX((int) mouseX - infoWidth / 2);
-                CONFIG.infoY((int) mouseY - infoHeight / 2);
+                CONFIG.infoX = (int) mouseX - infoWidth / 2;
+                CONFIG.infoY = ((int) mouseY - infoHeight / 2);;
 
                 return true;
             }
 
             if(mouseX >= bagX + 10 && mouseY >= bagY + 10  && mouseX < bagX + bagWidth + 10 && mouseY < bagY + bagHeight + 10) {
 
-                CONFIG.bagX((int) mouseX - bagWidth / 2);
-                CONFIG.bagY((int) mouseY - bagHeight / 2);
+                CONFIG.bagX = ((int) mouseX - bagWidth / 2);;
+                CONFIG.bagY = ((int) mouseY - bagHeight / 2);;
 
                 return true;
             }
@@ -118,13 +118,13 @@ public class TelosMenu extends Screen {
 
     private void drawTitle(DrawContext context, TextRenderer tr) {
         String title = "Realms Addon | BETA-" + MOD_VERSION;
-        Text titleText = FontHelper.toCustomFont(title, CONFIG.font());
+        Text titleText = FontHelper.toCustomFont(title, CONFIG.font);
 
         float titleScale = 1.5f;
         // todo: fix this
 //        context.getMatrices().push();
 //        context.getMatrices().scale(titleScale, titleScale, titleScale);
-//        context.drawText(tr, titleText, (int) (10 / titleScale), (int) (35 / titleScale), CONFIG.menuColor(), true);
+//        context.drawText(tr, titleText, (int) (10 / titleScale), (int) (35 / titleScale), CONFIG.menuColor, true);
 //        context.getMatrices().pop();
     }
 
