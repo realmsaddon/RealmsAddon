@@ -35,6 +35,7 @@ public class ShowRangeFeature extends ToggleableFeature {
 		var loreComponent = itemStack.getComponents().get(DataComponentTypes.LORE);
 		if (loreComponent == null) return Float.NaN;
 		for (var line : loreComponent.lines()) {
+
 			if (!line.getString().contains("Range:")) continue;
 			try {
 				String numWithPossibleExt = line.getString().split("Range:")[1].trim();
@@ -48,7 +49,7 @@ public class ShowRangeFeature extends ToggleableFeature {
 	}
 
 	private void checkItem(@NotNull ClientPlayerEntity player) {
-		//System.out.println("checking item");
+
 		var inventory = player.getInventory();
 		if (inventory == null) return;
 		ItemStack itemToCheck = this.itemGetter.apply(inventory);
@@ -88,7 +89,7 @@ public class ShowRangeFeature extends ToggleableFeature {
 	}
 
 	public void draw(float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, ClientPlayerEntity player, float dy) {
-		if (!this.isEnabled()) return;
+		//if (!this.isEnabled()) return;
 
 		this.renderers.forEach(r -> r.draw(tickDelta,
 				matrices,

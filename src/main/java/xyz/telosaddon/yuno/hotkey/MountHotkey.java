@@ -29,8 +29,7 @@ public class MountHotkey {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (keyBinding.wasPressed()) {
-                TelosAddon.getInstance().sendMessage("Mount hotkey pressed!");
-                LOGGER.info("Mount hotkey pressed!");
+
                 useMount();
             }
         });
@@ -41,7 +40,8 @@ public class MountHotkey {
         PlayerInventory inv = client.player.getInventory();
         for (int i = 0; i < 9; i++) {
             ItemStack item = inv.getStack(i);
-            if (ItemType.fromItemStack(item) == ItemType.OBELISK){ // hacky solution but it works
+            LOGGER.info(item.getName().getString().hashCode()+"");
+            if (item.getName().getString().hashCode() == 1307673572){ // hacky solution but it works
                 inv.setSelectedSlot(i);
             }
         }

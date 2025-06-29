@@ -26,7 +26,7 @@ public class ShowOffHandFeature extends ShowRangeFeature {
 
 	@Override
 	public void draw(float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, ClientPlayerEntity player, float dy) {
-		if (!this.isEnabled()) return;
+		//if (!this.isEnabled()) return;
 
 		this.renderers.forEach(r -> r.draw(tickDelta,
 				matrices,

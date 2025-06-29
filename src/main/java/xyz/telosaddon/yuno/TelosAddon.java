@@ -62,6 +62,7 @@ public class TelosAddon implements ClientModInitializer  {
         TeleportMenuHotkey.init();
         CallHotkey.init();
         HitboxHotkey.init();
+        //TestHotkey.init();
     }
     public void stop() {
 

@@ -35,15 +35,15 @@ public class TelosMenu extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         if(!TelosAddon.getInstance().isEditMode()) {
-            super.render(context, mouseX, mouseY, delta);
-
-            TextRenderer tr = mc.textRenderer;
-            drawTitle(context, tr);
-
-            String bugString = "§cPlease report bugs to §7'§4pixelizedgaming§7'§c on Discord§7!";
-            Text bugText = FontHelper.toCustomFont(bugString, CONFIG.font);
-            int bugTextWidth = tr.getWidth(bugText);
-            context.drawText(tr, bugText, width - bugTextWidth - 4, height - 12, 0xFFFFFF, true);
+//            super.render(context, mouseX, mouseY, delta);
+//
+//            TextRenderer tr = mc.textRenderer;
+//            drawTitle(context, tr);
+//
+//            String bugString = "§cPlease report bugs to §7'§4pixelizedgaming§7'§c on Discord§7!";
+//            Text bugText = FontHelper.toCustomFont(bugString, CONFIG.font);
+//            int bugTextWidth = tr.getWidth(bugText);
+//            context.drawText(tr, bugText, width - bugTextWidth - 4, height - 12, 0xFFFFFF, true);
         }
 
         this.customUiManager.render(context, mouseX, mouseY, delta);
@@ -122,10 +122,10 @@ public class TelosMenu extends Screen {
 
         float titleScale = 1.5f;
         // todo: fix this
-//        context.getMatrices().push();
-//        context.getMatrices().scale(titleScale, titleScale, titleScale);
+//        context.getMatrices().pushMatrix();
+//        context.getMatrices().scale(titleScale, titleScale);
 //        context.drawText(tr, titleText, (int) (10 / titleScale), (int) (35 / titleScale), CONFIG.menuColor, true);
-//        context.getMatrices().pop();
+//        context.getMatrices().popMatrix();
     }
 
 }

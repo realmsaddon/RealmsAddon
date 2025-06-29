@@ -28,7 +28,7 @@ public class BossTrackerFeature extends ToggleableFeature{
     private final Set<BossData> currentAlive = ConcurrentHashMap.newKeySet();
 
     BossTrackerFeature() {
-
+        enable();
     }
 
     private void onGameMessage(Text message, boolean overlay) {

@@ -4,6 +4,8 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import xyz.telosaddon.yuno.TelosAddon;
 
+import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
+
 public enum ItemType {
 
 	UT_HERALD_ESSENCE,
@@ -16,11 +18,12 @@ public enum ItemType {
 	public static @Nullable ItemType fromItemStack(ItemStack item){
 		String name = item.getName().getString().trim();
 		String trimmedName = name.substring(1, name.length()-1);
+
 		if(trimmedName.equals("\uD83E\uDF45"))
 			return UT_HERALD_ESSENCE;
 		if(trimmedName.equals("\uD83E\uDF46"))
 			return EX_HERALD_ESSENCE;
-		if(trimmedName.equals("\uD83F\uDC09"))
+		if(trimmedName.equals("\uD857\uDD93"))
 			return OBELISK;
 		if(trimmedName.equals("\uD83E\uDF9D"))
 			return UT_AYAHUASCA_FLASK;
