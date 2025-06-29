@@ -37,7 +37,7 @@ public class LocalAPI {
                 String[] charInfo = info.get().split(" ");
                 if (charInfo.length < 4) return;
                 // something something mastery
-                switch (charInfo[1].hashCode()) {
+                switch (charInfo[0].substring(2).hashCode()) {
                     case 880 -> currentCharacterType = "Normal";
                     case 881 -> currentCharacterType = "Hardcore";
                     case 882 -> currentCharacterType = "Seasonal";

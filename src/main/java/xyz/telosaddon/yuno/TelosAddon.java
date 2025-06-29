@@ -3,9 +3,11 @@ package xyz.telosaddon.yuno;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
 import xyz.telosaddon.yuno.discordrpc.DiscordRPCManager;
 import xyz.telosaddon.yuno.hotkey.*;
 import xyz.telosaddon.yuno.features.ShowMainRangeFeature;
@@ -23,6 +25,7 @@ import xyz.telosaddon.yuno.utils.config.ModConfigModel;
 import java.util.logging.Logger;
 
 import static xyz.telosaddon.yuno.utils.LocalAPI.updateAPI;
+import static xyz.telosaddon.yuno.utils.TabListUtils.mc;
 
 public class TelosAddon implements ClientModInitializer  {
     public static final String MOD_NAME = "RealmsAddon";
@@ -139,6 +142,16 @@ public class TelosAddon implements ClientModInitializer  {
         HitboxRenderer.init();
 
         new InitializeCommands().initializeCommands();
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            ClientPlayerEntity player = client.player;
+            if(mc.options.attackKey.isPressed() && TelosAddon.getInstance().isOnTelos()) {
+                assert player != null;
+                boolean canSwing = !player.getItemCooldownManager().isCoolingDown(player.getMainHandStack());
+                if (!TelosAddon.CONFIG.swingIfNoCooldown|| canSwing) {
+                    player.swingHand(Hand.MAIN_HAND);
+                }
+            }
+        });
     }
 
     public ShowOffHandFeature getShowOffHandFeature() {
