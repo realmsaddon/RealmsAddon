@@ -34,9 +34,7 @@ public class HitboxRenderer {
         MinecraftClient client = MinecraftClient.getInstance();
         if (!showHitboxIndicator || client.options.getPerspective() != Perspective.THIRD_PERSON_BACK) return;
 
-
         MatrixStack matrices = context.matrixStack();
-
 
         VertexConsumerProvider.Immediate vertexConsumers = client.getBufferBuilders().getEntityVertexConsumers();
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getLines());
@@ -51,11 +49,10 @@ public class HitboxRenderer {
         MinecraftClient client = MinecraftClient.getInstance();
         Entity entity = client.player;
 
-
-
         if (entity == null ) return;
         Vec3d lookVector = Vec3d.fromPolar(entity.lastPitch, entity.lastYaw).normalize().multiply(4.0F);
-        Box box = entity.getBoundingBox().offset(-entity.getX() + lookVector.x, -entity.getY() + lookVector.y, -entity.getZ() + lookVector.z);
+        Box box = entity.getBoundingBox().offset(-entity.getX() + lookVector.x, -entity.getY() + lookVector.y - 1.5f, -entity.getZ() + lookVector.z);
         VertexRendering.drawBox(matrices, vertices, box, red, green, blue, 1.0F);
+
     }
 }

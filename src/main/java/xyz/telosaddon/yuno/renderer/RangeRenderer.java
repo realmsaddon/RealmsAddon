@@ -27,7 +27,6 @@ public class RangeRenderer {
 		var matrixStack = context.matrixStack();
 		assert matrixStack != null;
 
-
 		float tickDelta = context.tickCounter().getTickProgress(false);
 		double px = MathHelper.lerp(tickDelta, player.lastRenderX, player.getX());
 		double py = MathHelper.lerp(tickDelta, player.lastRenderY, player.getY());

@@ -8,6 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.renderer.CircleRenderer;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
+import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
 
 public class ShowRangeFeature extends ToggleableFeature {
 	private ItemStack previousItem = null;
@@ -28,12 +30,18 @@ public class ShowRangeFeature extends ToggleableFeature {
 
     public ShowRangeFeature(Function<PlayerInventory, ItemStack> itemGetter) {
         this.itemGetter = itemGetter;
+
+
     }
 
 
     private float parseRadius(ItemStack itemStack) {
 		var loreComponent = itemStack.getComponents().get(DataComponentTypes.LORE);
 		if (loreComponent == null) return Float.NaN;
+		var player = MinecraftClient.getInstance().player;
+        assert player != null;
+        player.sendMessage(Text.of("tried parse radius"),false);
+
 		for (var line : loreComponent.lines()) {
 
 			if (!line.getString().contains("Range:")) continue;
@@ -41,10 +49,13 @@ public class ShowRangeFeature extends ToggleableFeature {
 				String numWithPossibleExt = line.getString().split("Range:")[1].trim();
 				// Handle <num>(+3) case for EX
 				String num = numWithPossibleExt.split("\\(")[0].trim();
+				player.sendMessage(Text.of("radius parsed as: " + num),false);
 				return Float.parseFloat(num);
-			} catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
+			} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+				LOGGER.warning(e.getLocalizedMessage());
 			}
 		}
+		player.sendMessage(Text.of("unable to parse radius"),false);
 		return Float.NaN;
 	}
 
@@ -53,7 +64,9 @@ public class ShowRangeFeature extends ToggleableFeature {
 		var inventory = player.getInventory();
 		if (inventory == null) return;
 		ItemStack itemToCheck = this.itemGetter.apply(inventory);
+		player.sendMessage(Text.of("got: " + itemToCheck),false);
 		if (!itemToCheck.equals(this.previousItem)) {
+
 			ItemType itemType = ItemType.fromItemStack(itemToCheck);
 			previousItem = itemToCheck;
 			float offset = 0;
@@ -71,6 +84,7 @@ public class ShowRangeFeature extends ToggleableFeature {
 				}
 			}
 			float finalOffset = offset;
+			player.sendMessage(Text.of("tried range render"),false);
 			this.renderers.forEach(r -> r.setRadius(radius));
 			this.renderers.forEach(r -> r.setOffset(finalOffset));
 		}
@@ -78,7 +92,7 @@ public class ShowRangeFeature extends ToggleableFeature {
 
 	public void tick() {
 
-		if (!this.isEnabled()) return;
+		//if (!this.isEnabled()) return;
 		var client = MinecraftClient.getInstance();
 		if (client.player == null) return;
 		checkItem(client.player);
@@ -95,8 +109,8 @@ public class ShowRangeFeature extends ToggleableFeature {
 				matrices,
 				vertexConsumers,
 				player,
-CONFIG.showMainRangeFeatureColor,
-0));
+		CONFIG.showMainRangeFeatureColor,
+		0));
 //				this.getConfig().getInteger(this.getFeatureName() + "Color"),
 //				this.getConfig().getDouble(this.getFeatureName() + "Height").floatValue() + dy));
 
@@ -113,7 +127,7 @@ CONFIG.showMainRangeFeatureColor,
 		};
 		var player = MinecraftClient.getInstance().player;
 		if(player == null) {
-			TelosAddon.LOGGER.warning("Got client.player == null even though the guy did so through a GUI?");
+			LOGGER.warning("Got client.player == null even though the guy did so through a GUI?");
 			return;
 		}
 		this.previousItem = null;

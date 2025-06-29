@@ -36,7 +36,9 @@ public class LocalAPI {
 
                 String[] charInfo = info.get().split(" ");
                 if (charInfo.length < 4) return;
-                // something something mastery
+
+                // in 1.3 the format is "(MASTERY)(GAMEMODE) (LEVEL) (CLASS)"
+                // the spaces are exact, so u have to split the last 2 chars
                 switch (charInfo[0].substring(2).hashCode()) {
                     case 880 -> currentCharacterType = "Normal";
                     case 881 -> currentCharacterType = "Hardcore";

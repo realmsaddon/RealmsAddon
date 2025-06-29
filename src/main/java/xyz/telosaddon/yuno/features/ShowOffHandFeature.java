@@ -14,6 +14,7 @@ public class ShowOffHandFeature extends ShowRangeFeature {
         super(PlayerInventory::getSelectedStack);
 //		super(CONFIG.keys.showOffHandRangeFeatureEnabled, (inv -> inv.player.getOffHandStack()));
 		this.setRangeType(CONFIG.showOffHandRangeFeatureViewType);
+		if (CONFIG.showOffHandRangeFeatureEnabled) enable();
 //		ConfigUtils.addConfigBinding(CONFIG.keys.showOffHandRangeFeatureViewType, this::setRangeType);
 	}
 

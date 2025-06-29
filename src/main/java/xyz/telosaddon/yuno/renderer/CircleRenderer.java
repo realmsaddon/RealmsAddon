@@ -41,6 +41,7 @@ public class CircleRenderer implements IRenderer{
 		drawCircleQuad(matrices, vertices, dy, color);
 		if(this.offset != 0)
 			drawOffsetCenter(matrices, vertices, dy, color);
+
 		matrices.pop();
 	}
 

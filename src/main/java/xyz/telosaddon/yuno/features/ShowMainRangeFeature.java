@@ -8,12 +8,15 @@ import xyz.telosaddon.yuno.utils.config.ConfigUtils;
 
 import xyz.telosaddon.yuno.TelosAddon;
 
+import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
+
 public class ShowMainRangeFeature extends ShowRangeFeature {
 
 	public ShowMainRangeFeature() {
         super(PlayerInventory::getSelectedStack);
 
         this.setRangeType(TelosAddon.CONFIG.showMainRangeFeatureViewType);
+		if (CONFIG.showMainRangeFeatureEnabled) enable();
 		// ConfigUtils.addConfigBinding(TelosAddon.CONFIG.keys.showMainRangeFeatureViewType, this::setRangeType);
 	}
 	@Override()
@@ -25,7 +28,7 @@ public class ShowMainRangeFeature extends ShowRangeFeature {
 
 	@Override
 	public void draw(float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, ClientPlayerEntity player, float dy) {
-		if (!this.isEnabled()) return;
+
 
 		this.renderers.forEach(r -> r.draw(tickDelta,
 				matrices,

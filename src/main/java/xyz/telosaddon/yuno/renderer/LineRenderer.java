@@ -1,22 +1,13 @@
 package xyz.telosaddon.yuno.renderer;
 
-import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.platform.DepthTestFunction;
-import com.mojang.blaze3d.platform.LogicOp;
-import com.mojang.blaze3d.platform.PolygonMode;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gl.UniformType;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import org.joml.Vector3f;
 import xyz.telosaddon.yuno.TelosAddon;
 
 import java.util.Locale;
@@ -82,9 +73,6 @@ public class LineRenderer implements IRenderer{
 							.withLocation(Identifier.of(TelosAddon.MOD_ID, "pipelines/showrange_line" ))
 							.build(),
 					RenderLayer.MultiPhaseParameters.builder()
-							//.program(RenderPhase.POSITION_COLOR_PROGRAM)
-							//.writeMaskState(ALL_MASK)
-							//.transparency(RenderPhase.NO_TRANSPARENCY)
 							.lineWidth(new RenderPhase.LineWidth(OptionalDouble.of(10f)))
 							.layering(RenderPhase.VIEW_OFFSET_Z_LAYERING)
 							.target(ITEM_ENTITY_TARGET)
