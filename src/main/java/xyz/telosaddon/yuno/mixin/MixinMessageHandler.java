@@ -32,7 +32,7 @@ import static xyz.telosaddon.yuno.TelosAddon.*;
 public class MixinMessageHandler {
     private boolean trackerBit = false;
     private String lastKilledBoss = "";
-    private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated!");
+    private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
     private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at");
 
     @Inject(method = "method_45745", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/ChatHud;addMessage(Lnet/minecraft/text/Text;)V"))
@@ -53,8 +53,8 @@ public class MixinMessageHandler {
     @Unique
     private void onChat(Text text) {
         String s = text.getString().trim();
-
-        if(s.equals("\uD814\uDF21")){ // nexus message check
+        if (s.isEmpty()) return;
+        if(s.charAt(0) == '\uD814'){ // nexus message check
             Features.BOSS_TRACKER_FEATURE.clearAlive();
 
             if (!CONFIG.enableJoinText|| TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
