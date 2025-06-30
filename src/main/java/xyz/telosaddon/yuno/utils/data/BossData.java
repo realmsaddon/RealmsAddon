@@ -56,7 +56,7 @@ public enum BossData {
             new BlockPos(10, 212, -121)
     ),
     ONYX(
-            "Onyx",
+            "Raphael",
             new BlockPos(-15, 243, 88)
     );
 

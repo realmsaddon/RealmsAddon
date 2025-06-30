@@ -20,7 +20,6 @@ public class TelosMenu extends Screen {
 
     private final MinecraftClient mc;
 
-
     private final CustomUiManager customUiManager;
 
     public CustomUiManager getCustomUiManager() {

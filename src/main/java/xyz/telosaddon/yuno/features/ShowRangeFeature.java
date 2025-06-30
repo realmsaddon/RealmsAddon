@@ -30,8 +30,6 @@ public class ShowRangeFeature extends ToggleableFeature {
 
     public ShowRangeFeature(Function<PlayerInventory, ItemStack> itemGetter) {
         this.itemGetter = itemGetter;
-
-
     }
 
 
@@ -40,7 +38,6 @@ public class ShowRangeFeature extends ToggleableFeature {
 		if (loreComponent == null) return Float.NaN;
 		var player = MinecraftClient.getInstance().player;
         assert player != null;
-        player.sendMessage(Text.of("tried parse radius"),false);
 
 		for (var line : loreComponent.lines()) {
 
@@ -49,13 +46,13 @@ public class ShowRangeFeature extends ToggleableFeature {
 				String numWithPossibleExt = line.getString().split("Range:")[1].trim();
 				// Handle <num>(+3) case for EX
 				String num = numWithPossibleExt.split("\\(")[0].trim();
-				player.sendMessage(Text.of("radius parsed as: " + num),false);
+
 				return Float.parseFloat(num);
 			} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
 				LOGGER.warning(e.getLocalizedMessage());
 			}
 		}
-		player.sendMessage(Text.of("unable to parse radius"),false);
+
 		return Float.NaN;
 	}
 
@@ -64,7 +61,6 @@ public class ShowRangeFeature extends ToggleableFeature {
 		var inventory = player.getInventory();
 		if (inventory == null) return;
 		ItemStack itemToCheck = this.itemGetter.apply(inventory);
-		player.sendMessage(Text.of("got: " + itemToCheck),false);
 		if (!itemToCheck.equals(this.previousItem)) {
 
 			ItemType itemType = ItemType.fromItemStack(itemToCheck);
@@ -84,7 +80,7 @@ public class ShowRangeFeature extends ToggleableFeature {
 				}
 			}
 			float finalOffset = offset;
-			player.sendMessage(Text.of("tried range render"),false);
+
 			this.renderers.forEach(r -> r.setRadius(radius));
 			this.renderers.forEach(r -> r.setOffset(finalOffset));
 		}
