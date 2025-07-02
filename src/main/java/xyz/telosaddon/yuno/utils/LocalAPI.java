@@ -73,7 +73,6 @@ public class LocalAPI {
 
                 currentCharacterArea = area.replaceAll("[^a-zA-z ']+", ""); // idk why but theres numbers at the end so we gotta trim that off
 
-
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
                 // LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
                 lastKnownBoss = currentCharacterFighting;

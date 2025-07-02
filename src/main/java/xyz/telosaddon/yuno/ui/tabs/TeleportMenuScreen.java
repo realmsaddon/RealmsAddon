@@ -9,15 +9,23 @@ import io.wispforest.owo.ui.container.GridLayout;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
-import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.utils.LocalAPI;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
 public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
-    final String[] serverNames = {
+    final String[] NAServerNames = {
             "Ashburn", "Bayou", "Cedar", "Dakota",
-            "Astra", "Balkan", "Creska", "Draskov", // insert eu servers here
-            "Asura", "Bayan", "Chantura", "", ""};
+            "Eagleton", "Farrion", "Groveridge", "Holloway"
+    };
+    final String[] EUServerNames = {
+            "Astra", "Balkan", "Creska", "Draskov",
+            "Estenmoor", "Falkenburg", "Galla", "Helmburg"
+    };
+
+    final String[] SGServerNames = {
+            "Asura", "Bayan", "Chantura", "", "","","","",
+    };
 
 
     @Override
@@ -37,16 +45,18 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
                 Containers.verticalFlow(Sizing.content(), Sizing.content())
                         .child(Components.label(Text.literal("Teleport Menu")))
                         .child(
-                                Containers.grid(Sizing.content(), Sizing.content(),3,4)
+                                Containers.grid(Sizing.content(), Sizing.content(),2,4)
 
                                         .<GridLayout>configure(layout ->{
+                                            String[] finalServerNames = getServerName();
                                             for(int i = 0; i < 4; i++){
-                                                for(int j = 0; j < 3; j++) {
+                                                for(int j = 0; j < 2; j++) {
                                                     int finalI = i;
                                                     int finalJ = j;
-                                                    layout.child(Components.button(Text.literal(serverNames[finalJ*4+finalI]), button -> {
+
+                                                    layout.child(Components.button(Text.literal(finalServerNames[finalJ*4+finalI]), button -> {
                                                         if (client == null || client.player == null) return;
-                                                        client.player.networkHandler.sendChatCommand("joinq " + serverNames[finalJ*4+finalI]);
+                                                        client.player.networkHandler.sendChatCommand("joinq " + finalServerNames[finalJ*4+finalI]);
                                                     }).renderer(ButtonComponent.Renderer.flat(
                                                             new java.awt.Color(0, 0, 0, 150).getRGB(),
                                                             CONFIG.fillColor(),
@@ -68,5 +78,22 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
 
 
         );
+    }
+
+    private String[] getServerName() {
+        String[] serverNames;
+        String currentArea = LocalAPI.getCurrentCharacterWorld();
+        System.out.println(currentArea);
+        if (currentArea.trim().charAt(0) == 'N'){
+            serverNames = NAServerNames;
+        }
+        else if (currentArea.trim().charAt(0) == 'G'){
+            serverNames = EUServerNames;
+        }
+        else{
+            serverNames = SGServerNames;
+        }
+        String[] finalServerNames = serverNames;
+        return finalServerNames;
     }
 }
