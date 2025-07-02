@@ -46,7 +46,7 @@ public class ConfigTransferrer {
                 Type type = new TypeToken<Map<String, Object>>() {}.getType();
                 configMap = GSON.fromJson(reader, type);
             } catch (Exception e) {
-                TelosAddon.LOGGER.severe("Error loading old config!");
+                TelosAddon.LOGGER.error("Error loading old config!");
                 e.printStackTrace();
                 return;
             }
@@ -126,11 +126,11 @@ public class ConfigTransferrer {
                 TelosAddon.CONFIG.showOffHandRangeFeatureColor(getInteger("ShowOffHandRangeFeatureColor"));
             }
         } catch (Exception e) {
-            TelosAddon.LOGGER.severe("Error transferring config!");
+            TelosAddon.LOGGER.error("Error transferring config!");
             e.printStackTrace();
             return;
         }
-        TelosAddon.LOGGER.severe("Successfully transferred configs!");
+        TelosAddon.LOGGER.error("Successfully transferred configs!");
         configFile.delete();
 
     }

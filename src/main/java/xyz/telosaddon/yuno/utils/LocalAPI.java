@@ -119,7 +119,7 @@ public class LocalAPI {
                 //System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);
                 // this means a boss has died recently.
                 if (!lastKnownBoss.equals(currentCharacterFighting) && currentCharacterFighting.equals("")) {
-                    LOGGER.log(Level.INFO, "Boss has died");
+                    LOGGER.info("Boss has died");
                     System.out.println(lastKnownBoss);
                     switch (lastKnownBoss){
                         case "Chungus" -> currentPortalCall = "void";

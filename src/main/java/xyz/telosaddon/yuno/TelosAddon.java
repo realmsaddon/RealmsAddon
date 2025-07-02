@@ -4,7 +4,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xyz.telosaddon.yuno.discordrpc.DiscordRPCManager;
 import xyz.telosaddon.yuno.hotkey.*;
 import xyz.telosaddon.yuno.features.ShowMainRangeFeature;
@@ -19,7 +20,7 @@ import xyz.telosaddon.yuno.utils.config.ConfigTransferrer;
 import xyz.telosaddon.yuno.utils.config.ModConfig;
 import xyz.telosaddon.yuno.sound.CustomSound;
 
-import java.util.logging.Logger;
+
 
 import static xyz.telosaddon.yuno.utils.LocalAPI.updateAPI;
 
@@ -30,7 +31,7 @@ public class TelosAddon implements ClientModInitializer  {
 
     public static final ModConfig CONFIG = ModConfig.createAndLoad();
 
-    public static final Logger LOGGER = Logger.getLogger(MOD_NAME);
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
     private final MinecraftClient mc = MinecraftClient.getInstance();
     public static TelosAddon instance;
 
@@ -51,7 +52,7 @@ public class TelosAddon implements ClientModInitializer  {
 
 
     public void initHotkeys(){
-        NexusHotkey.init();
+        MountHotkey.init();
         MenuHotkey.init();
         TeleportMenuHotkey.init();
         CallHotkey.init();

@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(PlayerEntityRenderer.class)
 
+
+//whenever we work on player opacity slider
 public class MixinPlayerRenderer {
 
 

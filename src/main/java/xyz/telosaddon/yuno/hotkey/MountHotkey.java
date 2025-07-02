@@ -9,16 +9,10 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import org.lwjgl.glfw.GLFW;
-import xyz.telosaddon.yuno.TelosAddon;
-
-import java.nio.charset.StandardCharsets;
-
-import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
 
 @Environment(EnvType.CLIENT)
-public class NexusHotkey {
+public class MountHotkey {
     private static KeyBinding keyBinding;
 
     public static void init() {
@@ -31,13 +25,11 @@ public class NexusHotkey {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (keyBinding.wasPressed()) {
-                TelosAddon.getInstance().sendMessage("Nexus hotkey pressed!");
-                LOGGER.info("Nexus hotkey pressed!");
-                useNexus();
+                useMount();
             }
         });
     }
-    public static void useNexus(){
+    public static void useMount(){
         MinecraftClient client = MinecraftClient.getInstance();
         assert client.player != null;
         PlayerInventory inv = client.player.getInventory();

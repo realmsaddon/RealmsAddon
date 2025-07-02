@@ -9,7 +9,6 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,19 +16,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.event.api.realm.BossSpawnedEventHandler;
+import xyz.telosaddon.yuno.event.api.realm.WorldBossDefeatedEventHandler;
 import xyz.telosaddon.yuno.features.Features;
+import xyz.telosaddon.yuno.utils.data.BossData;
 
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
+import java.util.regex.Pattern;
 
 import static xyz.telosaddon.yuno.TelosAddon.*;
 
 @Mixin(MessageHandler.class)
 public class MixinMessageHandler {
     private boolean trackerBit = false;
+    private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
+    private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at");
 
     @Inject(method = "method_45745", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/ChatHud;addMessage(Lnet/minecraft/text/Text;)V"))
     private void onDisguisedChatLambda(MessageType.Parameters parameters, Text text, Instant instant, CallbackInfoReturnable<Boolean> cir) {
@@ -73,21 +77,33 @@ public class MixinMessageHandler {
                                         .withHoverEvent(new HoverEvent.ShowText(Text.literal("Join our discord!")))
                                 ), false);
                     } catch (Exception e) {
-                        LOGGER.warning(e.getMessage());
+                        LOGGER.warn(e.getMessage());
                     }
 
                 });
             }
         }
+        if (BOSS_DEFEATED_MESSAGE_PATTERN.matcher(s).find()){
+            WorldBossDefeatedEventHandler.EVENT.invoker().onBossDefeated(s.split(" ")[0]);
 
+        }
+
+        if (BOSS_SPAWNED_MESSAGE_PATTERN.matcher(s).find()){
+            BossSpawnedEventHandler.EVENT.invoker().onBossSpawned(s.split(" ")[0]);
+
+        }
+
+        if (trackerBit){
+            if (BossData.fromString(s).isPresent()){
+
+            }
+        }
         if(!s.equals("===============================================")) return;
         if (trackerBit = !trackerBit) return; // there's 2 bars in the kill message, and guess what datatype has 2 states
 
         CONFIG.totalRuns(CONFIG.totalRuns() + 1);
         CONFIG.noWhiteRuns(CONFIG.noWhiteRuns() + 1);
         CONFIG.noBlackRuns(CONFIG.noBlackRuns() + 1);
-
-
 
     }
 

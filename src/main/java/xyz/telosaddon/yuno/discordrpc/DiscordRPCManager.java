@@ -13,12 +13,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
+import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
 
 public class DiscordRPCManager implements IPCListener {
 
     private static final long APPLICATION_ID = 1290485474452045865L;
 
-    private static final Logger logger = TelosAddon.LOGGER;
 
     private IPCClient client;
     private OffsetDateTime startTimestamp;
@@ -27,7 +27,7 @@ public class DiscordRPCManager implements IPCListener {
 
     public void start() {
         try{
-            logger.info("Starting Discord RPC...");
+            LOGGER.info("Starting Discord RPC...");
             if (isActive()) {
                 return;
             }
@@ -37,12 +37,12 @@ public class DiscordRPCManager implements IPCListener {
             try {
                 client.connect();
             } catch (Exception e) {
-                logger.log(Level.WARNING, "Failed to connect to Discord RPC!");
-                logger.log(Level.WARNING, e.toString());
+                LOGGER.warn("Failed to connect to Discord RPC!");
+                LOGGER.warn(e.toString());
             }
         } catch (Throwable e) {
-            logger.log(Level.WARNING,"Discord RPC has thrown an unexpected error while trying to start...");
-            logger.log(Level.WARNING, e.toString());
+            LOGGER.warn("Discord RPC has thrown an unexpected error while trying to start...");
+            LOGGER.warn(e.toString());
         }
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -56,7 +56,7 @@ public class DiscordRPCManager implements IPCListener {
 
 
     public void stop() {
-        logger.log(Level.INFO, "Attempting to disconnect RPC \nConnectedStatus: " + connected);
+        LOGGER.info("Attempting to disconnect RPC \nConnectedStatus: " + connected);
         if (isActive()) {
             connected = false;
             client.close();
@@ -98,13 +98,13 @@ public class DiscordRPCManager implements IPCListener {
     }
     @Override
     public void onReady(IPCClient client) {
-        logger.info("Discord RPC started.");
+        LOGGER.info("Discord RPC started.");
         connected = true;
     }
 
     @Override
     public void onDisconnect(IPCClient client, Throwable t) {
-        logger.info("Discord RPC disconnected.");
+        LOGGER.info("Discord RPC disconnected.");
         this.client = null;
         connected = false;
     }

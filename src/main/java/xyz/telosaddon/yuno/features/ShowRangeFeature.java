@@ -114,7 +114,7 @@ CONFIG.showMainRangeFeatureColor(),
 		};
 		var player = MinecraftClient.getInstance().player;
 		if(player == null) {
-			TelosAddon.LOGGER.warning("Got client.player == null even though the guy did so through a GUI?");
+			TelosAddon.LOGGER.warn("Got client.player == null even though the guy did so through a GUI?");
 			return;
 		}
 		this.previousItem = null;
