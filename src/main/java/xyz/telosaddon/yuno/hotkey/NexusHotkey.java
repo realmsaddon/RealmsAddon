@@ -44,12 +44,13 @@ public class NexusHotkey {
         int invslot = inv.getSelectedSlot();
         for (int i = 0; i < 9; i++) {
             ItemStack item = inv.getStack(i);
-            if (item.getName().getString().hashCode() == 1307700015){ // hacky solution but it works
+            if (item.getName().getString().hashCode() == 1307673572){ // hacky solution but it works
                 inv.setSelectedSlot(i);
             }
         }
         assert client.interactionManager != null;
         client.interactionManager.interactItem(client.player, client.player.getActiveHand());
+        inv.setSelectedSlot(invslot);
     }
 
 }

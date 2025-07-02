@@ -11,7 +11,7 @@ import static xyz.telosaddon.yuno.TelosAddon.MOD_ID;
 @Modmenu(modId = MOD_ID)
 @Config(name = MOD_ID, wrapperName = "ModConfig")
 public class ModConfigModel {
-    public String modVersion = "v0.3.0";
+    public String modVersion = "v0.4";
 
     public int greenBags = 0;
     public int goldBags = 0;

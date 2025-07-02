@@ -8,7 +8,7 @@ public enum ItemType {
 
 	UT_HERALD_ESSENCE,
 	EX_HERALD_ESSENCE,
-	NEXUS,
+	OBELISK,
 	UT_AYAHUASCA_FLASK,
 	EX_AYAHUASCA_FLASK;
 
@@ -19,8 +19,8 @@ public enum ItemType {
 			return UT_HERALD_ESSENCE;
 		if(trimmedName.equals("\uD83E\uDF46"))
 			return EX_HERALD_ESSENCE;
-		if(trimmedName.equals("\uD83F\uDC10"))
-			return NEXUS;
+		if(trimmedName.equals("\uD857\uDD93"))
+			return OBELISK;
 		if(trimmedName.equals("\uD83E\uDF9D"))
 			return UT_AYAHUASCA_FLASK;
 		if(trimmedName.equals("\uD83E\uDF9C"))

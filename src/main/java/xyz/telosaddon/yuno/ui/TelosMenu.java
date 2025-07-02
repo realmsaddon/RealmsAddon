@@ -121,10 +121,10 @@ public class TelosMenu extends Screen {
         Text titleText = FontHelper.toCustomFont(title, CONFIG.font());
 
         float titleScale = 1.5f;
-        context.getMatrices().push();
-        context.getMatrices().scale(titleScale, titleScale, titleScale);
+        context.getMatrices().pushMatrix();
+        context.getMatrices().scale(titleScale, titleScale);
         context.drawText(tr, titleText, (int) (10 / titleScale), (int) (35 / titleScale), CONFIG.menuColor(), true);
-        context.getMatrices().pop();
+        context.getMatrices().popMatrix();
     }
 
 }
