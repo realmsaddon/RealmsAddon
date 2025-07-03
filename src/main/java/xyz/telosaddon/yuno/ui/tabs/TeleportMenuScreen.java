@@ -22,11 +22,11 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
     final String[] EUServerNames = {
             "Astra", "Balkan", "Creska", "Draskov",
             "Estenmoor", "Falkenburg", "Galla", "Helmburg",
-            "Ivarn", "Jarnwald", "Krausenfield", "Lindenburg"
+            "Ivarn", "Jarnwald", "Krausenfeld", "Lindenburg"
     };
 
     final String[] SGServerNames = {
-            "Asura", "Bayan", "Chantura", "", "","","","",
+            "Asura", "Bayan", "Chantara", "", "","","","",
             "", "", "", "",
     };
 
