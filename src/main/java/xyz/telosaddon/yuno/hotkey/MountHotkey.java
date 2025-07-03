@@ -17,7 +17,7 @@ public class MountHotkey {
 
     public static void init() {
         keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.telosaddon.nexus",
+                "key.telosaddon.mount",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_V,
                 "category.telosaddon"
