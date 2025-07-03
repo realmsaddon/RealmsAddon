@@ -196,7 +196,7 @@ public enum BossData {
             BossType.DUNGEON
     ),
     DARK_CHAMPIONS(
-            "Orion and Osiris",
+            "Dark Champion",
             new BlockPos(0, 0, 0),
             BossType.DUNGEON
     ),

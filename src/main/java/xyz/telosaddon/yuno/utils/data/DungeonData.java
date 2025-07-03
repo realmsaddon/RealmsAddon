@@ -32,7 +32,7 @@ public enum DungeonData {
     CULTISTS_HIDEOUT("Cultist's Hideout", DungeonType.BOSS, BossData.SILEX),
     ILLARIUS_HIDEOUT("Illarius' Hideout", DungeonType.BOSS, BossData.LOA),
     VOID("Void", DungeonType.BOSS, BossData.SHADOWFLARE),
-    RAPHS_CASTLE("Raphael's Castle", DungeonType.BOSS, BossData.RAPHAEL),
+    RAPHS_CASTLE("Raphael's Castle", DungeonType.BOSS, BossData.DARK_CHAMPIONS),
 
     RAPHS_CHAMBER("Raphael's Chamber", DungeonType.ENDGAME, BossData.RAPHAEL),
     TENEBRIS("Tenebris", DungeonType.ENDGAME, BossData.VOIDED_OMNIPOTENT),

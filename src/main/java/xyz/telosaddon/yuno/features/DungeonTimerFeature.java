@@ -45,7 +45,7 @@ public class DungeonTimerFeature extends ToggleableFeature implements DungeonSta
             bossBeaten = false;
             LOGGER.info("dungeon " + dungeonType.areaName + " has spawned");
             while(!bossBeaten) {
-                LOGGER.info("Hi from thread: " + Thread.currentThread().getName());
+                //LOGGER.info("Hi from thread: " + Thread.currentThread().getName());
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -80,10 +80,16 @@ public class DungeonTimerFeature extends ToggleableFeature implements DungeonSta
     @Override
     public void onBossDefeated(BossData bossName) {
         if (currentDungeon == null) return;
+
         if (bossName.equals(currentFinalBoss)){
             bossBeaten = true;
             var player = MinecraftClient.getInstance().player;
-            if (player != null) player.sendMessage(Text.of("§aDefeated §e" + currentDungeon + "§a in §e" + getTimeStringFormatted()),false);
+            if (player != null) player.sendMessage(Text.of("§aDefeated §e" + currentDungeon.areaName + "§a in §e" + getTimeStringFormatted()),false);
+
+            // todo: make some decorator shit for multi stage dungeons
+        } else if (currentDungeon == DungeonData.SHATTERED_KINGDOM || currentDungeon == DungeonData.CELESTIALS_PROVINCE ){
+            var player = MinecraftClient.getInstance().player;
+            if (player != null) player.sendMessage(Text.of("§2Split: §aDefeated §e" + bossName.getLabel() + "§a in §e" + getTimeStringFormatted()),false);
 
         }
     }

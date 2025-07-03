@@ -34,7 +34,7 @@ import static xyz.telosaddon.yuno.TelosAddon.*;
 @Mixin(MessageHandler.class)
 public class MixinMessageHandler {
     private boolean trackerBit = false;
-    private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
+    private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated!");
     private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at");
     private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Raph's Castle has opened at");
 
@@ -58,7 +58,8 @@ public class MixinMessageHandler {
     private void onChat(Text text) {
         String s = text.getString().trim();
 
-        if(s.contains("discord.telosrealms.com")){ // nexus check
+        if (s.isEmpty()) return;
+        if(s.charAt(0) == '\uD814'){ // nexus check
             Features.BOSS_TRACKER_FEATURE.clearAlive();
 
             if (!CONFIG.enableJoinText()|| TelosAddon.getInstance().getPlayTime() > 15) return; // don't spam this thing
@@ -101,7 +102,7 @@ public class MixinMessageHandler {
 
         if (trackerBit){
             if (BossData.findByKey(s.trim()).isPresent()){
-                LOGGER.info("(BossDeafeatedEvent) boss " + s.trim()  + " has been defeated");
+                LOGGER.info("(BossDefeatedEvent) boss " + s.trim()  + " has been defeated");
                 BossDefeatedEventHandler.EVENT.invoker().onBossDefeated(BossData.findByKey(s.trim()).get());
             }
         }
