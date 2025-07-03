@@ -80,5 +80,6 @@ public class ModConfigModel {
     public ShowRangeFeature.RangeViewType showMainRangeFeatureViewType = ShowRangeFeature.RangeViewType.LINE;
     public ShowRangeFeature.RangeViewType showOffHandRangeFeatureViewType = ShowRangeFeature.RangeViewType.LINE;
 
+    public boolean dungeonTimerSetting = true;
 
 }

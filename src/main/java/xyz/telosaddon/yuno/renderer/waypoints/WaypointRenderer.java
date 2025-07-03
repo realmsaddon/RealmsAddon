@@ -83,7 +83,7 @@ public class WaypointRenderer{
         VertexConsumerProvider.Immediate consumerProvider = client.getBufferBuilders().getEntityVertexConsumers();
         for(BossData bossData : Features.BOSS_TRACKER_FEATURE.getCurrentAlive()) {
             if(!CONFIG.bossWaypointsSetting()) return;
-            BlockPos waypoint = bossData.spawnPosition;
+            BlockPos waypoint = bossData.getPosition().get();
 
             Vec3d position = new Vec3d(waypoint.getX(), waypoint.getY(), waypoint.getZ());
             double squaredDistance = camera.getPos().squaredDistanceTo(position);
@@ -113,13 +113,13 @@ public class WaypointRenderer{
             int colorcode = new Color(255,255,255, (fade)).getRGB();
             int backgroundColorCode = new Color(0,0,0, (int) (fade * 0.3)).getRGB();
 
-            String waypointString = bossData.label + " (" +  (int) distance + "m" + ")";
+            String waypointString = bossData.getLabel() + " (" +  (int) distance + "m" + ")";
 //            RenderSystem.depthMask(false);
 //            RenderSystem.disableCull();
 //            RenderSystem.disableBlend();
             textRenderer.draw(
                     Text.of(waypointString),
-                    -textRenderer.getWidth(bossData.label) / 2.0F,
+                    -textRenderer.getWidth(bossData.getLabel()) / 2.0F,
                     (float) 0,
                     colorcode,
                     false,
@@ -132,7 +132,7 @@ public class WaypointRenderer{
             if (distance > 30 ) {
                 textRenderer.draw(
                         Text.of(waypointString),
-                        -textRenderer.getWidth(bossData.label) / 2.0F,
+                        -textRenderer.getWidth(bossData.getLabel()) / 2.0F,
                         (float) 0,
                         -1,
                         false,

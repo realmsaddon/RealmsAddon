@@ -146,6 +146,12 @@
                                     <horizontal method="fixed">150</horizontal>
                                 </sizing>
                             </checkbox>
+                            <checkbox id="DungeonTimerSetting">
+                                <text>Dungeon Timer</text>
+                                <sizing>
+                                    <horizontal method="fixed">150</horizontal>
+                                </sizing>
+                            </checkbox>
 
                     </children>
 

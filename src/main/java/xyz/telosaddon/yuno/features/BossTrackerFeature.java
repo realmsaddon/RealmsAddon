@@ -6,18 +6,20 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.text.Text;
 import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.event.api.realm.RaphPortalSpawnedEventHandler;
 import xyz.telosaddon.yuno.event.api.realm.WorldBossDefeatedEventHandler;
 import xyz.telosaddon.yuno.event.api.realm.BossSpawnedEventHandler;
 import xyz.telosaddon.yuno.event.HandledScreenRemovedCallback;
 import xyz.telosaddon.yuno.utils.data.BossData;
 
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
-public class BossTrackerFeature extends ToggleableFeature implements WorldBossDefeatedEventHandler, BossSpawnedEventHandler, HandledScreenRemovedCallback {
+public class BossTrackerFeature extends ToggleableFeature implements WorldBossDefeatedEventHandler, BossSpawnedEventHandler, HandledScreenRemovedCallback, RaphPortalSpawnedEventHandler {
 
     private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
     private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at");
@@ -31,45 +33,10 @@ public class BossTrackerFeature extends ToggleableFeature implements WorldBossDe
         WorldBossDefeatedEventHandler.EVENT.register(this);
         BossSpawnedEventHandler.EVENT.register(this);
         HandledScreenRemovedCallback.EVENT.register(this);
+        RaphPortalSpawnedEventHandler.EVENT.register(this);
     }
 
 
-
-//    private void onGameMessage(Text message, boolean overlay) {
-//        String s = message.getString();
-//
-//        if (!s.matches("^(\\w|\\[|\\().+")) {
-//            return;
-//        }
-//
-//        if(BOSS_SPAWNED_MESSAGE_PATTERN.matcher(s).find()) {
-//            addAlive(s.split(" ")[0]);
-//        }
-//
-//        if(BOSS_DEFEATED_MESSAGE_PATTERN.matcher(s).find()){
-//            removeAlive(s.split(" ")[0]);
-//        }
-//
-//
-//        if(ONYX_PORTAL_OPEN_MESSAGE_PATTERN.matcher(s).find()){
-//
-//            CompletableFuture.runAsync(() -> {
-//                try {
-//                    currentAlive.clear();
-//                    currentAlive.add(BossData.ONYX);
-//
-//                    int countdown = 60;
-//                    while (countdown > 0) {
-//                        countdown--;
-//                        Thread.sleep(1000);
-//                    }
-//                    currentAlive.remove(BossData.ONYX);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            });
-//        }
-//    }
 
 
     public void addAlive(String name){
@@ -122,7 +89,6 @@ public class BossTrackerFeature extends ToggleableFeature implements WorldBossDe
         }
 
         for (var stack : simpleInventory.getHeldStacks()) {
-            System.out.println("Closed inventory contains: " + stack.getName().getString());
             var stackName = stack.getName().getString();
             var bossItemNameMatcher = BOSS_ITEM_NAME_PATTERN.matcher(stackName);
 
@@ -149,5 +115,25 @@ public class BossTrackerFeature extends ToggleableFeature implements WorldBossDe
                 removeAlive(bossItemNameMatcher.group(1));
             }
         }
+    }
+
+    @Override
+    public void onRaphSpawned() {
+        // async for timer
+        CompletableFuture.runAsync(() -> {
+            try {
+                currentAlive.clear();
+                currentAlive.add(BossData.RAPHAEL);
+
+                int countdown = 60;
+                while (countdown > 0) {
+                    countdown--;
+                    Thread.sleep(1000);
+                }
+                currentAlive.remove(BossData.RAPHAEL);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

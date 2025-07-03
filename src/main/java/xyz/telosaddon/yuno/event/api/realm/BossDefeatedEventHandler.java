@@ -5,11 +5,11 @@ import net.fabricmc.fabric.api.event.EventFactory;
 
 // called when a player gets a loot leaderboard placement. this only applies to bosses that the player has damaged.
 public interface BossDefeatedEventHandler {
-    Event<BossDefeatedEventHandler> EVENT = EventFactory.createArrayBacked(BossDefeatedEventHandler.class, listeners -> (bossName, placement, damage) -> {
+    Event<BossDefeatedEventHandler> EVENT = EventFactory.createArrayBacked(BossDefeatedEventHandler.class, listeners -> (bossName) -> {
         for (var listener : listeners) {
-            listener.onBossDefeated(bossName, placement, damage);
+            listener.onBossDefeated(bossName);
         }
     });
 
-    void onBossDefeated(String bossName, int placement, int damage);
+    void onBossDefeated(String bossName);
 }

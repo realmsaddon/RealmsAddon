@@ -14,9 +14,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.telosaddon.yuno.TelosAddon;
+import xyz.telosaddon.yuno.features.DungeonTimerFeature;
 import xyz.telosaddon.yuno.features.Features;
 
 import xyz.telosaddon.yuno.utils.FontHelper;
+import xyz.telosaddon.yuno.utils.LocalAPI;
 import xyz.telosaddon.yuno.utils.data.BossData;
 
 import java.util.*;
@@ -48,8 +50,6 @@ public abstract class MixinInGameHud {
 
         int width = client.getWindow().getScaledWidth();
         //int height = client.getWindow().getScaledHeight();
-
-
 
         if(CONFIG.bagX() == -1)
             CONFIG.bagX(width - 130);
@@ -119,10 +119,17 @@ public abstract class MixinInGameHud {
         if(playtimeSetting || isEditMode)
             infoList.add("Playtime§7: §f" + TelosAddon.getInstance().getPlaytimeText());
 
+        if (DungeonTimerFeature.getTimerActive() && CONFIG.dungeonTimerSetting()) {
+            infoList.add("Current Dungeon§7: §f" + LocalAPI.getCurrentCharacterArea());
+            infoList.add("Current Dungeon Time§7: §f" + DungeonTimerFeature.getTimeStringFormatted());
+        }
+
+
+
         if(spawnBossesSetting || isEditMode) {
             for (BossData bossData: Features.BOSS_TRACKER_FEATURE.getCurrentAlive()) {
 
-                infoList.add("Boss Spawned§7: §f" + bossData.label);
+                infoList.add("Boss Spawned§7: §f" + bossData.getLabel());
             }
             if(isEditMode) {
                 infoList.add("Boss Spawned§7: §fNAME");
@@ -151,11 +158,6 @@ public abstract class MixinInGameHud {
         for(int i = 0; i < infoList.size(); i++)
             context.drawText(tr, FontHelper.toCustomFont(infoList.get(i), fontName), infoX, infoY + i * 10, CONFIG.menuColor(), true);
     }
-
-
-
-
-
 
 
 }

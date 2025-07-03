@@ -40,7 +40,7 @@ public class RealmUtils {
             String worldToJoin = worldName;
             // use nexus
             int waitTime = 15;
-            while (!LocalAPI.getCurrentCharacterWorld().contains("Hub")){
+            while (!LocalAPI.getCurrentCharacterArea().contains("The Nexus")){
                 try {
                     Thread.sleep(1000); // local api only updated every second
                     waitTime--;

@@ -7,6 +7,7 @@ import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.telosaddon.yuno.discordrpc.DiscordRPCManager;
+import xyz.telosaddon.yuno.event.api.realm.DungeonStartedEventHandler;
 import xyz.telosaddon.yuno.hotkey.*;
 import xyz.telosaddon.yuno.features.ShowMainRangeFeature;
 import xyz.telosaddon.yuno.features.ShowOffHandFeature;
@@ -16,10 +17,11 @@ import xyz.telosaddon.yuno.renderer.waypoints.WaypointRenderer;
 import xyz.telosaddon.yuno.sound.SoundManager;
 
 import xyz.telosaddon.yuno.utils.BossBarUtils;
-import xyz.telosaddon.yuno.utils.config.ConfigTransferrer;
+import xyz.telosaddon.yuno.utils.LocalAPI;
+
 import xyz.telosaddon.yuno.utils.config.ModConfig;
 import xyz.telosaddon.yuno.sound.CustomSound;
-
+import xyz.telosaddon.yuno.utils.data.DungeonData;
 
 
 import static xyz.telosaddon.yuno.utils.LocalAPI.updateAPI;
@@ -50,6 +52,7 @@ public class TelosAddon implements ClientModInitializer  {
 
     private ShowOffHandFeature showOffHandFeature;
 
+    private DungeonData previousDungeonState;
 
     public void initHotkeys(){
         MountHotkey.init();
@@ -68,11 +71,8 @@ public class TelosAddon implements ClientModInitializer  {
         if(player == null) return;
         if(!isOnTelos()) return;
 
-
-
         this.showMainRangeFeature.tick();
         this.showOffHandFeature.tick();
-
 
         updateAPI();
 
@@ -84,7 +84,15 @@ public class TelosAddon implements ClientModInitializer  {
 
         }
 
+        DungeonData currentDungeonState = DungeonData.findByKey(LocalAPI.getCurrentCharacterArea());
 
+        if (currentDungeonState != null && currentDungeonState != previousDungeonState){
+
+            DungeonStartedEventHandler.EVENT.invoker().onDungeonSpawned(currentDungeonState);
+            previousDungeonState = currentDungeonState;
+        } else if (currentDungeonState == null){
+            previousDungeonState = null;
+        }
     }
 
     public void sendMessage(String message) {
@@ -125,7 +133,6 @@ public class TelosAddon implements ClientModInitializer  {
         rpcManager.start();
         initHotkeys();
 
-
         soundManager = new SoundManager();
 
         soundManager.addSound(new CustomSound("button_click"));
@@ -139,7 +146,6 @@ public class TelosAddon implements ClientModInitializer  {
         WaypointRenderer.init();
         HitboxRenderer.init();
 
-        new ConfigTransferrer();
         new InitializeCommands().initializeCommands();
     }
 

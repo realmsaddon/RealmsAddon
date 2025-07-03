@@ -82,5 +82,8 @@ public class HomeTab extends BaseUIModelScreen<FlowLayout> {
         rootComponent.childById(CheckboxComponent.class, "BossWaypointsSetting")
                 .checked(CONFIG.bossWaypointsSetting())
                 .onChanged(CONFIG::bossWaypointsSetting);
+        rootComponent.childById(CheckboxComponent.class, "DungeonTimerSetting")
+                .checked(CONFIG.dungeonTimerSetting())
+                .onChanged(CONFIG::dungeonTimerSetting);
     }
 }
