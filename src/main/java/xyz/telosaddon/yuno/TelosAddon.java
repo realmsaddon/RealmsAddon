@@ -29,7 +29,7 @@ import static xyz.telosaddon.yuno.utils.LocalAPI.updateAPI;
 
 public class TelosAddon implements ClientModInitializer  {
     public static final String MOD_NAME = "RealmsAddon";
-    public static final String MOD_VERSION = "v0.3.2";
+    public static final String MOD_VERSION = "v0.4";
     public static final String MOD_ID = "realmsaddon";
 
     public static final ModConfig CONFIG = ModConfig.createAndLoad();

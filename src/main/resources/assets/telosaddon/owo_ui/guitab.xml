@@ -1,10 +1,15 @@
 <owo-ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/wisp-forest/owo-lib/1.20/owo-ui.xsd">
     <components>
-        <flow-layout direction="vertical">
+
+        <flow-layout direction="vertical" >
             <children>
-                <label>
-                    <text>RealmsAddon v0.3.1</text>
+                <label id="version">
+                    <margins>
+                        <all>15</all>
+                    </margins>
+
+                    <text>RealmsAddon v0.4</text>
                 </label>
                 <flow-layout direction="horizontal">
                     <children>
@@ -134,5 +139,6 @@
                 <vanilla-translucent/>
             </surface>
         </flow-layout>
+
     </components>
 </owo-ui>

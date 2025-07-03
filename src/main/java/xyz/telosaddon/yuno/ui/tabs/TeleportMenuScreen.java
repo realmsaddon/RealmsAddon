@@ -14,17 +14,20 @@ import xyz.telosaddon.yuno.utils.LocalAPI;
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
 public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
-    final String[] NAServerNames = {
+    final String[] NAServerNames = { // man fuck this shit idk how to make it generate dynamically
             "Ashburn", "Bayou", "Cedar", "Dakota",
-            "Eagleton", "Farrion", "Groveridge", "Holloway"
+            "Eagleton", "Farrion", "Groveridge", "Holloway",
+            "", "", "", "",
     };
     final String[] EUServerNames = {
             "Astra", "Balkan", "Creska", "Draskov",
-            "Estenmoor", "Falkenburg", "Galla", "Helmburg"
+            "Estenmoor", "Falkenburg", "Galla", "Helmburg",
+            "Ivarn", "Jarnwald", "Krausenfield", "Lindenburg"
     };
 
     final String[] SGServerNames = {
             "Asura", "Bayan", "Chantura", "", "","","","",
+            "", "", "", "",
     };
 
 
@@ -45,12 +48,13 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
                 Containers.verticalFlow(Sizing.content(), Sizing.content())
                         .child(Components.label(Text.literal("Teleport Menu")))
                         .child(
-                                Containers.grid(Sizing.content(), Sizing.content(),2,4)
+                                Containers.grid(Sizing.content(), Sizing.content(),3,4)
 
                                         .<GridLayout>configure(layout ->{
                                             String[] finalServerNames = getServerName();
+                                            layout.allowOverflow();
                                             for(int i = 0; i < 4; i++){
-                                                for(int j = 0; j < 2; j++) {
+                                                for(int j = 0; j < 3; j++) {
                                                     int finalI = i;
                                                     int finalJ = j;
 
@@ -70,6 +74,8 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
                                         .verticalAlignment(VerticalAlignment.CENTER)
                                         .horizontalAlignment(HorizontalAlignment.CENTER)
                                         .margins(Insets.of(5))
+
+
                         )
                         .margins(Insets.of(30))
                         .verticalAlignment(VerticalAlignment.CENTER)

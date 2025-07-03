@@ -3,8 +3,8 @@
     <components>
         <flow-layout direction="vertical">
             <children>
-                <label>
-                    <text>RealmsAddon v0.3.1</text> <!--todo make this not hardcoded-->
+                <label id="version">
+                    <text>RealmsAddon v0.4</text> <!--todo make this not hardcoded-->
                 </label>
                 <flow-layout direction="horizontal">
                     <children>
