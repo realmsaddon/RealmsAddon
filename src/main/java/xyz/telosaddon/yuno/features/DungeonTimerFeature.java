@@ -5,6 +5,7 @@ import net.minecraft.text.Text;
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.event.api.realm.BossDefeatedEventHandler;
 import xyz.telosaddon.yuno.event.api.realm.DungeonStartedEventHandler;
+import xyz.telosaddon.yuno.utils.data.BossData;
 import xyz.telosaddon.yuno.utils.data.DungeonData;
 
 import java.util.concurrent.CompletableFuture;
@@ -14,8 +15,9 @@ import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
 public class DungeonTimerFeature extends ToggleableFeature implements DungeonStartedEventHandler, BossDefeatedEventHandler {
     private static boolean timerActive = false;
     private static boolean bossBeaten = false;
-    private static String currentDungeon = "";
-    private static String currentFinalBoss = "";
+
+    private static DungeonData currentDungeon;
+    private static BossData currentFinalBoss;
     private static int timer = 0;
 
     protected DungeonTimerFeature() {
@@ -36,12 +38,14 @@ public class DungeonTimerFeature extends ToggleableFeature implements DungeonSta
         timerActive = true;
 
         CompletableFuture.runAsync(()->{
-            currentDungeon = dungeonType.areaName;
-            currentFinalBoss = dungeonType.finalBossName;
+            currentDungeon = dungeonType;
+            currentFinalBoss = dungeonType.finalBoss;
 
             timer = 0;
+            bossBeaten = false;
             LOGGER.info("dungeon " + dungeonType.areaName + " has spawned");
             while(!bossBeaten) {
+                LOGGER.info("Hi from thread: " + Thread.currentThread().getName());
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -50,11 +54,8 @@ public class DungeonTimerFeature extends ToggleableFeature implements DungeonSta
                 timer++;
 
             }
-
-            var player = MinecraftClient.getInstance().player;
-            if (player != null) player.sendMessage(Text.of("§aDefeated §e" + currentDungeon + "§a in §e" + getTimeStringFormatted()),false);
             bossBeaten = false;
-            currentFinalBoss = "";
+            currentFinalBoss = null;
             timerActive = false;
         });
 
@@ -71,10 +72,19 @@ public class DungeonTimerFeature extends ToggleableFeature implements DungeonSta
     public static String getTimeStringFormatted(){
         return String.format("%02d:%02d:%02d", timer/3600, (timer%3600)/60, timer%60);
     }
+
+    public static void disableTimer(){
+        bossBeaten = true;
+
+    }
     @Override
-    public void onBossDefeated(String bossName) {
+    public void onBossDefeated(BossData bossName) {
+        if (currentDungeon == null) return;
         if (bossName.equals(currentFinalBoss)){
             bossBeaten = true;
+            var player = MinecraftClient.getInstance().player;
+            if (player != null) player.sendMessage(Text.of("§aDefeated §e" + currentDungeon + "§a in §e" + getTimeStringFormatted()),false);
+
         }
     }
 }

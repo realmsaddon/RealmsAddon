@@ -102,7 +102,7 @@ public class MixinMessageHandler {
         if (trackerBit){
             if (BossData.findByKey(s.trim()).isPresent()){
                 LOGGER.info("(BossDeafeatedEvent) boss " + s.trim()  + " has been defeated");
-                BossDefeatedEventHandler.EVENT.invoker().onBossDefeated(s.trim());
+                BossDefeatedEventHandler.EVENT.invoker().onBossDefeated(BossData.findByKey(s.trim()).get());
             }
         }
         if(!s.equals("===============================================")) return;

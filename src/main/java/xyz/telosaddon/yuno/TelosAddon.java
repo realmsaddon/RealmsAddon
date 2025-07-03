@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.telosaddon.yuno.discordrpc.DiscordRPCManager;
 import xyz.telosaddon.yuno.event.api.realm.DungeonStartedEventHandler;
+import xyz.telosaddon.yuno.features.DungeonTimerFeature;
 import xyz.telosaddon.yuno.hotkey.*;
 import xyz.telosaddon.yuno.features.ShowMainRangeFeature;
 import xyz.telosaddon.yuno.features.ShowOffHandFeature;
@@ -87,10 +88,12 @@ public class TelosAddon implements ClientModInitializer  {
         DungeonData currentDungeonState = DungeonData.findByKey(LocalAPI.getCurrentCharacterArea());
 
         if (currentDungeonState != null && currentDungeonState != previousDungeonState){
-
+            LOGGER.info("user entered dungeon: {}", currentDungeonState.areaName);
             DungeonStartedEventHandler.EVENT.invoker().onDungeonSpawned(currentDungeonState);
             previousDungeonState = currentDungeonState;
-        } else if (currentDungeonState == null){
+        } else if (previousDungeonState != null && currentDungeonState == null){
+            DungeonTimerFeature.disableTimer();
+            LOGGER.info("user exited dungeon unexpectedly, stopping timer");
             previousDungeonState = null;
         }
     }
