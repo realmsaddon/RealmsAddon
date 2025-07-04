@@ -34,7 +34,7 @@ import static xyz.telosaddon.yuno.TelosAddon.*;
 @Mixin(MessageHandler.class)
 public class MixinMessageHandler {
     private boolean trackerBit = false;
-    private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated!");
+    private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
     private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at");
     private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Raph's Castle has opened at");
 
