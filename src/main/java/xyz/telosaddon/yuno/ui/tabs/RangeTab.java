@@ -25,6 +25,7 @@ public class RangeTab extends BaseUIModelScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
+        rootComponent.childById(LabelComponent.class, "version").text(Text.of(TelosAddon.MOD_VERSION));
         //tab buttons
         rootComponent.childById(ButtonComponent.class, "Gui").onPress(button -> {
             this.client.setScreen(new GuiTab(this));

@@ -3,6 +3,7 @@ package xyz.telosaddon.yuno.ui.tabs;
 import io.wispforest.owo.ui.base.BaseUIModelScreen;
 import io.wispforest.owo.ui.component.ButtonComponent;
 import io.wispforest.owo.ui.component.DropdownComponent;
+import io.wispforest.owo.ui.component.LabelComponent;
 import io.wispforest.owo.ui.component.TextBoxComponent;
 import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.Color;
@@ -28,6 +29,7 @@ public class SettingsTab extends BaseUIModelScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
+        rootComponent.childById(LabelComponent.class, "version").text(Text.of(TelosAddon.MOD_VERSION));
         //tab buttons
         rootComponent.childById(ButtonComponent.class, "Gui").onPress(button -> {
             this.client.setScreen(new GuiTab(this));

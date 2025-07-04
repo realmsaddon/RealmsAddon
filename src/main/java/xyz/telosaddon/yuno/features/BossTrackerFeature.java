@@ -21,9 +21,6 @@ import java.util.stream.Collectors;
 
 public class BossTrackerFeature extends ToggleableFeature implements WorldBossDefeatedEventHandler, BossSpawnedEventHandler, HandledScreenRemovedCallback, RaphPortalSpawnedEventHandler {
 
-    private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
-    private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at");
-    private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Raph's Castle has opened at");
     private static final Pattern BOSS_ITEM_NAME_PATTERN = Pattern.compile("^» \\[(\\w+)] «");
 
     private final Set<BossData> currentAlive = ConcurrentHashMap.newKeySet();
@@ -35,9 +32,6 @@ public class BossTrackerFeature extends ToggleableFeature implements WorldBossDe
         HandledScreenRemovedCallback.EVENT.register(this);
         RaphPortalSpawnedEventHandler.EVENT.register(this);
     }
-
-
-
 
     public void addAlive(String name){
         var newBoss = BossData.fromString(name);

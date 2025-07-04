@@ -3,10 +3,13 @@ package xyz.telosaddon.yuno.ui.tabs;
 import io.wispforest.owo.ui.base.BaseUIModelScreen;
 import io.wispforest.owo.ui.component.ButtonComponent;
 import io.wispforest.owo.ui.component.CheckboxComponent;
+import io.wispforest.owo.ui.component.LabelComponent;
 import io.wispforest.owo.ui.container.FlowLayout;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.client.gui.screen.Screen;
+import xyz.telosaddon.yuno.TelosAddon;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
@@ -21,6 +24,9 @@ public class GuiTab extends BaseUIModelScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
+        rootComponent.childById(LabelComponent.class, "version").text(Text.of(TelosAddon.MOD_VERSION));
+
+
         //tab buttons
         rootComponent.childById(ButtonComponent.class, "Home").onPress(button -> {
             this.client.setScreen(new HomeTab());
