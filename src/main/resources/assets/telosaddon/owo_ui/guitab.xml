@@ -6,7 +6,7 @@
             <children>
                 <label id="version">
                     <margins>
-                        <all>15</all>
+                        <all>8</all>
                     </margins>
 
                     <text>RealmsAddon v0.4</text>

@@ -6,7 +6,7 @@
                 <label id="version">
                     <text>RealmsAddon v0.4</text>
                     <margins>
-                        <all>15</all>
+                        <all>8</all>
                     </margins><!--todo make this not hardcoded-->
                 </label>
                 <flow-layout direction="horizontal">
