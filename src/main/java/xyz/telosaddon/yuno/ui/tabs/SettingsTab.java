@@ -29,7 +29,7 @@ public class SettingsTab extends BaseUIModelScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
-        rootComponent.childById(LabelComponent.class, "version").text(Text.of(TelosAddon.MOD_VERSION));
+        rootComponent.childById(LabelComponent.class, "version").text(Text.of(TelosAddon.MOD_NAME + TelosAddon.MOD_VERSION));
         //tab buttons
         rootComponent.childById(ButtonComponent.class, "Gui").onPress(button -> {
             this.client.setScreen(new GuiTab(this));

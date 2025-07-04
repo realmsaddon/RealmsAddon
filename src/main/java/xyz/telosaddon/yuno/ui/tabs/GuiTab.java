@@ -24,7 +24,7 @@ public class GuiTab extends BaseUIModelScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
-        rootComponent.childById(LabelComponent.class, "version").text(Text.of(TelosAddon.MOD_VERSION));
+        rootComponent.childById(LabelComponent.class, "version").text(Text.of(TelosAddon.MOD_NAME + TelosAddon.MOD_VERSION));
 
 
         //tab buttons

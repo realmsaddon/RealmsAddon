@@ -5,6 +5,9 @@
             <children>
                 <label  id="version">
                     <text>RealmsAddon v0.4</text>
+                    <margins>
+                        <all>15</all>
+                    </margins>
                 </label>
                 <flow-layout direction="horizontal">
                     <children>
