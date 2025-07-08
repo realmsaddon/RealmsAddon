@@ -67,6 +67,7 @@ public class ShowRangeFeature extends ToggleableFeature {
 						offset = 3;
 					}
 					case EX_AYAHUASCA_FLASK, UT_AYAHUASCA_FLASK -> radius = 8;
+					case UT_MALICE, EX_MALICE -> radius = 6;
 					default -> radius = parseRadius(itemToCheck);
 
 				}
