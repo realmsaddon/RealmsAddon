@@ -7,6 +7,7 @@ import io.wispforest.owo.ui.component.LabelComponent;
 import io.wispforest.owo.ui.component.TextBoxComponent;
 import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.Color;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -63,9 +64,10 @@ public class SettingsTab extends BaseUIModelScreen<FlowLayout> {
                     var eventSrc = textBox.onChanged();
                     eventSrc.subscribe((input)->{
                         try {
-                            int color = SerializeUtils.parseHexRGB(input);
+                            int color = 0xFF000000 | SerializeUtils.parseHexRGB(input);
                             CONFIG.menuColor(color);
                         } catch (Exception e) {
+                            TelosAddon.LOGGER.error(e.getLocalizedMessage());
                             TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
                         }
                     });
@@ -73,27 +75,27 @@ public class SettingsTab extends BaseUIModelScreen<FlowLayout> {
 
         rootComponent.childById(DropdownComponent.class, "ChangeFontDropdown")
 
-                .button(Text.of("Nokia CF"),
+                .button(Text.of("Nokia CF").getWithStyle(Style.EMPTY).getFirst(),
                         (button)->{
                             CONFIG.font("nokiacf") ;
                         })
-                .button(Text.of("Roboto"),
+                .button(Text.of("Roboto").getWithStyle(Style.EMPTY).getFirst(),
                         (dropdown)->{
                             CONFIG.font("roboto") ;
                 })
-                .button(Text.of("Silkscreen"),
+                .button(Text.of("Silkscreen").getWithStyle(Style.EMPTY).getFirst(),
                         (dropdown)->{
                             CONFIG.font("silkscreen");
                 })
-                .button(Text.of("Arial"),
+                .button(Text.of("Arial").getWithStyle(Style.EMPTY).getFirst(),
                         (dropdown)->{
                             CONFIG.font("arial");
                         })
-                .button(Text.of("Comic Sans"),
+                .button(Text.of("Comic Sans").getWithStyle(Style.EMPTY).getFirst(),
                         (dropdown)->{
                             CONFIG.font("comic_sans");
                         })
-                .button(Text.of("Default"),
+                .button(Text.of("Default").getWithStyle(Style.EMPTY).getFirst(),
                         (dropdown)->{
                             CONFIG.font("default");
                         });;

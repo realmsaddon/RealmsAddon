@@ -39,7 +39,6 @@ public class WaypointRenderer{
         WorldRenderEvents.END.register(RENDER_IDENTIFIER, WaypointRenderer::render);
     }
 
-
     public static Vec3d calculateRenderCoords(BlockPos waypoint, Camera camera, float distance) {
         double cameraX = (float)camera.getPos().x;
         double cameraY = (float)camera.getPos().y;
@@ -90,7 +89,6 @@ public class WaypointRenderer{
 
             double distance = Math.sqrt(squaredDistance);
 
-            //System.out.println("local displacement: " + x + " " + y + " " + z);
             Vec3d renderCoords = calculateRenderCoords(waypoint, camera, (int) distance);
 
             matrixStack.push();
@@ -109,14 +107,12 @@ public class WaypointRenderer{
             int tooclosedist = 30;
             var lerp = clamp((float) (distance - 15)/tooclosedist , 0.1F , 1F);
             var fade = (int)(lerp * 255F);
-            //System.out.println(fade);
+
             int colorcode = new Color(255,255,255, (fade)).getRGB();
             int backgroundColorCode = new Color(0,0,0, (int) (fade * 0.3)).getRGB();
 
             String waypointString = bossData.getLabel() + " (" +  (int) distance + "m" + ")";
-//            RenderSystem.depthMask(false);
-//            RenderSystem.disableCull();
-//            RenderSystem.disableBlend();
+
             textRenderer.draw(
                     Text.of(waypointString),
                     -textRenderer.getWidth(bossData.getLabel()) / 2.0F,
@@ -145,9 +141,7 @@ public class WaypointRenderer{
             }
 
             //todo: render the boss icon
-//            RenderSystem.depthMask(true);
-//            RenderSystem.enableCull();
-//            RenderSystem.enableBlend();
+
             matrixStack.pop();
 
         }

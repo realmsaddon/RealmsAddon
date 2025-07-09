@@ -55,7 +55,7 @@ public class RangeTab extends BaseUIModelScreen<FlowLayout> {
                             CONFIG.showMainRangeFeatureViewType(ShowRangeFeature.RangeViewType.BOTH);
                         });
         rootComponent.childById(TextBoxComponent.class, "MainHandColorField")
-                .text(Color.ofRgb(CONFIG.showMainRangeFeatureColor()).asHexString(true))
+                .text(Color.ofRgb(CONFIG.showMainRangeFeatureColor()).asHexString(false))
                 .<TextBoxComponent>configure(textBox -> {
                     var eventSrc = textBox.onChanged();
                     eventSrc.subscribe((input)->{
@@ -63,7 +63,8 @@ public class RangeTab extends BaseUIModelScreen<FlowLayout> {
                             int color = 0xFF000000 | SerializeUtils.parseHexRGB(input);
                             CONFIG.showMainRangeFeatureColor(color);
                         } catch (Exception e) {
-                            TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
+                            TelosAddon.LOGGER.error(e.getMessage());
+                            TelosAddon.getInstance().sendMessage("Wrong Format! Use #RRGGBB!");
                         }
                     });
                 });
@@ -105,7 +106,8 @@ public class RangeTab extends BaseUIModelScreen<FlowLayout> {
                             int color = 0xFF000000 | SerializeUtils.parseHexRGB(input);
                             CONFIG.showOffHandRangeFeatureColor(color);
                         } catch (Exception e) {
-                            TelosAddon.getInstance().sendMessage("Wrong Format! Use #AARRGGBB!");
+                            TelosAddon.LOGGER.error(e.getMessage());
+                            TelosAddon.getInstance().sendMessage("Wrong Format! Use #RRGGBB!");
                         }
                     });
                 });

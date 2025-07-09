@@ -314,4 +314,9 @@ public enum BossData {
             return Optional.empty();
         }
     }
+
+    @Override
+    public String toString(){
+        return label;
+    }
 }

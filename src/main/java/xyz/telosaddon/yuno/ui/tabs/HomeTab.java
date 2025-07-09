@@ -89,5 +89,9 @@ public class HomeTab extends BaseUIModelScreen<FlowLayout> {
         rootComponent.childById(CheckboxComponent.class, "DungeonTimerSetting")
                 .checked(CONFIG.dungeonTimerSetting())
                 .onChanged(CONFIG::dungeonTimerSetting);
+
+        rootComponent.childById(CheckboxComponent.class, "HealthBarSetting")
+                .checked(CONFIG.healthBarSetting())
+                .onChanged(CONFIG::healthBarSetting);
     }
 }

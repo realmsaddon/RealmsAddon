@@ -130,11 +130,6 @@ public class CircleRenderer implements IRenderer{
 							.lineWidth(RenderPhase.FULL_LINE_WIDTH)
 							.layering(VIEW_OFFSET_Z_LAYERING)
 							.target(ITEM_ENTITY_TARGET)
-							//.program(POSITION_COLOR_PROGRAM)
-
-							//.transparency(NO_TRANSPARENCY)
-
-							//.writeMaskState(ALL_MASK)
 							.build(false)
 			);
 		}

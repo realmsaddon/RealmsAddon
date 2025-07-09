@@ -155,7 +155,12 @@
                                     <horizontal method="fixed">150</horizontal>
                                 </sizing>
                             </checkbox>
-
+                            <checkbox id="HealthBarSetting">
+                                <text>Show Health Bar</text>
+                                <sizing>
+                                    <horizontal method="fixed">150</horizontal>
+                                </sizing>
+                            </checkbox>
                     </children>
 
                     <padding><all>10</all></padding>

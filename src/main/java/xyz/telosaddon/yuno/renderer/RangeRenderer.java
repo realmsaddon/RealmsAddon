@@ -16,8 +16,8 @@ public class RangeRenderer {
 	private static final Identifier RENDER_IDENTIFIER = Identifier.of("showtelosrange", "range_draw");
 
 	public static void init() {
-		WorldRenderEvents.AFTER_TRANSLUCENT.addPhaseOrdering(Event.DEFAULT_PHASE, RENDER_IDENTIFIER);
-		WorldRenderEvents.AFTER_TRANSLUCENT.register(RENDER_IDENTIFIER, RangeRenderer::draw);
+		WorldRenderEvents.LAST.addPhaseOrdering(Event.DEFAULT_PHASE, RENDER_IDENTIFIER);
+		WorldRenderEvents.LAST.register(RENDER_IDENTIFIER, RangeRenderer::draw);
 	}
 
 	private static void draw(WorldRenderContext context) {
