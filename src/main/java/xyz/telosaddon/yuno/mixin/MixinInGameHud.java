@@ -85,7 +85,7 @@ public abstract class MixinInGameHud {
         if(CONFIG.noWhiteRunSetting() || isEditMode)
             bagTexts.add("No Royal Runs§7: §f" + CONFIG.noWhiteRuns());
         if(CONFIG.noBlackRunSetting() || isEditMode)
-            bagTexts.add("No Bloodshot Runs§7: §f" + CONFIG.noBlackRuns());
+            bagTexts.add("No BShot Runs§7: §f" + CONFIG.noBlackRuns());
 
         int bagY = CONFIG.bagY();
         int bagX = CONFIG.bagX();
