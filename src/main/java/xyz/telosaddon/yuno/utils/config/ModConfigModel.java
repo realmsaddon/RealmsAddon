@@ -14,6 +14,7 @@ public class ModConfigModel {
     public String modVersion = "v0.4.1";
 
     public int greenBags = 0;
+    public int gildeds = 0;
     public int goldBags = 0;
     public int whiteBags = 0;
     public int blackBags = 0;
