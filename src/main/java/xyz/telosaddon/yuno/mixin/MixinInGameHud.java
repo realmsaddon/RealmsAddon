@@ -68,8 +68,6 @@ public abstract class MixinInGameHud {
             bagTexts.add("Irradiateds§7: §f" + CONFIG.greenBags());
         if(CONFIG.goldSetting() || isEditMode)
             bagTexts.add("Companions§7: §f" + CONFIG.goldBags());
-        if(CONFIG.gildedSetting() || isEditMode)
-            bagTexts.add("Gilded§7: §f" + CONFIG.gildeds());
         if(CONFIG.whiteSetting() || isEditMode)
             bagTexts.add("Royals§7: §f" + CONFIG.whiteBags());
         if(CONFIG.blackSetting()|| isEditMode)
