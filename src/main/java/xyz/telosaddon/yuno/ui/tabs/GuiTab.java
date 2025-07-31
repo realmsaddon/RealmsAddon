@@ -41,6 +41,9 @@ public class GuiTab extends BaseUIModelScreen<FlowLayout> {
         rootComponent.childById(CheckboxComponent.class, "GreenSetting")
                 .checked(CONFIG.greenSetting())
                 .onChanged(CONFIG::greenSetting);
+        rootComponent.childById(CheckboxComponent.class, "GildedSetting")
+                .checked(CONFIG.gildedSetting())
+                .onChanged(CONFIG::gildedSetting);
 
         rootComponent.childById(CheckboxComponent.class, "GoldSetting")
                 .checked(CONFIG.goldSetting())
