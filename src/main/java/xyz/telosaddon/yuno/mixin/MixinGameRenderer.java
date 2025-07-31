@@ -51,7 +51,7 @@ public abstract class MixinGameRenderer {
                     soundManager.playSound("black_bag");
 
             }
-            case "entity/pouch/companion_totem  " -> CONFIG.goldBags(CONFIG.goldBags() + 1);
+            case "entity/pouch/companion  " -> CONFIG.goldBags(CONFIG.goldBags() + 1);
             case "entity/pouch/unholy_totem"  -> CONFIG.crosses(CONFIG.crosses() + 1);
             case "entity/pouch/halloween_totem","entity/pouch/valentine_totem", "entity/pouch/christmas_totem" -> {CONFIG.eventBags(CONFIG.eventBags() + 1);}
             case "entity/pouch/voidbound_totem" -> CONFIG.relics(CONFIG.relics() + 1);
