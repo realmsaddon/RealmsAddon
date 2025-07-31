@@ -41,6 +41,7 @@ public class ModConfigModel {
     public int bagY = 60;
 
     public boolean greenSetting = false;
+    public boolean gildedSetting = false;
     public boolean goldSetting = false;
     public boolean whiteSetting = false;
     public boolean blackSetting = false;
