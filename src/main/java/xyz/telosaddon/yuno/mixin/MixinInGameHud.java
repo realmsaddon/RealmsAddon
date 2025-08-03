@@ -65,17 +65,17 @@ public abstract class MixinInGameHud {
 
         List<String> bagTexts = new ArrayList<>();
         if(CONFIG.greenSetting() || isEditMode)
-            bagTexts.add("Green Bags§7: §f" + CONFIG.greenBags());
+            bagTexts.add("Irradiateds§7: §f" + CONFIG.greenBags());
         if(CONFIG.goldSetting() || isEditMode)
-            bagTexts.add("Gold Bags§7: §f" + CONFIG.goldBags());
+            bagTexts.add("Companions§7: §f" + CONFIG.goldBags());
         if(CONFIG.whiteSetting() || isEditMode)
-            bagTexts.add("White Bags§7: §f" + CONFIG.whiteBags());
+            bagTexts.add("Royals§7: §f" + CONFIG.whiteBags());
         if(CONFIG.blackSetting()|| isEditMode)
-            bagTexts.add("Black Bags§7: §f" + CONFIG.blackBags());
+            bagTexts.add("Bloodshots§7: §f" + CONFIG.blackBags());
         if(CONFIG.eventSetting() || isEditMode)
             bagTexts.add("Event Bags§7: §f" + CONFIG.eventBags());
         if(CONFIG.crossSetting() || isEditMode)
-            bagTexts.add("Crosses§7: §f" + CONFIG.crosses());
+            bagTexts.add("Unholy§7: §f" + CONFIG.crosses());
         if(CONFIG.relicSetting() || isEditMode)
             bagTexts.add("Voidbounds§7: §f" + CONFIG.relics());
         if(CONFIG.runesSetting() || isEditMode)
@@ -83,9 +83,9 @@ public abstract class MixinInGameHud {
         if(CONFIG.totalRunSetting() || isEditMode)
             bagTexts.add("Total Runs§7: §f" + CONFIG.totalRuns());
         if(CONFIG.noWhiteRunSetting() || isEditMode)
-            bagTexts.add("No Whites Runs§7: §f" + CONFIG.noWhiteRuns());
+            bagTexts.add("No Royal Runs§7: §f" + CONFIG.noWhiteRuns());
         if(CONFIG.noBlackRunSetting() || isEditMode)
-            bagTexts.add("No Black Runs§7: §f" + CONFIG.noBlackRuns());
+            bagTexts.add("No BShot Runs§7: §f" + CONFIG.noBlackRuns());
 
         int bagY = CONFIG.bagY();
         int bagX = CONFIG.bagX();
