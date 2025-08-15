@@ -40,7 +40,7 @@ public class MixinMessageHandler {
     private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
     private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at");
     private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Raph's Castle has opened at");
-    private static final List<String> BS_Boss=Arrays.asList("Kurvaros","Shadowflare","Valerion","Nebula","Prismara","Omnipotent","Silex","Chronos","Warden","Herald","Reaper","Defender","Asmodeus","Seraphim","Raphael");
+    private static final List<String> BS_Boss=Arrays.asList("Silvaris","Voided Omnipotent","Kurvaros","Shadowflare","Valerion","Nebula","Prismara","Omnipotent","Silex","Chronos","Warden","Herald","Reaper","Defender","Asmodeus","Seraphim","Raphael");
     @Inject(method = "method_45745", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/ChatHud;addMessage(Lnet/minecraft/text/Text;)V"))
     private void onDisguisedChatLambda(MessageType.Parameters parameters, Text text, Instant instant, CallbackInfoReturnable<Boolean> cir) {
         onChat(text);
@@ -106,6 +106,7 @@ public class MixinMessageHandler {
             if (BossData.findByKey(s.trim()).isPresent()){
                 LOGGER.info("(BossDefeatedEvent) boss " + s.trim()  + " has been defeated");
                 BossDefeatedEventHandler.EVENT.invoker().onBossDefeated(BossData.findByKey(s.trim()).get());
+
                 CONFIG.totalRuns(CONFIG.totalRuns() + 1);  //incrementing after killing a boss
                 CONFIG.noWhiteRuns(CONFIG.noWhiteRuns() + 1); //increments for any boss
                 if(BS_Boss.contains(s.trim())){ //checks if boss can drop BS
