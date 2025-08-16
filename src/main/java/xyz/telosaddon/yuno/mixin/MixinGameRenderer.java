@@ -10,9 +10,12 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.mojang.authlib.minecraft.client.MinecraftClient;
+
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.sound.SoundManager;
-
+import xyz.telosaddon.yuno.features.BagTrackerFeature;
 
 import java.util.Objects;
 
@@ -36,17 +39,15 @@ public abstract class MixinGameRenderer {
         switch (cmd.getPath()) {
             case "entity/pouch/royal_totem" -> {
                 CONFIG.whiteBags(CONFIG.whiteBags() + 1);
-
                 CONFIG.noWhiteRuns(0);
-
                 if(soundSetting)
                     soundManager.playSound("white_bag");
 
             }
             case "entity/pouch/bloodshot_totem" -> {
                 CONFIG.blackBags(CONFIG.blackBags() + 1);
-                CONFIG.noBlackRuns(0);
-
+                
+                BagTrackerFeature.resetBlackBagPitty();    
                 if(soundSetting)
                     soundManager.playSound("black_bag");
 

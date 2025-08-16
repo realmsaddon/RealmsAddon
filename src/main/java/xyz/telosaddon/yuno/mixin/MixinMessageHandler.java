@@ -20,6 +20,7 @@ import xyz.telosaddon.yuno.event.api.realm.BossDefeatedEventHandler;
 import xyz.telosaddon.yuno.event.api.realm.BossSpawnedEventHandler;
 import xyz.telosaddon.yuno.event.api.realm.RaphPortalSpawnedEventHandler;
 import xyz.telosaddon.yuno.event.api.realm.WorldBossDefeatedEventHandler;
+import xyz.telosaddon.yuno.features.BagTrackerFeature;
 import xyz.telosaddon.yuno.features.Features;
 import xyz.telosaddon.yuno.utils.data.BossData;
 
@@ -106,11 +107,13 @@ public class MixinMessageHandler {
             if (BossData.findByKey(s.trim()).isPresent()){
                 LOGGER.info("(BossDefeatedEvent) boss " + s.trim()  + " has been defeated");
                 BossDefeatedEventHandler.EVENT.invoker().onBossDefeated(BossData.findByKey(s.trim()).get());
-
+                
                 CONFIG.totalRuns(CONFIG.totalRuns() + 1);  //incrementing after killing a boss
                 CONFIG.noWhiteRuns(CONFIG.noWhiteRuns() + 1); //increments for any boss
                 if(BS_Boss.contains(s.trim())){ //checks if boss can drop BS
-                    CONFIG.noBlackRuns(CONFIG.noBlackRuns() + 1);}
+                    BagTrackerFeature.blackBagPittyCounter(s.trim());
+                    //CONFIG.noBlackRuns(CONFIG.noBlackRuns() + 1);
+                    }
             }
         }
         if(!s.equals("===============================================")) return;

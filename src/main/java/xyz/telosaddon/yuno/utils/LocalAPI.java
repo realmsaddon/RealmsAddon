@@ -27,7 +27,7 @@ public class LocalAPI {
     private static boolean countdownLock = false;
     private static String currentPortalCall = "";
     private static int currentPortalCallTime = 0;
-
+    
     public static void updateAPI(){
         CompletableFuture.runAsync(() -> {
                 if (!TelosAddon.getInstance().isOnTelos()) return;
@@ -74,44 +74,49 @@ public class LocalAPI {
                 currentCharacterArea = area.replaceAll("[^a-zA-z ']+", ""); // idk why but theres numbers at the end so we gotta trim that off
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
-                // LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
+                try{
+                    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" " + bossBar.getName().getLiteralString() +" " + bossBar.getName().getString()); // keep this until i can fill out all the bosses
+                    Thread.sleep(1000);
+                }
+                catch (Throwable e) {
+                    LOGGER.warn("Some error " + e );
+                    
+                }
                 lastKnownBoss = currentCharacterFighting;
                 switch (bossBar.getName().hashCode()){
-                    case -1083980771 -> currentCharacterFighting = "Chungus";
-                    case 452824575 -> currentCharacterFighting = "Illarius";
-                    case 2125535338 -> currentCharacterFighting = "Astaroth";
-                    case -1083975966 -> currentCharacterFighting = "Glumi";
-                    case 2125159587 -> currentCharacterFighting = "Lotil";
-                    case 453134978 -> currentCharacterFighting = "Tidol";
-                    case 1757112170 -> currentCharacterFighting = "Valus";
-                    case 1472054207 -> currentCharacterFighting = "Oozul";
-                    case 2035818623 -> currentCharacterFighting = "Freddy";
-                    case -1258344668 -> currentCharacterFighting = "Anubis";
+                    //if they have a comment , it means its updated as of 16th August 2025
+                    case -168181711 -> currentCharacterFighting = "Chungus";//-168181711
+                    case 1368623635 -> currentCharacterFighting = "Illarius";//1368623635
+                    case -1253632898 -> currentCharacterFighting = "Astaroth";//-1253632898
+                    case -168176906 -> currentCharacterFighting = "Glumi";//-168176906
+                    case -1254008649 -> currentCharacterFighting = "Lotil";//-1254008649
+                    case 453134978 -> currentCharacterFighting = "Tidol";//
+                    case -1622056066 -> currentCharacterFighting = "Valus";//-1622056066
+                    case -1907114029 -> currentCharacterFighting = "Oozul";//-1907114029
+                    case 2035818623 -> currentCharacterFighting = "Freddy";//
+                    case -342545608 -> currentCharacterFighting = "Anubis";//-342545608
                     case -1240191621 -> currentCharacterFighting = "Hollowbane";
                     case -1048713371 -> currentCharacterFighting = "Claus";
-
-                    case 908391166 -> currentCharacterFighting = "Shadowflare";
+                    case 1824190226 -> currentCharacterFighting = "Shadowflare";//1824190226
                     case 1996713601 -> currentCharacterFighting = "Loa";
                     case -1048545196 -> currentCharacterFighting = "Valerion";
-                    // insert astaroth bosses here
-                    case -1624135070 -> currentCharacterFighting = "Prismara";
-                    case 2125160548 -> currentCharacterFighting = "Omnipotent";
+                    //case xxx -> currentCharacterFighting = "Nebula";
+                    //case xxx -> currentCharacterFighting = "Ophanim";
+                    case -708336010 -> currentCharacterFighting = "Prismara";//-708336010
+                    case -1254007688 -> currentCharacterFighting = "Omnipotent";//-1254007688
                     case 1757423534 -> currentCharacterFighting = "Thalassar";
-                    case 1735775594 -> currentCharacterFighting = "Silex";
-                    case -624873662 -> currentCharacterFighting = "Chronos";
+                    case -1643392642 -> currentCharacterFighting = "Silex";//-1643392642
+                    case 290925398 -> currentCharacterFighting = "Chronos";//290925398
                     case -1338784736 -> currentCharacterFighting = "Golden Freddy";
-                    case -1258333136 -> currentCharacterFighting = "Kurvaros";
-
+                    case -342534076 -> currentCharacterFighting = "Kurvaros";//-342534076
                     case 2008511319 -> currentCharacterFighting = "Warden";
                     case 2008512280 -> currentCharacterFighting = "Herald";
                     case 2008513241 -> currentCharacterFighting = "Reaper";
                     case 2008514202 -> currentCharacterFighting = "Defender";
                     case 1757100638 -> currentCharacterFighting = "Asmodeus";
                     case 1735762140 -> currentCharacterFighting = "Seraphim";
-
-                    case 1216094805 -> currentCharacterFighting = "Onyx Castle";
-                    case 1757905956 -> currentCharacterFighting = "Onyx";
-
+                    case 2131893865 -> currentCharacterFighting = "Raphael's Castle";//2131893865
+                    case 254038329 -> currentCharacterFighting = "Raphael";//254038329
                     case -1083171609 -> currentCharacterFighting = "Pirate's Cove";
                     case 1997519880 -> currentCharacterFighting = "Thornwood Wargrove";
                     default -> currentCharacterFighting = "";
@@ -133,7 +138,7 @@ public class LocalAPI {
                         case "Freddy" -> currentPortalCall = "pizza";
                         case "Anubis" -> currentPortalCall = "alair";
                         case "Defender" -> currentPortalCall = "cprov";
-
+                
                         default -> currentPortalCall = "";
                     }
                     lastKnownBoss = "";
@@ -154,11 +159,11 @@ public class LocalAPI {
                         }
                         currentPortalCall = "";
                         countdownLock = false;
-
+                
                     });
                 }
-
-
+                
+                
 
             }
         }

@@ -83,4 +83,22 @@ public class ModConfigModel {
     public boolean dungeonTimerSetting = true;
 
     public boolean healthBarSetting = true;
+    //BS pitty counter
+    public int Silvaris=0;
+    public int Voided_Omnipotent=0;
+    public int Kurvaros=0;
+    public int Shadowflare=0;
+    public int Valerion=0;
+    public int Nebula=0;
+    public int Prismara=0;
+    public int Omnipotent=0;
+    public int Silex=0;
+    public int Chronos=0;
+    public int Warden=0;
+    public int Herald=0;
+    public int Reaper=0;
+    public int Defender=0;
+    public int Asmodeus=0;
+    public int Seraphim=0;
+    public int Raphael=0;
 }
