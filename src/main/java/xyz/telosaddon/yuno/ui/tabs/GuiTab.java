@@ -90,9 +90,9 @@ public class GuiTab extends BaseUIModelScreen<FlowLayout> {
         
         
         //Pitty counting
-        rootComponent.childById(CheckboxComponent.class, "Silvaris")
-                .checked(CONFIG.SilvarisSetting())
-                .onChanged(CONFIG::SilvarisSetting);
+        rootComponent.childById(CheckboxComponent.class, "Sylvaris")
+                .checked(CONFIG.SylvarisSetting())
+                .onChanged(CONFIG::SylvarisSetting);
         rootComponent.childById(CheckboxComponent.class, "VoidedOmnipotent")
                         .checked(CONFIG.VoidedOmnipotentSetting())
                         .onChanged(CONFIG::VoidedOmnipotentSetting);

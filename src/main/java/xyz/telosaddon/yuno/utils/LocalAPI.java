@@ -74,14 +74,10 @@ public class LocalAPI {
                 currentCharacterArea = area.replaceAll("[^a-zA-z ']+", ""); // idk why but theres numbers at the end so we gotta trim that off
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
-                //try{
-                //    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" " + bossBar.getName().getLiteralString() +" " + bossBar.getName().getString()); // keep this until i can fill out all the bosses
-                //    Thread.sleep(1000);
-                //}
-                //catch (Throwable e) {
-                //    LOGGER.warn("Some error " + e );
-                //    
-                //}
+        
+                //LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" " + bossBar.getName().getLiteralString() +" " + bossBar.getName().getString()); // keep this until i can fill out all the bosses
+                
+               
                 lastKnownBoss = currentCharacterFighting;
                 switch (bossBar.getName().hashCode()){
                     //if they have a number in comment , it means its updated as of 16th August 2025
@@ -109,16 +105,16 @@ public class LocalAPI {
                     case 290925398 -> currentCharacterFighting = "Chronos";//290925398
                     case -1338784736 -> currentCharacterFighting = "Golden Freddy";
                     case -342534076 -> currentCharacterFighting = "Kurvaros";//-342534076
-                    case 2008511319 -> currentCharacterFighting = "Warden";
-                    case 2008512280 -> currentCharacterFighting = "Herald";
-                    case 2008513241 -> currentCharacterFighting = "Reaper";
-                    case 2008514202 -> currentCharacterFighting = "Defender";
-                    case 1757100638 -> currentCharacterFighting = "Asmodeus";
-                    case 1735762140 -> currentCharacterFighting = "Seraphim";
+                    case -1370656917 -> currentCharacterFighting = "Warden";//-1370656917
+                    case -1370655956 -> currentCharacterFighting = "Herald";//-1370655956
+                    case -1370654995 -> currentCharacterFighting = "Reaper";//-1370654995
+                    case -1370654034 -> currentCharacterFighting = "Defender";//-1370654034
+                    case -1622067598 -> currentCharacterFighting = "Asmodeus";//-1622067598
+                    case -1643406096 -> currentCharacterFighting = "Seraphim";//-1643406096
                     case 2131893865 -> currentCharacterFighting = "Raphael's Castle";//2131893865
                     case 254038329 -> currentCharacterFighting = "Raphael";//254038329
                     case -1083171609 -> currentCharacterFighting = "Pirate's Cove";
-                    case 1997519880 -> currentCharacterFighting = "Thornwood Wargrove";
+                    case 230903377 -> currentCharacterFighting = "Sylvaris";//230903377
                     case -1253581965 -> currentCharacterFighting = "Voided Omnioptent";//-1253581965
                     default -> currentCharacterFighting = "";
                 }

@@ -87,7 +87,7 @@ public class ModConfigModel {
 
     public boolean healthBarSetting = true;
     //BS pitty setting
-    public boolean SilvarisSetting=false;
+    public boolean SylvarisSetting=false;
     public boolean VoidedOmnipotentSetting=false;
     public boolean KurvarosSetting=false;
     public boolean ShadowflareSetting=false;
@@ -107,7 +107,7 @@ public class ModConfigModel {
     public boolean OphanimSetting=false;
 
     //BS pitty counter
-    public int Silvaris=0;
+    public int Sylvaris=0;
     public int Voided_Omnipotent=0;
     public int Kurvaros=0;
     public int Shadowflare=0;

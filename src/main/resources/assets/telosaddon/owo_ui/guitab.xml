@@ -147,13 +147,13 @@
                                     </sizing>
                                 </checkbox>
                                 <checkbox id="VoidedOmnipotent">
-                                    <text>Voided Omnipotentr</text>
+                                    <text>Voided Omnipotent</text>
                                     <sizing>
                                         <horizontal method="fixed">150</horizontal>
                                     </sizing>
                                 </checkbox>
-                                <checkbox id="Silvaris">
-                                    <text>Silvaris Pitty</text>
+                                <checkbox id="Sylvaris">
+                                    <text>Sylvaris </text>
                                     <sizing>
                                         <horizontal method="fixed">150</horizontal>
                                     </sizing>

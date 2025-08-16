@@ -62,8 +62,8 @@ public abstract class MixinInGameHud {
         boolean spawnBossesSetting = CONFIG.bossTrackerFeatureEnabled();
 
         List<String> pittybagTexts = new ArrayList<>();
-        if(CONFIG.SilvarisSetting() || isEditMode)
-            pittybagTexts.add("Silvaris§7: §f" + CONFIG.Silvaris());
+        if(CONFIG.SylvarisSetting() || isEditMode)
+            pittybagTexts.add("Sylvaris§7: §f" + CONFIG.Sylvaris());
         if(CONFIG.VoidedOmnipotentSetting() || isEditMode)
             pittybagTexts.add("Voided Omnipotent§7: §f" + CONFIG.Voided_Omnipotent());
         if(CONFIG.KurvarosSetting() || isEditMode)

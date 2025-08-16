@@ -30,7 +30,7 @@ public class BagTrackerFeature {
         LOGGER.info(boss);
         LOGGER.info("(Bag event counter) boss " + boss  + " Dropped a bag");
         switch(boss){
-            case "Silvaris" -> CONFIG.Silvaris(0) ;
+            case "Sylvaris" -> CONFIG.Sylvaris(0) ;
             case "Voided Omnipotent" -> CONFIG.Voided_Omnipotent(0) ;
             case "Kurvaros" -> CONFIG.Kurvaros(0) ;
             case "Shadowflare" -> CONFIG.Shadowflare(0) ;
@@ -64,7 +64,7 @@ public class BagTrackerFeature {
         boss=LocalAPI.getCurrentCharacterFighting();
         LOGGER.info("(BagPittyEvent) boss " + boss  + " did not drop a bag");
         switch(boss_name){
-            case "Silvaris" -> CONFIG.Silvaris(CONFIG.Silvaris()+1) ;
+            case "Sylvaris" -> CONFIG.Sylvaris(CONFIG.Sylvaris()+1) ;
             case "Voided Omnipotent" -> CONFIG.Voided_Omnipotent(CONFIG.Voided_Omnipotent()+1) ;
             case "Kurvaros" -> CONFIG.Kurvaros(CONFIG.Kurvaros()+1) ;
             case "Shadowflare" -> CONFIG.Shadowflare(CONFIG.Shadowflare()+1) ;
