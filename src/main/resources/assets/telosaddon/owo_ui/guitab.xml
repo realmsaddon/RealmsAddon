@@ -56,84 +56,213 @@
                         </button>
                     </children>
                 </flow-layout> <!--Tab buttons-->
-                <flow-layout direction="vertical">
+                <scroll direction="vertical">
+                <flow-layout direction="horizontal">
                     <children>
-                        <checkbox id="GreenSetting">
-                            <text>GreenBag Counter</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="GoldSetting">
-                            <text>GoldBag Counter</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="WhiteSetting">
-                            <text>WhiteBag Counter</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="BlackSetting">
-                            <text>BlackBag Counter</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="EventSetting">
-                            <text>EventBag Counter</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="CrossSetting">
-                            <text>Cross Counter</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="RelicSetting">
-                            <text>Voidbound Counter</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="RunesSetting">
-                            <text>Runes Counter</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="TotalRunSetting">
-                            <text>Total Boss Runs</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="NoWhiteRunSetting">
-                            <text>No Whites Runs</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="NoBlackRunSetting">
-                            <text>No Black Runs</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
-                        <checkbox id="LifetimeSetting">
-                            <text>Lifetime Counter</text>
-                            <sizing>
-                                <horizontal method="fixed">150</horizontal>
-                            </sizing>
-                        </checkbox>
+                        <flow-layout direction="vertical">
+                            <children>
+                                <checkbox id="GreenSetting">
+                                    <text>GreenBag Counter</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="GoldSetting">
+                                    <text>GoldBag Counter</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="WhiteSetting">
+                                    <text>WhiteBag Counter</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="BlackSetting">
+                                    <text>BlackBag Counter</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="EventSetting">
+                                    <text>EventBag Counter</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="CrossSetting">
+                                    <text>Cross Counter</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="RelicSetting">
+                                    <text>Voidbound Counter</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="RunesSetting">
+                                    <text>Runes Counter</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="TotalRunSetting">
+                                    <text>Total Boss Runs</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="NoWhiteRunSetting">
+                                    <text>No Whites Runs</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="NoBlackRunSetting">
+                                    <text>No Black Runs</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="LifetimeSetting">
+                                    <text>Lifetime Counter</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                            </children>
+                        </flow-layout>
+                        <flow-layout direction="vertical">
+                            <children>
+                                <label>
+                                    <text>Blood Shot Pitty</text>
+                                </label>
+                                <checkbox id="Omnipotent">
+                                    <text>Omnipotent</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="VoidedOmnipotent">
+                                    <text>Voided Omnipotentr</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Silvaris">
+                                    <text>Silvaris Pitty</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Kurvaros">
+                                    <text>Kurvaros</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Shadowflare">
+                                    <text>Shadowflare</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Valerion">
+                                    <text>Valerion</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Nebula">
+                                    <text>Nebula</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Prismara">
+                                    <text>Prismara</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Silex">
+                                    <text>Silex</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Chronos">
+                                    <text>Chronos</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Warden">
+                                    <text>Warden</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Herald">
+                                    <text>Herald</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Reaper">
+                                    <text>Reaper</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Defender">
+                                    <text>Defender</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Asmodeus">
+                                    <text>Asmodeus</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Seraphim">
+                                    <text>Seraphim</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Raphael">
+                                    <text>Raphael</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Ophanim">
+                                    <text>Ophanim</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                            </children>
+                        </flow-layout>
                     </children>
-
-                    <padding><all>10</all></padding>
+                <padding><all>10</all></padding>
                 </flow-layout>
+                <scrollbar-thiccness>10</scrollbar-thiccness>
+                <scrollbar-color>#ff0000</scrollbar-color>
+                <padding>
+                    <all>10</all>
+                </padding>
+                <sizing>
+                    <vertical method="fill">90</vertical>
+                    <horizontal method="fill">90</horizontal>
+                </sizing>
+                </scroll>
             </children>
             <surface>
                 <vanilla-translucent/>

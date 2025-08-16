@@ -41,7 +41,7 @@ public class MixinMessageHandler {
     private static final Pattern BOSS_DEFEATED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has been defeated");
     private static final Pattern BOSS_SPAWNED_MESSAGE_PATTERN = Pattern.compile("^(\\w+) has spawned at");
     private static final Pattern ONYX_PORTAL_OPEN_MESSAGE_PATTERN = Pattern.compile("^A portal to Raph's Castle has opened at");
-    private static final List<String> BS_Boss=Arrays.asList("Silvaris","Voided Omnipotent","Kurvaros","Shadowflare","Valerion","Nebula","Prismara","Omnipotent","Silex","Chronos","Warden","Herald","Reaper","Defender","Asmodeus","Seraphim","Raphael");
+    private static final List<String> BS_Boss=Arrays.asList("Silvaris","Voided Omnipotent","Kurvaros","Shadowflare","Valerion","Nebula","Prismara","Omnipotent","Silex","Chronos","Warden","Herald","Reaper","Defender","Asmodeus","Seraphim","Raphael","Ophanim");
     @Inject(method = "method_45745", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/ChatHud;addMessage(Lnet/minecraft/text/Text;)V"))
     private void onDisguisedChatLambda(MessageType.Parameters parameters, Text text, Instant instant, CallbackInfoReturnable<Boolean> cir) {
         onChat(text);

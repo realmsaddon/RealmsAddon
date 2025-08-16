@@ -87,5 +87,62 @@ public class GuiTab extends BaseUIModelScreen<FlowLayout> {
         rootComponent.childById(CheckboxComponent.class, "LifetimeSetting")
                 .checked(CONFIG.lifetimeSetting())
                 .onChanged(CONFIG::lifetimeSetting);
+        
+        
+        //Pitty counting
+        rootComponent.childById(CheckboxComponent.class, "Silvaris")
+                .checked(CONFIG.SilvarisSetting())
+                .onChanged(CONFIG::SilvarisSetting);
+        rootComponent.childById(CheckboxComponent.class, "VoidedOmnipotent")
+                        .checked(CONFIG.VoidedOmnipotentSetting())
+                        .onChanged(CONFIG::VoidedOmnipotentSetting);
+        rootComponent.childById(CheckboxComponent.class, "Kurvaros")
+                        .checked(CONFIG.KurvarosSetting())
+                        .onChanged(CONFIG::KurvarosSetting);
+        rootComponent.childById(CheckboxComponent.class, "Shadowflare")
+                        .checked(CONFIG.ShadowflareSetting())
+                        .onChanged(CONFIG::ShadowflareSetting);
+        rootComponent.childById(CheckboxComponent.class, "Valerion")
+                        .checked(CONFIG.ValerionSetting())
+                        .onChanged(CONFIG::ValerionSetting);
+        rootComponent.childById(CheckboxComponent.class, "Nebula")
+                        .checked(CONFIG.NebulaSetting())
+                        .onChanged(CONFIG::NebulaSetting);
+        rootComponent.childById(CheckboxComponent.class, "Prismara")
+                        .checked(CONFIG.PrismaraSetting())
+                        .onChanged(CONFIG::PrismaraSetting);
+        rootComponent.childById(CheckboxComponent.class, "Omnipotent")
+                        .checked(CONFIG.OmnipotentSetting())
+                        .onChanged(CONFIG::OmnipotentSetting);
+        rootComponent.childById(CheckboxComponent.class, "Silex")
+                        .checked(CONFIG.SilexSetting())
+                        .onChanged(CONFIG::SilexSetting);
+        rootComponent.childById(CheckboxComponent.class, "Chronos")
+                        .checked(CONFIG.ChronosSetting())
+                        .onChanged(CONFIG::ChronosSetting);
+        rootComponent.childById(CheckboxComponent.class, "Warden")
+                        .checked(CONFIG.WardenSetting())
+                        .onChanged(CONFIG::WardenSetting);
+        rootComponent.childById(CheckboxComponent.class, "Herald")
+                        .checked(CONFIG.HeraldSetting())
+                        .onChanged(CONFIG::HeraldSetting);
+        rootComponent.childById(CheckboxComponent.class, "Reaper")
+                        .checked(CONFIG.ReaperSetting())
+                        .onChanged(CONFIG::ReaperSetting);
+        rootComponent.childById(CheckboxComponent.class, "Defender")
+                        .checked(CONFIG.DefenderSetting())
+                        .onChanged(CONFIG::DefenderSetting);
+        rootComponent.childById(CheckboxComponent.class, "Asmodeus")
+                        .checked(CONFIG.AsmodeusSetting())
+                        .onChanged(CONFIG::AsmodeusSetting);
+        rootComponent.childById(CheckboxComponent.class, "Seraphim")
+                        .checked(CONFIG.SeraphimSetting())
+                        .onChanged(CONFIG::SeraphimSetting);
+        rootComponent.childById(CheckboxComponent.class, "Raphael")
+                        .checked(CONFIG.RaphaelSetting())
+                        .onChanged(CONFIG::RaphaelSetting);
+        rootComponent.childById(CheckboxComponent.class, "Ophanim")
+                        .checked(CONFIG.OphanimSetting())
+                        .onChanged(CONFIG::OphanimSetting);
     }
 }

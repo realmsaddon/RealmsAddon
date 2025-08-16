@@ -74,17 +74,17 @@ public class LocalAPI {
                 currentCharacterArea = area.replaceAll("[^a-zA-z ']+", ""); // idk why but theres numbers at the end so we gotta trim that off
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
-                try{
-                    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" " + bossBar.getName().getLiteralString() +" " + bossBar.getName().getString()); // keep this until i can fill out all the bosses
-                    Thread.sleep(1000);
-                }
-                catch (Throwable e) {
-                    LOGGER.warn("Some error " + e );
-                    
-                }
+                //try{
+                //    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" " + bossBar.getName().getLiteralString() +" " + bossBar.getName().getString()); // keep this until i can fill out all the bosses
+                //    Thread.sleep(1000);
+                //}
+                //catch (Throwable e) {
+                //    LOGGER.warn("Some error " + e );
+                //    
+                //}
                 lastKnownBoss = currentCharacterFighting;
                 switch (bossBar.getName().hashCode()){
-                    //if they have a comment , it means its updated as of 16th August 2025
+                    //if they have a number in comment , it means its updated as of 16th August 2025
                     case -168181711 -> currentCharacterFighting = "Chungus";//-168181711
                     case 1368623635 -> currentCharacterFighting = "Illarius";//1368623635
                     case -1253632898 -> currentCharacterFighting = "Astaroth";//-1253632898
@@ -119,6 +119,7 @@ public class LocalAPI {
                     case 254038329 -> currentCharacterFighting = "Raphael";//254038329
                     case -1083171609 -> currentCharacterFighting = "Pirate's Cove";
                     case 1997519880 -> currentCharacterFighting = "Thornwood Wargrove";
+                    case -1253581965 -> currentCharacterFighting = "Voided Omnioptent";//-1253581965
                     default -> currentCharacterFighting = "";
                 }
                 //System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);

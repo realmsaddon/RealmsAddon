@@ -48,7 +48,8 @@ public class TelosAddon implements ClientModInitializer  {
     public int infoHeight;
     public int bagWidth;
     public int bagHeight;
-
+    public int pittybagWidth;
+    public int pittybagHeight;
     private ShowMainRangeFeature showMainRangeFeature;
 
     private ShowOffHandFeature showOffHandFeature;

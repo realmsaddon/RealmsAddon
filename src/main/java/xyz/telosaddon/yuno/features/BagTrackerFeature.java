@@ -47,6 +47,7 @@ public class BagTrackerFeature {
             case "Asmodeus" -> CONFIG.Asmodeus(0) ;
             case "Seraphim" -> CONFIG.Seraphim(0) ;
             case "Raphael" -> CONFIG.Raphael(0) ;
+            case "Ophanim" -> CONFIG.Ophanim(0) ;
             default -> {}
         }
         CONFIG.noBlackRuns(0);
@@ -80,6 +81,7 @@ public class BagTrackerFeature {
             case "Asmodeus" -> CONFIG.Asmodeus(CONFIG.Asmodeus()+1) ;
             case "Seraphim" -> CONFIG.Seraphim(CONFIG.Seraphim()+1) ;
             case "Raphael" -> CONFIG.Raphael(CONFIG.Raphael()+1) ;
+            case "Ophanim" -> CONFIG.Ophanim(CONFIG.Ophanim()+1) ;
             default -> {}
         }
         CONFIG.noBlackRuns(CONFIG.noBlackRuns()+1);
