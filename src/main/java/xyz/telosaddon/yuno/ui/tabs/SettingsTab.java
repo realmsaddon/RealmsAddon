@@ -56,6 +56,8 @@ public class SettingsTab extends BaseUIModelScreen<FlowLayout> {
                     CONFIG.infoY(4);
                     CONFIG.bagX(-1);
                     CONFIG.bagY(60);
+                    CONFIG.pittybagX(-1);
+                    CONFIG.pittybagY(20);
         });
 
         rootComponent.childById(TextBoxComponent.class, "ChangeGUIColorField")
