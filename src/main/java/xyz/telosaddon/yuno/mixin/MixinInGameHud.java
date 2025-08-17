@@ -61,62 +61,62 @@ public abstract class MixinInGameHud {
         boolean playtimeSetting = CONFIG.playTimeSetting();
         boolean spawnBossesSetting = CONFIG.bossTrackerFeatureEnabled();
 
-        List<String> pittybagTexts = new ArrayList<>();
+        List<String> pitybagTexts = new ArrayList<>();
         if(CONFIG.SylvarisSetting() || isEditMode)
-            pittybagTexts.add("Sylvaris§7: §f" + CONFIG.Sylvaris());
+            pitybagTexts.add("Sylvaris§7: §f" + CONFIG.Sylvaris());
         if(CONFIG.VoidedOmnipotentSetting() || isEditMode)
-            pittybagTexts.add("Voided Omnipotent§7: §f" + CONFIG.Voided_Omnipotent());
+            pitybagTexts.add("Voided Omnipotent§7: §f" + CONFIG.Voided_Omnipotent());
         if(CONFIG.KurvarosSetting() || isEditMode)
-            pittybagTexts.add("Kurvaros§7: §f" + CONFIG.Kurvaros());
+            pitybagTexts.add("Kurvaros§7: §f" + CONFIG.Kurvaros());
         if(CONFIG.ShadowflareSetting() || isEditMode)
-            pittybagTexts.add("Shadowflare§7: §f" + CONFIG.Shadowflare());
+            pitybagTexts.add("Shadowflare§7: §f" + CONFIG.Shadowflare());
         if(CONFIG.ValerionSetting() || isEditMode)
-            pittybagTexts.add("Valerion§7: §f" + CONFIG.Valerion());
+            pitybagTexts.add("Valerion§7: §f" + CONFIG.Valerion());
         if(CONFIG.NebulaSetting() || isEditMode)
-            pittybagTexts.add("Nebula§7: §f" + CONFIG.Nebula());
+            pitybagTexts.add("Nebula§7: §f" + CONFIG.Nebula());
         if(CONFIG.PrismaraSetting() || isEditMode)
-            pittybagTexts.add("Prismara§7: §f" + CONFIG.Prismara());
+            pitybagTexts.add("Prismara§7: §f" + CONFIG.Prismara());
         if(CONFIG.OmnipotentSetting() || isEditMode)
-            pittybagTexts.add("Omnipotent§7: §f" + CONFIG.Omnipotent());
+            pitybagTexts.add("Omnipotent§7: §f" + CONFIG.Omnipotent());
         if(CONFIG.SilexSetting() || isEditMode)
-            pittybagTexts.add("Silex§7: §f" + CONFIG.Silex());
+            pitybagTexts.add("Silex§7: §f" + CONFIG.Silex());
         if(CONFIG.ChronosSetting() || isEditMode)
-            pittybagTexts.add("Chronos§7: §f" + CONFIG.Chronos());
+            pitybagTexts.add("Chronos§7: §f" + CONFIG.Chronos());
         if(CONFIG.WardenSetting() || isEditMode)
-            pittybagTexts.add("Warden§7: §f" + CONFIG.Warden());
+            pitybagTexts.add("Warden§7: §f" + CONFIG.Warden());
         if(CONFIG.HeraldSetting() || isEditMode)
-            pittybagTexts.add("Herald§7: §f" + CONFIG.Herald());
+            pitybagTexts.add("Herald§7: §f" + CONFIG.Herald());
         if(CONFIG.ReaperSetting() || isEditMode)
-            pittybagTexts.add("Reaper§7: §f" + CONFIG.Reaper());
+            pitybagTexts.add("Reaper§7: §f" + CONFIG.Reaper());
         if(CONFIG.DefenderSetting() || isEditMode)
-            pittybagTexts.add("Defender§7: §f" + CONFIG.Defender());
+            pitybagTexts.add("Defender§7: §f" + CONFIG.Defender());
         if(CONFIG.AsmodeusSetting() || isEditMode)
-            pittybagTexts.add("Asmodeus§7: §f" + CONFIG.Asmodeus());
+            pitybagTexts.add("Asmodeus§7: §f" + CONFIG.Asmodeus());
         if(CONFIG.SeraphimSetting() || isEditMode)
-            pittybagTexts.add("Seraphim§7: §f" + CONFIG.Seraphim());
+            pitybagTexts.add("Seraphim§7: §f" + CONFIG.Seraphim());
         if(CONFIG.RaphaelSetting() || isEditMode)
-            pittybagTexts.add("Raphael§7: §f" + CONFIG.Raphael());
+            pitybagTexts.add("Raphael§7: §f" + CONFIG.Raphael());
         if(CONFIG.OphanimSetting() || isEditMode)
-            pittybagTexts.add("Ophanim§7: §f" + CONFIG.Ophanim());
+            pitybagTexts.add("Ophanim§7: §f" + CONFIG.Ophanim());
 
-        int pittybagY = CONFIG.pittybagY();
-        int pittybagX = CONFIG.pittybagX();
+        int pitybagY = CONFIG.pitybagY();
+        int pitybagX = CONFIG.pitybagX();
 
-        int ypittyBackground = pittybagY - 25;
-        if(!pittybagTexts.isEmpty()) {
-            String title = "Blood Shot Pitty";
-            context.fill(pittybagX, ypittyBackground, pittybagX + 120, pittybagY + pittybagTexts.size() * 13 + 5, CONFIG.fillColor());
-            context.drawBorder(pittybagX, ypittyBackground, 120, pittybagY - ypittyBackground + pittybagTexts.size() * 13 + 5,CONFIG.borderColor());
-            context.drawHorizontalLine(pittybagX + 10, pittybagX + 110, pittybagY - 4, CONFIG.borderColor());
+        int ypityBackground = pitybagY - 25;
+        if(!pitybagTexts.isEmpty()) {
+            String title = "Blood Shot Pity";
+            context.fill(pitybagX, ypityBackground, pitybagX + 120, pitybagY + pitybagTexts.size() * 13 + 5, CONFIG.fillColor());
+            context.drawBorder(pitybagX, ypityBackground, 120, pitybagY - ypityBackground + pitybagTexts.size() * 13 + 5,CONFIG.borderColor());
+            context.drawHorizontalLine(pitybagX + 10, pitybagX + 110, pitybagY - 4, CONFIG.borderColor());
 
             int titleWidth = tr.getWidth(FontHelper.toCustomFont(title, fontName));
-            int midX = (pittybagX + (pittybagX + 120)) / 2;
+            int midX = (pitybagX + (pitybagX + 120)) / 2;
 
-            //context.drawText(tr, toCustomFont(title), midX - titleWidth / 2, pittybagY - 15, config.getInteger("MenuColor"), false);
-            context.drawText(tr, FontHelper.toCustomFont(title, fontName), midX - titleWidth / 2, pittybagY - 15, CONFIG.menuColor(), true);
+            //context.drawText(tr, toCustomFont(title), midX - titleWidth / 2, pitybagY - 15, config.getInteger("MenuColor"), false);
+            context.drawText(tr, FontHelper.toCustomFont(title, fontName), midX - titleWidth / 2, pitybagY - 15, CONFIG.menuColor(), true);
         }
-        for(int i = 0; i < pittybagTexts.size(); i++) {
-            context.drawText(tr, FontHelper.toCustomFont(pittybagTexts.get(i), fontName), pittybagX + 10, pittybagY + (i * 13), CONFIG.menuColor(), true);
+        for(int i = 0; i < pitybagTexts.size(); i++) {
+            context.drawText(tr, FontHelper.toCustomFont(pitybagTexts.get(i), fontName), pitybagX + 10, pitybagY + (i * 13), CONFIG.menuColor(), true);
         }
 
 
@@ -197,8 +197,8 @@ public abstract class MixinInGameHud {
         int infoWidth = 150;
         int bagHeight = bagTexts.size() * 13 + 5;
         int bagWidth = 120;
-        int pittybagHeight = bagTexts.size() * 13 + 5;
-        int pittybagWidth = 120;
+        int pitybagHeight = bagTexts.size() * 13 + 5;
+        int pitybagWidth = 120;
 
         if(isEditMode) {
             if(TelosAddon.getInstance().infoWidth != infoWidth)
@@ -213,11 +213,11 @@ public abstract class MixinInGameHud {
             if(TelosAddon.getInstance().bagWidth != bagWidth)
                 TelosAddon.getInstance().bagWidth = bagWidth;
 
-            if(TelosAddon.getInstance().pittybagHeight != pittybagHeight)
-                TelosAddon.getInstance().pittybagHeight = pittybagHeight;
+            if(TelosAddon.getInstance().pitybagHeight != pitybagHeight)
+                TelosAddon.getInstance().pitybagHeight = pitybagHeight;
 
-            if(TelosAddon.getInstance().pittybagWidth != pittybagWidth)
-                TelosAddon.getInstance().pittybagWidth = pittybagWidth;
+            if(TelosAddon.getInstance().pitybagWidth != pitybagWidth)
+                TelosAddon.getInstance().pitybagWidth = pitybagWidth;
         }
 
         for(int i = 0; i < infoList.size(); i++)

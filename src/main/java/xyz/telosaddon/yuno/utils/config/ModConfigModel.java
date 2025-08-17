@@ -39,8 +39,8 @@ public class ModConfigModel {
     public int bagX = -1;
     public int bagY = 60;
 
-    public int pittybagX = -2;
-    public int pittybagY = 50;
+    public int pitybagX = -2;
+    public int pitybagY = 50;
 
     public boolean greenSetting = false;
     public boolean goldSetting = false;
@@ -86,7 +86,7 @@ public class ModConfigModel {
     public boolean dungeonTimerSetting = true;
 
     public boolean healthBarSetting = true;
-    //BS pitty setting
+    //BS pity setting
     public boolean SylvarisSetting=false;
     public boolean VoidedOmnipotentSetting=false;
     public boolean KurvarosSetting=false;
@@ -106,7 +106,7 @@ public class ModConfigModel {
     public boolean RaphaelSetting=false;
     public boolean OphanimSetting=false;
 
-    //BS pitty counter
+    //BS pity counter
     public int Sylvaris=0;
     public int Voided_Omnipotent=0;
     public int Kurvaros=0;

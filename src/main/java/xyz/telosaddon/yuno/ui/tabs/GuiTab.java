@@ -89,7 +89,7 @@ public class GuiTab extends BaseUIModelScreen<FlowLayout> {
                 .onChanged(CONFIG::lifetimeSetting);
         
         
-        //Pitty counting
+        //Pity counting
         rootComponent.childById(CheckboxComponent.class, "Sylvaris")
                 .checked(CONFIG.SylvarisSetting())
                 .onChanged(CONFIG::SylvarisSetting);

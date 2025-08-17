@@ -111,7 +111,7 @@ public class MixinMessageHandler {
                 CONFIG.totalRuns(CONFIG.totalRuns() + 1);  //incrementing after killing a boss
                 CONFIG.noWhiteRuns(CONFIG.noWhiteRuns() + 1); //increments for any boss
                 if(BS_Boss.contains(s.trim())){ //checks if boss can drop BS
-                    BagTrackerFeature.blackBagPittyCounter(s.trim());
+                    BagTrackerFeature.blackBagPityCounter(s.trim());
                     //CONFIG.noBlackRuns(CONFIG.noBlackRuns() + 1);
                     }
             }

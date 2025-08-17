@@ -47,7 +47,7 @@ public abstract class MixinGameRenderer {
             case "entity/pouch/bloodshot_totem" -> {
                 CONFIG.blackBags(CONFIG.blackBags() + 1);
                 
-                BagTrackerFeature.resetBlackBagPitty();    
+                BagTrackerFeature.resetBlackBagPity();    
                 if(soundSetting)
                     soundManager.playSound("black_bag");
 

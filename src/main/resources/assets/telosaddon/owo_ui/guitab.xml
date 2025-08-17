@@ -138,7 +138,7 @@
                         <flow-layout direction="vertical">
                             <children>
                                 <label>
-                                    <text>Blood Shot Pitty</text>
+                                    <text>Blood Shot Pity</text>
                                 </label>
                                 <checkbox id="Omnipotent">
                                     <text>Omnipotent</text>

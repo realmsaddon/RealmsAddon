@@ -25,7 +25,7 @@ public class BagTrackerFeature {
     //    LOGGER.info("(BossDefeatedEvent) boss " + boss  + " Dropped a bag");
     //    CONFIG.noWhiteRuns(0);
     //}
-    public static void resetBlackBagPitty(){
+    public static void resetBlackBagPity(){
         boss=LocalAPI.getCurrentCharacterFighting();
         LOGGER.info(boss);
         LOGGER.info("(Bag event counter) boss " + boss  + " Dropped a bag");
@@ -60,9 +60,9 @@ public class BagTrackerFeature {
     //    LOGGER.info("Current boss:"+boss);
     //    return;
     //}
-    public static void blackBagPittyCounter(String boss_name){
+    public static void blackBagPityCounter(String boss_name){
         boss=LocalAPI.getCurrentCharacterFighting();
-        LOGGER.info("(BagPittyEvent) boss " + boss  + " did not drop a bag");
+        LOGGER.info("(BagPityEvent) boss " + boss  + " did not drop a bag");
         switch(boss_name){
             case "Sylvaris" -> CONFIG.Sylvaris(CONFIG.Sylvaris()+1) ;
             case "Voided Omnipotent" -> CONFIG.Voided_Omnipotent(CONFIG.Voided_Omnipotent()+1) ;

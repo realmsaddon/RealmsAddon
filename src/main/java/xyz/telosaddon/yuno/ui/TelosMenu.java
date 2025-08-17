@@ -73,10 +73,10 @@ public class TelosMenu extends Screen {
             int bagWidth = TelosAddon.getInstance().bagWidth;
             int bagHeight = TelosAddon.getInstance().bagHeight;
 
-            int pittybagX = CONFIG.pittybagX();
-            int pittybagY = CONFIG.pittybagY();
-            int pittybagWidth = TelosAddon.getInstance().pittybagWidth;
-            int pittybagHeight = TelosAddon.getInstance().pittybagHeight;
+            int pitybagX = CONFIG.pitybagX();
+            int pitybagY = CONFIG.pitybagY();
+            int pitybagWidth = TelosAddon.getInstance().pitybagWidth;
+            int pitybagHeight = TelosAddon.getInstance().pitybagHeight;
 
             if(mouseX >= infoX + 10 && mouseY >= infoY + 10  && mouseX < infoX + infoWidth + 10 && mouseY < infoY + infoHeight + 10) {
 
@@ -93,10 +93,10 @@ public class TelosMenu extends Screen {
 
                 return true;
             }
-            if(mouseX >= pittybagX + 10 && mouseY >= pittybagY + 10  && mouseX < pittybagX + pittybagWidth + 10 && mouseY < pittybagY + pittybagHeight + 10) {
+            if(mouseX >= pitybagX + 10 && mouseY >= pitybagY + 10  && mouseX < pitybagX + pitybagWidth + 10 && mouseY < pitybagY + pitybagHeight + 10) {
 
-                CONFIG.pittybagX((int) mouseX - pittybagWidth / 2);
-                CONFIG.pittybagY((int) mouseY - pittybagHeight / 2);
+                CONFIG.pitybagX((int) mouseX - pitybagWidth / 2);
+                CONFIG.pitybagY((int) mouseY - pitybagHeight / 2);
 
                 return true;
             }
