@@ -24,6 +24,7 @@ public class LocalAPI {
     private static String currentCharacterFighting = "";
     private static String currentClientPing = "";
     private static String lastKnownBoss = "";
+    private static int lastKnownBossHash=0;
     private static boolean countdownLock = false;
     private static String currentPortalCall = "";
     private static int currentPortalCallTime = 0;
@@ -87,7 +88,7 @@ public class LocalAPI {
                     case -1253632898 -> currentCharacterFighting = "Astaroth";//-1253632898
                     case -168176906 -> currentCharacterFighting = "Glumi";//-168176906
                     case -1254008649 -> currentCharacterFighting = "Lotil";//-1254008649
-                    case 453134978 -> currentCharacterFighting = "Tidol";//
+                    case 1368934038 -> currentCharacterFighting = "Tidol";//1368934038
                     case -1622056066 -> currentCharacterFighting = "Valus";//-1622056066
                     case -1907114029 -> currentCharacterFighting = "Oozul";//-1907114029
                     case -1343349613 -> currentCharacterFighting = "Freddy";//-1343349613
@@ -95,16 +96,16 @@ public class LocalAPI {
                     case -1240191621 -> currentCharacterFighting = "Hollowbane";
                     case -1048713371 -> currentCharacterFighting = "Claus";
                     case 1824190226 -> currentCharacterFighting = "Shadowflare";//1824190226
-                    case 1996713601 -> currentCharacterFighting = "Loa";
+                    case -1382454635 -> currentCharacterFighting = "Loa";//-1382454635
                     case -1048545196 -> currentCharacterFighting = "Valerion";
                     //case xxx -> currentCharacterFighting = "Nebula";
                     //case xxx -> currentCharacterFighting = "Ophanim";
                     case -708336010 -> currentCharacterFighting = "Prismara";//-708336010
                     case -1254007688 -> currentCharacterFighting = "Omnipotent";//-1254007688
-                    case 1757423534 -> currentCharacterFighting = "Thalassar";
+                    case -1621744702 -> currentCharacterFighting = "Thalassar";//-1621744702
                     case -1643392642 -> currentCharacterFighting = "Silex";//-1643392642
                     case 290925398 -> currentCharacterFighting = "Chronos";//290925398
-                    case -1338784736 -> currentCharacterFighting = "Golden Freddy";
+                    case -422985676 -> currentCharacterFighting = "Golden Freddy";//-422985676
                     case -342534076 -> currentCharacterFighting = "Kurvaros";//-342534076
                     case -1370656917 -> currentCharacterFighting = "Warden";//-1370656917
                     case -1370655956 -> currentCharacterFighting = "Herald";//-1370655956
@@ -114,7 +115,6 @@ public class LocalAPI {
                     case -1643406096 -> currentCharacterFighting = "Seraphim";//-1643406096
                     case 2131893865 -> currentCharacterFighting = "Raphael's Castle";//2131893865
                     case 254038329 -> currentCharacterFighting = "Raphael";//254038329
-                    case -1083171609 -> currentCharacterFighting = "Pirate's Cove";
                     case 230903377 -> currentCharacterFighting = "Sylvaris";//230903377
                     case -1253581965 -> currentCharacterFighting = "Voided Omnipotent";//-1253581965
                     default -> currentCharacterFighting = "";
@@ -122,16 +122,14 @@ public class LocalAPI {
                 //Improved system to find HashCodes 
                 //This can honestly be kept in if needded , it does not spam logs like before very usefull to get Hash's
                 //if The initial hash is known and the player is on an actual boss 
-                //if((InitialHash!=bossBar.getName().hashCode()) && lastKnownBoss!=currentCharacterFighting){
+                //if((InitialHash!=bossBar.getName().hashCode()) && lastKnownBossHash!=bossBar.getName().hashCode()){
+                //    //comparing Hash cause they are unique , else if we fight two unknown bosses back to back it wont print
+                //    LOGGER.info("old Last known Boss: "+ lastKnownBoss);
                 //    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" BossName:" + currentCharacterFighting);
-                //    if (!lastKnownBoss.equals(currentCharacterFighting))
-                //    {
-                //        LOGGER.info("old Last known Boss: "+ lastKnownBoss); // This can be removed after testing
-                //        lastKnownBoss=currentCharacterFighting;
-                //        LOGGER.info("new Last known Boss: "+ lastKnownBoss);
-                //        //Honestly CurrentPortalCall can be set inside here since its called only if players swaps from one boss to another 
-                //        // Add the switch case inside here  
-                //    }
+                //    LOGGER.info("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + ", current Area is: " + currentCharacterArea);
+                //    LOGGER.info("last known boss Hash is: " + lastKnownBossHash + ", current boss Hash is: " + bossBar.getName().hashCode());
+                //    lastKnownBoss=currentCharacterFighting;
+                //    lastKnownBossHash=bossBar.getName().hashCode();
                 //}
                 //System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);
                 // this means a boss has died recently.
