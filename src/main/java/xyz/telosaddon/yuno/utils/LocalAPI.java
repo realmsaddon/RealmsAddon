@@ -115,7 +115,7 @@ public class LocalAPI {
                     case 254038329 -> currentCharacterFighting = "Raphael";//254038329
                     case -1083171609 -> currentCharacterFighting = "Pirate's Cove";
                     case 230903377 -> currentCharacterFighting = "Sylvaris";//230903377
-                    case -1253581965 -> currentCharacterFighting = "Voided Omnioptent";//-1253581965
+                    case -1253581965 -> currentCharacterFighting = "Voided Omnipotent";//-1253581965
                     default -> currentCharacterFighting = "";
                 }
                 //System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);
