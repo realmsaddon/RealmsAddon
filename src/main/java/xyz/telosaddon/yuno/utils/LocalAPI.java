@@ -27,7 +27,8 @@ public class LocalAPI {
     private static boolean countdownLock = false;
     private static String currentPortalCall = "";
     private static int currentPortalCallTime = 0;
-    
+    private static int InitialHash=0; // this is the default hash every time you join the server
+    private static Boolean InitialHashSet=false;
     public static void updateAPI(){
         CompletableFuture.runAsync(() -> {
                 if (!TelosAddon.getInstance().isOnTelos()) return;
@@ -61,7 +62,7 @@ public class LocalAPI {
     }
 
     private static void updateCharacterArea(){
-
+        
         if (bossBarMap != null) {
 
             Object[] preArray = bossBarMap.values().toArray();
@@ -70,15 +71,15 @@ public class LocalAPI {
 
                 BossBar areaBar = (BossBar) preArray[0];
                 String area = stripAllFormatting(areaBar.getName().getString());
-
                 currentCharacterArea = area.replaceAll("[^a-zA-z ']+", ""); // idk why but theres numbers at the end so we gotta trim that off
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
-        
-                //LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" " + bossBar.getName().getLiteralString() +" " + bossBar.getName().getString()); // keep this until i can fill out all the bosses
+                if(!InitialHashSet){
+                    InitialHash=bossBar.getName().hashCode(); // This is the trash hash we can ignore
+                    InitialHashSet=true;// once players loads onto the server we know the default hash of the empty bossbar
+                    LOGGER.info("Initial Boss hash set! and hash is:"+ InitialHash);
+                }
                 
-               
-                lastKnownBoss = currentCharacterFighting;
                 switch (bossBar.getName().hashCode()){
                     //if they have a number in comment , it means its updated as of 16th August 2025
                     case -168181711 -> currentCharacterFighting = "Chungus";//-168181711
@@ -89,7 +90,7 @@ public class LocalAPI {
                     case 453134978 -> currentCharacterFighting = "Tidol";//
                     case -1622056066 -> currentCharacterFighting = "Valus";//-1622056066
                     case -1907114029 -> currentCharacterFighting = "Oozul";//-1907114029
-                    case 2035818623 -> currentCharacterFighting = "Freddy";//
+                    case -1343349613 -> currentCharacterFighting = "Freddy";//-1343349613
                     case -342545608 -> currentCharacterFighting = "Anubis";//-342545608
                     case -1240191621 -> currentCharacterFighting = "Hollowbane";
                     case -1048713371 -> currentCharacterFighting = "Claus";
@@ -118,11 +119,26 @@ public class LocalAPI {
                     case -1253581965 -> currentCharacterFighting = "Voided Omnipotent";//-1253581965
                     default -> currentCharacterFighting = "";
                 }
+                //Improved system to find HashCodes 
+                //This can honestly be kept in if needded , it does not spam logs like before very usefull to get Hash's
+                //if The initial hash is known and the player is on an actual boss 
+                //if((InitialHash!=bossBar.getName().hashCode()) && lastKnownBoss!=currentCharacterFighting){
+                //    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" BossName:" + currentCharacterFighting);
+                //    if (!lastKnownBoss.equals(currentCharacterFighting))
+                //    {
+                //        LOGGER.info("old Last known Boss: "+ lastKnownBoss); // This can be removed after testing
+                //        lastKnownBoss=currentCharacterFighting;
+                //        LOGGER.info("new Last known Boss: "+ lastKnownBoss);
+                //        //Honestly CurrentPortalCall can be set inside here since its called only if players swaps from one boss to another 
+                //        // Add the switch case inside here  
+                //    }
+                //}
                 //System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);
                 // this means a boss has died recently.
-                if (!lastKnownBoss.equals(currentCharacterFighting) && currentCharacterFighting.equals("")) {
-                    LOGGER.info("Boss has died");
-                    System.out.println(lastKnownBoss);
+                if (!lastKnownBoss.equals(currentCharacterFighting) && currentCharacterFighting.equals("")) { // addiing a condition to check if this has been called might improve performance 
+                    //As it is rn , this is called every tick if a boss died or even if you move away from a boss.
+                    //LOGGER.info("Boss has died");
+                    //System.out.println("Last known Boss: "+ lastKnownBoss);
                     switch (lastKnownBoss){
                         case "Chungus" -> currentPortalCall = "void";
                         case "Illarius" -> currentPortalCall = "loa";
@@ -138,7 +154,7 @@ public class LocalAPI {
                 
                         default -> currentPortalCall = "";
                     }
-                    lastKnownBoss = "";
+                    //lastKnownBoss = ""; why is it making it null lol 
                     if (currentPortalCall.isEmpty() || countdownLock){
                         return;
                     }
