@@ -82,41 +82,42 @@ public class LocalAPI {
                 }
                 
                 switch (bossBar.getName().hashCode()){
-                    //if they have a number in comment , it means its updated as of 16th August 2025
-                    case -168181711 -> currentCharacterFighting = "Chungus";//-168181711
-                    case 1368623635 -> currentCharacterFighting = "Illarius";//1368623635
-                    case -1253632898 -> currentCharacterFighting = "Astaroth";//-1253632898
-                    case -168176906 -> currentCharacterFighting = "Glumi";//-168176906
-                    case -1254008649 -> currentCharacterFighting = "Lotil";//-1254008649
-                    case 1368934038 -> currentCharacterFighting = "Tidol";//1368934038
-                    case -1622056066 -> currentCharacterFighting = "Valus";//-1622056066
-                    case -1907114029 -> currentCharacterFighting = "Oozul";//-1907114029
-                    case -1343349613 -> currentCharacterFighting = "Freddy";//-1343349613
-                    case -342545608 -> currentCharacterFighting = "Anubis";//-342545608
+                    //All updated as of 21th August 2025
+                    case -168181711 -> currentCharacterFighting = "Chungus";
+                    case 1368623635 -> currentCharacterFighting = "Illarius";
+                    case -1253632898 -> currentCharacterFighting = "Astaroth";
+                    case -168176906 -> currentCharacterFighting = "Glumi";
+                    case -1254008649 -> currentCharacterFighting = "Lotil";
+                    case 1368934038 -> currentCharacterFighting = "Tidol";
+                    case -1622056066 -> currentCharacterFighting = "Valus";
+                    case -1907114029 -> currentCharacterFighting = "Oozul";
+                    case -1343349613 -> currentCharacterFighting = "Freddy";
+                    case -342545608 -> currentCharacterFighting = "Anubis";
                     case -1240191621 -> currentCharacterFighting = "Hollowbane";
                     case -1048713371 -> currentCharacterFighting = "Claus";
-                    case 1824190226 -> currentCharacterFighting = "Shadowflare";//1824190226
-                    case -1382454635 -> currentCharacterFighting = "Loa";//-1382454635
-                    case -1048545196 -> currentCharacterFighting = "Valerion";
-                    //case xxx -> currentCharacterFighting = "Nebula";
-                    //case xxx -> currentCharacterFighting = "Ophanim";
-                    case -708336010 -> currentCharacterFighting = "Prismara";//-708336010
-                    case -1254007688 -> currentCharacterFighting = "Omnipotent";//-1254007688
-                    case -1621744702 -> currentCharacterFighting = "Thalassar";//-1621744702
-                    case -1643392642 -> currentCharacterFighting = "Silex";//-1643392642
-                    case 290925398 -> currentCharacterFighting = "Chronos";//290925398
-                    case -422985676 -> currentCharacterFighting = "Golden Freddy";//-422985676
-                    case -342534076 -> currentCharacterFighting = "Kurvaros";//-342534076
-                    case -1370656917 -> currentCharacterFighting = "Warden";//-1370656917
-                    case -1370655956 -> currentCharacterFighting = "Herald";//-1370655956
-                    case -1370654995 -> currentCharacterFighting = "Reaper";//-1370654995
-                    case -1370654034 -> currentCharacterFighting = "Defender";//-1370654034
-                    case -1622067598 -> currentCharacterFighting = "Asmodeus";//-1622067598
-                    case -1643406096 -> currentCharacterFighting = "Seraphim";//-1643406096
-                    case 2131893865 -> currentCharacterFighting = "Raphael's Castle";//2131893865
-                    case 254038329 -> currentCharacterFighting = "Raphael";//254038329
-                    case 230903377 -> currentCharacterFighting = "Sylvaris";//230903377
-                    case -1253581965 -> currentCharacterFighting = "Voided Omnipotent";//-1253581965
+                    case 1824190226 -> currentCharacterFighting = "Shadowflare";
+                    case -1382454635 -> currentCharacterFighting = "Loa";
+                    case -132746136 -> currentCharacterFighting = "Valerion";
+                    case -829226362 -> currentCharacterFighting = "Nebula";
+                    case -132585649 -> currentCharacterFighting = "Ophanim";
+                    case -708336010 -> currentCharacterFighting = "Prismara";
+                    case -1254007688 -> currentCharacterFighting = "Omnipotent";
+                    case -1621744702 -> currentCharacterFighting = "Thalassar";
+                    case -1643392642 -> currentCharacterFighting = "Silex";
+                    case 290925398 -> currentCharacterFighting = "Chronos";
+                    case -422985676 -> currentCharacterFighting = "Golden Freddy";
+                    case -342534076 -> currentCharacterFighting = "Kurvaros";
+                    case -1370656917 -> currentCharacterFighting = "Warden";
+                    case -1370655956 -> currentCharacterFighting = "Herald";
+                    case -1370654995 -> currentCharacterFighting = "Reaper";
+                    case -1370654034 -> currentCharacterFighting = "Defender";
+                    case -1622067598 -> currentCharacterFighting = "Asmodeus";
+                    case -1643406096 -> currentCharacterFighting = "Seraphim";
+                    case -1643245609 -> currentCharacterFighting = "True Seraphim";
+                    case 2131893865 -> currentCharacterFighting = "Raphael's Castle";
+                    case 254038329 -> currentCharacterFighting = "Raphael";
+                    case 230903377 -> currentCharacterFighting = "Sylvaris";
+                    case -1253581965 -> currentCharacterFighting = "Voided Omnipotent";
                     default -> currentCharacterFighting = "";
                 }
                 //Improved system to find HashCodes 
