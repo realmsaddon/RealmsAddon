@@ -6,11 +6,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Lint Java with Super-Linter
-        uses: super-linter/super-linter@v6 # Or a specific version like v6.0.0
-        env:
-          VALIDATE_JAVA: true # Enable Java linting
-          DEFAULT_BRANCH: main # Or your default branch name
+      - uses: actions/checkout@v4
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--dry-run --set-exit-if-changed"
