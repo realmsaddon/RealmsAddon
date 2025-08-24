@@ -62,7 +62,8 @@ public class CallHotkey{
                     }
 
                     if (CONFIG.callHotkeyShout()) {
-                        Objects.requireNonNull(client.getNetworkHandler()).sendChatCommand("shout " + callString);
+                        //Objects.requireNonNull(client.getNetworkHandler()).sendChatCommand("shout " + callString);
+                        Objects.requireNonNull(client.getNetworkHandler()).sendChatMessage(callString);
                     }
                     else{
                         Objects.requireNonNull(client.getNetworkHandler()).sendChatMessage(callString);
