@@ -123,18 +123,19 @@ public class LocalAPI {
                 //Improved system to find HashCodes 
                 //This can honestly be kept in if needded , it does not spam logs like before very usefull to get Hash's
                 //if The initial hash is known and the player is on an actual boss 
-                //if((InitialHash!=bossBar.getName().hashCode()) && lastKnownBossHash!=bossBar.getName().hashCode()){
-                //    //comparing Hash cause they are unique , else if we fight two unknown bosses back to back it wont print
-                //    LOGGER.info("old Last known Boss: "+ lastKnownBoss);
-                //    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" BossName:" + currentCharacterFighting);
-                //    LOGGER.info("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + ", current Area is: " + currentCharacterArea);
-                //    LOGGER.info("last known boss Hash is: " + lastKnownBossHash + ", current boss Hash is: " + bossBar.getName().hashCode());
-                //    lastKnownBoss=currentCharacterFighting;
-                //    lastKnownBossHash=bossBar.getName().hashCode();
-                //}
-                //System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);
+                if((InitialHash!=bossBar.getName().hashCode()) && lastKnownBossHash!=bossBar.getName().hashCode()){
+                    //comparing Hash cause they are unique , else if we fight two unknown bosses back to back it wont print
+                    LOGGER.info("old Last known Boss: "+ lastKnownBoss);
+                    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" BossName:" + currentCharacterFighting);
+                    LOGGER.info("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + ", current Area is: " + currentCharacterArea);
+                    LOGGER.info("last known boss Hash is: " + lastKnownBossHash + ", current boss Hash is: " + bossBar.getName().hashCode());
+                    lastKnownBoss=currentCharacterFighting;
+                    lastKnownBossHash=bossBar.getName().hashCode();
+                }
                 // this means a boss has died recently.
-                if (!lastKnownBoss.equals(currentCharacterFighting) && currentCharacterFighting.equals("")) { // addiing a condition to check if this has been called might improve performance 
+                if (!lastKnownBoss.equals("") && bossBar.getName().hashCode()==InitialHash) { 
+                    // We are making sure there is a last known boss and that there is no current boss
+                    //Its not garunteed that the player even killed the boss or just moved away - Stress
                     //As it is rn , this is called every tick if a boss died or even if you move away from a boss.
                     //LOGGER.info("Boss has died");
                     //System.out.println("Last known Boss: "+ lastKnownBoss);
