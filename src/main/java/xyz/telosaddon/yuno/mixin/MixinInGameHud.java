@@ -22,7 +22,6 @@ import xyz.telosaddon.yuno.utils.LocalAPI;
 import xyz.telosaddon.yuno.utils.data.BossData;
 
 import java.util.*;
-import java.util.List;
 
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 import static xyz.telosaddon.yuno.utils.LocalAPI.getCurrentClientPing;
@@ -61,6 +60,64 @@ public abstract class MixinInGameHud {
         boolean pingSetting = CONFIG.pingSetting();
         boolean playtimeSetting = CONFIG.playTimeSetting();
         boolean spawnBossesSetting = CONFIG.bossTrackerFeatureEnabled();
+
+        List<String> pitybagTexts = new ArrayList<>();
+        if(CONFIG.SylvarisSetting() || isEditMode)
+            pitybagTexts.add("Sylvaris§7: §f" + CONFIG.Sylvaris());
+        if(CONFIG.VoidedOmnipotentSetting() || isEditMode)
+            pitybagTexts.add("Voided Omnipotent§7: §f" + CONFIG.Voided_Omnipotent());
+        if(CONFIG.KurvarosSetting() || isEditMode)
+            pitybagTexts.add("Kurvaros§7: §f" + CONFIG.Kurvaros());
+        if(CONFIG.ShadowflareSetting() || isEditMode)
+            pitybagTexts.add("Shadowflare§7: §f" + CONFIG.Shadowflare());
+        if(CONFIG.ValerionSetting() || isEditMode)
+            pitybagTexts.add("Valerion§7: §f" + CONFIG.Valerion());
+        if(CONFIG.NebulaSetting() || isEditMode)
+            pitybagTexts.add("Nebula§7: §f" + CONFIG.Nebula());
+        if(CONFIG.PrismaraSetting() || isEditMode)
+            pitybagTexts.add("Prismara§7: §f" + CONFIG.Prismara());
+        if(CONFIG.OmnipotentSetting() || isEditMode)
+            pitybagTexts.add("Omnipotent§7: §f" + CONFIG.Omnipotent());
+        if(CONFIG.SilexSetting() || isEditMode)
+            pitybagTexts.add("Silex§7: §f" + CONFIG.Silex());
+        if(CONFIG.ChronosSetting() || isEditMode)
+            pitybagTexts.add("Chronos§7: §f" + CONFIG.Chronos());
+        if(CONFIG.WardenSetting() || isEditMode)
+            pitybagTexts.add("Warden§7: §f" + CONFIG.Warden());
+        if(CONFIG.HeraldSetting() || isEditMode)
+            pitybagTexts.add("Herald§7: §f" + CONFIG.Herald());
+        if(CONFIG.ReaperSetting() || isEditMode)
+            pitybagTexts.add("Reaper§7: §f" + CONFIG.Reaper());
+        if(CONFIG.DefenderSetting() || isEditMode)
+            pitybagTexts.add("Defender§7: §f" + CONFIG.Defender());
+        if(CONFIG.AsmodeusSetting() || isEditMode)
+            pitybagTexts.add("Asmodeus§7: §f" + CONFIG.Asmodeus());
+        if(CONFIG.SeraphimSetting() || isEditMode)
+            pitybagTexts.add("Seraphim§7: §f" + CONFIG.Seraphim());
+        if(CONFIG.RaphaelSetting() || isEditMode)
+            pitybagTexts.add("Raphael§7: §f" + CONFIG.Raphael());
+        if(CONFIG.OphanimSetting() || isEditMode)
+            pitybagTexts.add("Ophanim§7: §f" + CONFIG.Ophanim());
+
+        int pitybagY = CONFIG.pitybagY();
+        int pitybagX = CONFIG.pitybagX();
+
+        int ypityBackground = pitybagY - 25;
+        if(!pitybagTexts.isEmpty()) {
+            String title = "Blood Shot Pity";
+            context.fill(pitybagX, ypityBackground, pitybagX + 120, pitybagY + pitybagTexts.size() * 13 + 5, CONFIG.fillColor());
+            context.drawBorder(pitybagX, ypityBackground, 120, pitybagY - ypityBackground + pitybagTexts.size() * 13 + 5,CONFIG.borderColor());
+            context.drawHorizontalLine(pitybagX + 10, pitybagX + 110, pitybagY - 4, CONFIG.borderColor());
+
+            int titleWidth = tr.getWidth(FontHelper.toCustomFont(title, fontName));
+            int midX = (pitybagX + (pitybagX + 120)) / 2;
+
+            //context.drawText(tr, toCustomFont(title), midX - titleWidth / 2, pitybagY - 15, config.getInteger("MenuColor"), false);
+            context.drawText(tr, FontHelper.toCustomFont(title, fontName), midX - titleWidth / 2, pitybagY - 15, CONFIG.menuColor(), true);
+        }
+        for(int i = 0; i < pitybagTexts.size(); i++) {
+            context.drawText(tr, FontHelper.toCustomFont(pitybagTexts.get(i), fontName), pitybagX + 10, pitybagY + (i * 13), CONFIG.menuColor(), true);
+        }
 
 
         List<String> bagTexts = new ArrayList<>();
@@ -140,6 +197,8 @@ public abstract class MixinInGameHud {
         int infoWidth = 150;
         int bagHeight = bagTexts.size() * 13 + 5;
         int bagWidth = 120;
+        int pitybagHeight = bagTexts.size() * 13 + 5;
+        int pitybagWidth = 120;
 
         if(isEditMode) {
             if(TelosAddon.getInstance().infoWidth != infoWidth)
@@ -153,6 +212,12 @@ public abstract class MixinInGameHud {
 
             if(TelosAddon.getInstance().bagWidth != bagWidth)
                 TelosAddon.getInstance().bagWidth = bagWidth;
+
+            if(TelosAddon.getInstance().pitybagHeight != pitybagHeight)
+                TelosAddon.getInstance().pitybagHeight = pitybagHeight;
+
+            if(TelosAddon.getInstance().pitybagWidth != pitybagWidth)
+                TelosAddon.getInstance().pitybagWidth = pitybagWidth;
         }
 
         for(int i = 0; i < infoList.size(); i++)

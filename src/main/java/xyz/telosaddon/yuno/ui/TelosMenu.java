@@ -73,6 +73,11 @@ public class TelosMenu extends Screen {
             int bagWidth = TelosAddon.getInstance().bagWidth;
             int bagHeight = TelosAddon.getInstance().bagHeight;
 
+            int pitybagX = CONFIG.pitybagX();
+            int pitybagY = CONFIG.pitybagY();
+            int pitybagWidth = TelosAddon.getInstance().pitybagWidth;
+            int pitybagHeight = TelosAddon.getInstance().pitybagHeight;
+
             if(mouseX >= infoX + 10 && mouseY >= infoY + 10  && mouseX < infoX + infoWidth + 10 && mouseY < infoY + infoHeight + 10) {
 
                 CONFIG.infoX((int) mouseX - infoWidth / 2);
@@ -85,6 +90,13 @@ public class TelosMenu extends Screen {
 
                 CONFIG.bagX((int) mouseX - bagWidth / 2);
                 CONFIG.bagY((int) mouseY - bagHeight / 2);
+
+                return true;
+            }
+            if(mouseX >= pitybagX + 10 && mouseY >= pitybagY + 10  && mouseX < pitybagX + pitybagWidth + 10 && mouseY < pitybagY + pitybagHeight + 10) {
+
+                CONFIG.pitybagX((int) mouseX - pitybagWidth / 2);
+                CONFIG.pitybagY((int) mouseY - pitybagHeight / 2);
 
                 return true;
             }

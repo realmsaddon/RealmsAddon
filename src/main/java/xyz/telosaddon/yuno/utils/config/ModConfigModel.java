@@ -39,6 +39,9 @@ public class ModConfigModel {
     public int bagX = -1;
     public int bagY = 60;
 
+    public int pitybagX = -2;
+    public int pitybagY = 50;
+
     public boolean greenSetting = false;
     public boolean goldSetting = false;
     public boolean whiteSetting = false;
@@ -83,4 +86,43 @@ public class ModConfigModel {
     public boolean dungeonTimerSetting = true;
 
     public boolean healthBarSetting = true;
+    //BS pity setting
+    public boolean SylvarisSetting=false;
+    public boolean VoidedOmnipotentSetting=false;
+    public boolean KurvarosSetting=false;
+    public boolean ShadowflareSetting=false;
+    public boolean ValerionSetting=false;
+    public boolean NebulaSetting=false;
+    public boolean PrismaraSetting=false;
+    public boolean OmnipotentSetting=false;
+    public boolean SilexSetting=false;
+    public boolean ChronosSetting=false;
+    public boolean WardenSetting=false;
+    public boolean HeraldSetting=false;
+    public boolean ReaperSetting=false;
+    public boolean DefenderSetting=false;
+    public boolean AsmodeusSetting=false;
+    public boolean SeraphimSetting=false;
+    public boolean RaphaelSetting=false;
+    public boolean OphanimSetting=false;
+
+    //BS pity counter
+    public int Sylvaris=0;
+    public int Voided_Omnipotent=0;
+    public int Kurvaros=0;
+    public int Shadowflare=0;
+    public int Valerion=0;
+    public int Nebula=0;
+    public int Prismara=0;
+    public int Omnipotent=0;
+    public int Silex=0;
+    public int Chronos=0;
+    public int Warden=0;
+    public int Herald=0;
+    public int Reaper=0;
+    public int Defender=0;
+    public int Asmodeus=0;
+    public int Seraphim=0;
+    public int Raphael=0;
+    public int Ophanim=0;
 }
