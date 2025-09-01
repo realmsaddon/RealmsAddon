@@ -9,25 +9,55 @@ import io.wispforest.owo.ui.container.GridLayout;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
+
+import com.llamalad7.mixinextras.lib.apache.commons.ObjectUtils.Null;
+
+import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.utils.LocalAPI;
 
+import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
 public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
+    public static int count=0;
+    public static boolean onServer=TelosAddon.getInstance().isOnTelos();
     final String[] NAServerNames = {
-            "Ashburn", "Bayou", "Cedar", "Dakota",
-            "Eagleton", "Farrion", "Groveridge", "Holloway",
-            "Hub-1", "Hub-2", "Hub-3"
+        "Groveridge",
+        "Bayou",
+        "Cedar",
+        "Dakota",
+        "Eagleton",
+        "Farrion",
+        "Ashburn",
+        "Holloway",
+        "Hub-1",
+        "Hub-2",
+        "Hub-3"
     };
     final String[] EUServerNames = {
-            "Astra", "Balkan", "Creska", "Draskov",
-            "Estenmoor", "Falkenburg", "Galla", "Helmburg",
-            "Ivarn", "Jarnwald", "Krausenfeld", "Lindenburg",
-            "Hub-1", "Hub-2", "Hub-3"
-    };
+            "Astra",
+            "Balkan",
+            "Creska",
+            "Draskov",
+            "Estenmoor",
+            "Falkenburg",
+            "Galla",
+            "Helmburg",
+            "Ivarn",
+            "Jarnwald",
+            "Krausenfeld",
+            "Lindenburg",
+            "Hub-1",
+            "Hub-2",
+            "Hub-3"
+            };
     final String[] SGServerNames = {
-            "Asura", "Bayan", "Chantara", "Hub-1", 
-            "Hub-2", "Hub-3"
+            "Asura",
+            "Bayan",
+            "Chantara",
+            "Hub-1",
+            "Hub-2",
+            "Hub-3"
     };
 
     @Override
@@ -47,28 +77,27 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
                 Containers.verticalFlow(Sizing.content(), Sizing.content())
                         .child(Components.label(Text.literal("Teleport Menu")))
                         .child(
-                                Containers.grid(Sizing.content(), Sizing.content(), 3, calculateRows()) // Dynamically calculate the number of rows
+                                Containers.grid(Sizing.content(), Sizing.content(), 4, calculateCols()) // Dynamically calculate the number of cols
                                         .<GridLayout>configure(layout -> {
-                                            String[] finalServerNames = getServerName();
+                                            String[] finalServer = getServerName(); // get all server names
                                             layout.allowOverflow();
-                                            for (int i = 0; i < calculateRows(); i++) { // Iterate over the number of rows
-                                                for (int j = 0; j < 3; j++) { // 3 columns
-                                                    int finalI = i;
-                                                    int finalJ = j;
-
-                                                    int index = finalJ * calculateRows() + finalI; // Dynamic index calculation
-
-                                                    if (index < finalServerNames.length) { // Prevent index errors
-                                                        layout.child(Components.button(Text.literal(finalServerNames[index]), button -> {
-                                                            if (client == null || client.player == null) return;
-                                                            client.player.networkHandler.sendChatCommand("joinq " + finalServerNames[index]);
-                                                        }).renderer(ButtonComponent.Renderer.flat(
-                                                                new java.awt.Color(0, 0, 0, 150).getRGB(),
-                                                                CONFIG.fillColor(),
-                                                                new java.awt.Color(0, 0, 0, 50).getRGB()))
-                                                                .sizing(Sizing.fixed(55), Sizing.fixed(20)).margins(Insets.of(5)), j, i
-                                                        );
-                                                    }
+                                            int totalCols=calculateCols();
+                                            int index=0;
+                                            for (int i = 0; i < totalCols; i++) { // Iterate over the number of cols
+                                                for (int j = 0; j < 4; j++) { // 4 row
+                                                    if (index > finalServer.length-1) return ;
+                                                    String realmName= finalServer[index];
+                                                    //LOGGER.info(realmName+" "+ index +" "+ i + " "+ j);
+                                                    layout.child(Components.button(Text.literal(realmName), button -> {
+                                                        if (client == null || client.player == null || !onServer) return;
+                                                        client.player.networkHandler.sendChatCommand("joinq " + realmName);
+                                                    }).renderer(ButtonComponent.Renderer.flat(
+                                                            new java.awt.Color(0, 0, 0, 150).getRGB(),
+                                                            CONFIG.fillColor(),
+                                                            new java.awt.Color(0, 0, 0, 50).getRGB()))
+                                                            .sizing(Sizing.fixed(85), Sizing.fixed(20)).margins(Insets.of(5)), j, i
+                                                    );
+                                                    index+=1;
                                                 }
                                             }
                                         })
@@ -84,23 +113,23 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
     }
 
     private String[] getServerName() {
-        String[] serverNames;
-        String currentArea = LocalAPI.getCurrentCharacterWorld();
-        System.out.println(currentArea);
-        if (currentArea.trim().charAt(0) == 'N') {
-            serverNames = NAServerNames;
-        } else if (currentArea.trim().charAt(0) == 'G') {
-            serverNames = EUServerNames;
-        } else {
-            serverNames = SGServerNames;
+        if (!onServer){
+            LOGGER.info("Player is not on tellos");
+            return new String[] {"Not on Telos"};
         }
-        return serverNames;
+        String currentArea = LocalAPI.getCurrentCharacterWorld();
+            if (currentArea.trim().toLowerCase().charAt(0) == 'n') {
+                return NAServerNames;
+            } else if (currentArea.trim().toLowerCase().charAt(0) == 'g') {
+                return EUServerNames;
+            } else {
+                return SGServerNames;
+            }
     }
 
-    // Dynamically calculate the number of rows based on the number of servers
-    private int calculateRows() {
-        String[] serverNames = getServerName();
-        int totalServers = serverNames.length;
-        return (int) Math.ceil(totalServers / 3.0); // 3 columns
+    // Dynamically calculate the number of cols based on the number of servers
+    private int calculateCols() { 
+        int totalServers = getServerName().length;
+        return (int) Math.ceil(totalServers / 4.0); // 4 Columns 
     }
 }
