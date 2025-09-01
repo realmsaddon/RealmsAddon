@@ -19,8 +19,6 @@ import static xyz.telosaddon.yuno.TelosAddon.LOGGER;
 import static xyz.telosaddon.yuno.TelosAddon.CONFIG;
 
 public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
-    public static int count=0;
-    public static boolean onServer=TelosAddon.getInstance().isOnTelos();
     final String[] NAServerNames = {
         "Groveridge",
         "Bayou",
@@ -89,7 +87,7 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
                                                     String realmName= finalServer[index];
                                                     //LOGGER.info(realmName+" "+ index +" "+ i + " "+ j);
                                                     layout.child(Components.button(Text.literal(realmName), button -> {
-                                                        if (client == null || client.player == null || !onServer) return;
+                                                        if (client == null || client.player == null || !TelosAddon.getInstance().isOnTelos()) return;
                                                         client.player.networkHandler.sendChatCommand("joinq " + realmName);
                                                     }).renderer(ButtonComponent.Renderer.flat(
                                                             new java.awt.Color(0, 0, 0, 150).getRGB(),
@@ -113,7 +111,7 @@ public class TeleportMenuScreen extends BaseOwoScreen<FlowLayout> {
     }
 
     private String[] getServerName() {
-        if (!onServer){
+        if (!TelosAddon.getInstance().isOnTelos()){
             LOGGER.info("Player is not on tellos");
             return new String[] {"Not on Telos"};
         }
