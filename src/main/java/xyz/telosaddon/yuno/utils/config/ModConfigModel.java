@@ -105,10 +105,13 @@ public class ModConfigModel {
     public boolean SeraphimSetting=false;
     public boolean RaphaelSetting=false;
     public boolean OphanimSetting=false;
+    public boolean TrueSeraphSetting=false;
+    public boolean TrueOphanSetting=false;
+    public boolean NihilitySetting=false;
 
     //BS pity counter
     public int Sylvaris=0;
-    public int Voided_Omnipotent=0;
+    public int VoidedOmnipotent=0;
     public int Kurvaros=0;
     public int Shadowflare=0;
     public int Valerion=0;
@@ -125,4 +128,7 @@ public class ModConfigModel {
     public int Seraphim=0;
     public int Raphael=0;
     public int Ophanim=0;
+    public int TrueSeraph=0;
+    public int TrueOphan=0;
+    public int Nihility=0;
 }
