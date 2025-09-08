@@ -120,7 +120,7 @@ public class TelosAddon implements ClientModInitializer  {
 
     public boolean isOnTelos() {
         String serverIP = mc.getCurrentServerEntry() != null ? mc.getCurrentServerEntry().address : "Null";
-        if(mc.world != null && !mc.isPaused() && serverIP.contains("telosrealms.com")) {
+        if(mc.world != null && !mc.isPaused() && serverIP.toLowerCase().contains("telosrealms")) {
             return true;
         }
         return false;

@@ -144,5 +144,16 @@ public class GuiTab extends BaseUIModelScreen<FlowLayout> {
         rootComponent.childById(CheckboxComponent.class, "Ophanim")
                         .checked(CONFIG.OphanimSetting())
                         .onChanged(CONFIG::OphanimSetting);
+
+        //Unholy and Nihility 
+        rootComponent.childById(CheckboxComponent.class, "TrueSeraph")
+                        .checked(CONFIG.TrueSeraphSetting())
+                        .onChanged(CONFIG::TrueSeraphSetting);
+        rootComponent.childById(CheckboxComponent.class, "TrueOphan")
+                        .checked(CONFIG.TrueOphanSetting())
+                        .onChanged(CONFIG::TrueOphanSetting);
+        rootComponent.childById(CheckboxComponent.class, "Nihility")
+                        .checked(CONFIG.NihilitySetting())
+                        .onChanged(CONFIG::NihilitySetting);
     }
 }

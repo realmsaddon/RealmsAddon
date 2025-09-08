@@ -28,8 +28,8 @@ public class LocalAPI {
     private static boolean countdownLock = false;
     private static String currentPortalCall = "";
     private static int currentPortalCallTime = 0;
-    private static int InitialHash=0; // this is the default hash every time you join the server
-    private static Boolean InitialHashSet=false;
+    private static int initialHash=0; // this is the default hash every time you join the server
+    private static Boolean initialHashSet=false;
     public static void updateAPI(){
         CompletableFuture.runAsync(() -> {
                 if (!TelosAddon.getInstance().isOnTelos()) return;
@@ -75,13 +75,13 @@ public class LocalAPI {
                 currentCharacterArea = area.replaceAll("[^a-zA-z ']+", ""); // idk why but theres numbers at the end so we gotta trim that off
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
-                if(!InitialHashSet){
-                    InitialHash=bossBar.getName().hashCode(); // This is the trash hash we can ignore
-                    InitialHashSet=true;// once players loads onto the server we know the default hash of the empty bossbar
-                    LOGGER.info("Initial Boss hash set! and hash is:"+ InitialHash);
+                if(!initialHashSet){
+                    initialHash=bossBar.getName().hashCode(); // This is the trash hash we can ignore
+                    initialHashSet=true;// once players loads onto the server we know the default hash of the empty bossbar
+                    LOGGER.info("Initial Boss hash set! and hash is:"+ initialHash);
                 }
-                
-                switch (bossBar.getName().hashCode()){
+                int currentBossHash = bossBar.getName().hashCode(); //instead of calling it alot of times 
+                switch (currentBossHash){
                     //All updated as of 21th August 2025
                     case -168181711 -> currentCharacterFighting = "Chungus";
                     case 1368623635 -> currentCharacterFighting = "Illarius";
@@ -113,27 +113,29 @@ public class LocalAPI {
                     case -1370654034 -> currentCharacterFighting = "Defender";
                     case -1622067598 -> currentCharacterFighting = "Asmodeus";
                     case -1643406096 -> currentCharacterFighting = "Seraphim";
-                    case -1643245609 -> currentCharacterFighting = "True Seraphim";
                     case 2131893865 -> currentCharacterFighting = "Raphael's Castle";
                     case 254038329 -> currentCharacterFighting = "Raphael";
                     case 230903377 -> currentCharacterFighting = "Sylvaris";
                     case -1253581965 -> currentCharacterFighting = "Voided Omnipotent";
+                    case -132915272 -> currentCharacterFighting = "True Ophan";
+                    case -1643245609 -> currentCharacterFighting = "True Seraph";
                     default -> currentCharacterFighting = "";
                 }
                 //Improved system to find HashCodes 
                 //This can honestly be kept in if needded , it does not spam logs like before very usefull to get Hash's
                 //if The initial hash is known and the player is on an actual boss 
-                if((InitialHash!=bossBar.getName().hashCode()) && lastKnownBossHash!=bossBar.getName().hashCode()){
+                if((initialHash!=currentBossHash) && lastKnownBossHash!=currentBossHash){
                     //comparing Hash cause they are unique , else if we fight two unknown bosses back to back it wont print
                     LOGGER.info("old Last known Boss: "+ lastKnownBoss);
-                    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + bossBar.getName().hashCode()  +" BossName:" + currentCharacterFighting);
+                    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + currentBossHash  +" BossName:" + currentCharacterFighting);
                     LOGGER.info("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + ", current Area is: " + currentCharacterArea);
-                    LOGGER.info("last known boss Hash is: " + lastKnownBossHash + ", current boss Hash is: " + bossBar.getName().hashCode());
+                    LOGGER.info("last known boss Hash is: " + lastKnownBossHash + ", current boss Hash is: " + currentBossHash);
                     lastKnownBoss=currentCharacterFighting;
-                    lastKnownBossHash=bossBar.getName().hashCode();
+                    lastKnownBossHash=currentBossHash;
+                    LOGGER.info("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + ", current Area is: " + currentCharacterArea);
                 }
                 // this means a boss has died recently.
-                if (!lastKnownBoss.equals("") && bossBar.getName().hashCode()==InitialHash) { 
+                if (!lastKnownBoss.equals("") && currentBossHash==initialHash) { 
                     // We are making sure there is a last known boss and that there is no current boss
                     //Its not garunteed that the player even killed the boss or just moved away - Stress
                     //As it is rn , this is called every tick if a boss died or even if you move away from a boss.
