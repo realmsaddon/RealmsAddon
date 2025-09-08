@@ -27,11 +27,10 @@ public class BagTrackerFeature {
     //}
     public static void resetBlackBagPity(){
         boss=LocalAPI.getCurrentCharacterFighting();
-        LOGGER.info(boss);
         LOGGER.info("(Bag event counter) boss " + boss  + " Dropped a bag");
         switch(boss){
             case "Sylvaris" -> CONFIG.Sylvaris(0) ;
-            case "Voided Omnipotent" -> CONFIG.Voided_Omnipotent(0) ;
+            case "Voided Omnipotent" -> CONFIG.VoidedOmnipotent(0) ;
             case "Kurvaros" -> CONFIG.Kurvaros(0) ;
             case "Shadowflare" -> CONFIG.Shadowflare(0) ;
             case "Valerion" -> CONFIG.Valerion(0) ;
@@ -53,19 +52,14 @@ public class BagTrackerFeature {
         CONFIG.noBlackRuns(0);
         return;
     }
-    //public static void test(){
-    //    LOGGER.info("Inside test function");
-    //    boss=LocalAPI.getCurrentCharacterFighting();
-    //    LOGGER.info("Last boss:" +lastboss);
-    //    LOGGER.info("Current boss:"+boss);
-    //    return;
-    //}
-    public static void blackBagPityCounter(String boss_name){
-        boss=LocalAPI.getCurrentCharacterFighting();
-        LOGGER.info("(BagPityEvent) boss " + boss  + " did not drop a bag");
+    public static void blackBagPityCounter(String boss_name){ // also increases unholy counter
+        LOGGER.info("(BagPityEvent) boss " + boss_name  + " did not drop a bag");
         switch(boss_name){
             case "Sylvaris" -> CONFIG.Sylvaris(CONFIG.Sylvaris()+1) ;
-            case "Voided Omnipotent" -> CONFIG.Voided_Omnipotent(CONFIG.Voided_Omnipotent()+1) ;
+            case "Voided Omnipotent" -> {
+                CONFIG.VoidedOmnipotent(CONFIG.VoidedOmnipotent()+1) ;
+                CONFIG.Nihility(CONFIG.Nihility()+1);
+            }
             case "Kurvaros" -> CONFIG.Kurvaros(CONFIG.Kurvaros()+1) ;
             case "Shadowflare" -> CONFIG.Shadowflare(CONFIG.Shadowflare()+1) ;
             case "Valerion" -> CONFIG.Valerion(CONFIG.Valerion()+1) ;
@@ -82,9 +76,23 @@ public class BagTrackerFeature {
             case "Seraphim" -> CONFIG.Seraphim(CONFIG.Seraphim()+1) ;
             case "Raphael" -> CONFIG.Raphael(CONFIG.Raphael()+1) ;
             case "Ophanim" -> CONFIG.Ophanim(CONFIG.Ophanim()+1) ;
+            //unholy 
+            case "True Seraph" -> CONFIG.TrueSeraph(CONFIG.TrueSeraph()+1);
+            case "True Ophan" -> CONFIG.TrueOphan(CONFIG.TrueOphan()+1) ;
             default -> {}
         }
         CONFIG.noBlackRuns(CONFIG.noBlackRuns()+1);
+        return;
+    }
+    public static void resetUnholyPity(){
+        String boss=LocalAPI.getCurrentCharacterFighting();
+        LOGGER.info("(BagPityEvent) boss " + boss  + " Dropped a Unholy / Voidbound Bag");
+        switch(boss){
+            case "True Seraph" -> CONFIG.TrueSeraph(0);
+            case "True Ophan" -> CONFIG.TrueOphan(0) ;
+            case "Voided Omnipotent" -> CONFIG.Nihility(0);
+            default -> {}
+        }
         return;
     }
 }
