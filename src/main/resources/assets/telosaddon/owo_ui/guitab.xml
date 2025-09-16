@@ -250,6 +250,47 @@
                                 </checkbox>
                             </children>
                         </flow-layout>
+                        <flow-layout direction="vertical">
+                            <children>
+                                <label>
+                                    <text>Unholy / Nihility Pity</text>
+                                </label>
+                                <checkbox id="TrueSeraph">
+                                    <text>Holy Cross</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="TrueOphan">
+                                    <text>Pendant of sin</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                                <checkbox id="Nihility">
+                                    <text>Fractured Nihility</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                            </children>
+                        </flow-layout>
+                        <!-- Adding another column
+                        <flow-layout direction="vertical">
+                            <children>
+                                <label>
+                                    <text>Text</text>
+                                </label>
+                                <checkbox id="Text">
+                                    <text>Text</text>
+                                    <sizing>
+                                        <horizontal method="fixed">150</horizontal>
+                                    </sizing>
+                                </checkbox>
+                            </children>
+                        </flow-layout>
+                        -->
+
                     </children>
                 <padding><all>10</all></padding>
                 </flow-layout>
