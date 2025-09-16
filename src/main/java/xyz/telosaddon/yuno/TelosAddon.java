@@ -48,7 +48,8 @@ public class TelosAddon implements ClientModInitializer  {
     public int infoHeight;
     public int bagWidth;
     public int bagHeight;
-
+    public int pitybagWidth;
+    public int pitybagHeight;
     private ShowMainRangeFeature showMainRangeFeature;
 
     private ShowOffHandFeature showOffHandFeature;
@@ -119,7 +120,7 @@ public class TelosAddon implements ClientModInitializer  {
 
     public boolean isOnTelos() {
         String serverIP = mc.getCurrentServerEntry() != null ? mc.getCurrentServerEntry().address : "Null";
-        if(mc.world != null && !mc.isPaused() && serverIP.contains("telosrealms.com")) {
+        if(mc.world != null && !mc.isPaused() && serverIP.toLowerCase().contains("telosrealms")) {
             return true;
         }
         return false;

@@ -24,10 +24,12 @@ public class LocalAPI {
     private static String currentCharacterFighting = "";
     private static String currentClientPing = "";
     private static String lastKnownBoss = "";
+    private static int lastKnownBossHash=0;
     private static boolean countdownLock = false;
     private static String currentPortalCall = "";
     private static int currentPortalCallTime = 0;
-
+    private static int initialHash=0; // this is the default hash every time you join the server
+    private static Boolean initialHashSet=false;
     public static void updateAPI(){
         CompletableFuture.runAsync(() -> {
                 if (!TelosAddon.getInstance().isOnTelos()) return;
@@ -61,7 +63,7 @@ public class LocalAPI {
     }
 
     private static void updateCharacterArea(){
-
+        
         if (bossBarMap != null) {
 
             Object[] preArray = bossBarMap.values().toArray();
@@ -70,57 +72,75 @@ public class LocalAPI {
 
                 BossBar areaBar = (BossBar) preArray[0];
                 String area = stripAllFormatting(areaBar.getName().getString());
-
                 currentCharacterArea = area.replaceAll("[^a-zA-z ']+", ""); // idk why but theres numbers at the end so we gotta trim that off
 
                 BossBar bossBar = (BossBar) preArray[1]; // add what boss we're fighting
-                // LOGGER.log(Level.INFO, "Bossbar hashcode:" + bossBar.getName().hashCode()); // keep this until i can fill out all the bosses
-                lastKnownBoss = currentCharacterFighting;
-                switch (bossBar.getName().hashCode()){
-                    case -1083980771 -> currentCharacterFighting = "Chungus";
-                    case 452824575 -> currentCharacterFighting = "Illarius";
-                    case 2125535338 -> currentCharacterFighting = "Astaroth";
-                    case -1083975966 -> currentCharacterFighting = "Glumi";
-                    case 2125159587 -> currentCharacterFighting = "Lotil";
-                    case 453134978 -> currentCharacterFighting = "Tidol";
-                    case 1757112170 -> currentCharacterFighting = "Valus";
-                    case 1472054207 -> currentCharacterFighting = "Oozul";
-                    case 2035818623 -> currentCharacterFighting = "Freddy";
-                    case -1258344668 -> currentCharacterFighting = "Anubis";
+                if(!initialHashSet){
+                    initialHash=bossBar.getName().hashCode(); // This is the trash hash we can ignore
+                    initialHashSet=true;// once players loads onto the server we know the default hash of the empty bossbar
+                    LOGGER.info("Initial Boss hash set! and hash is:"+ initialHash);
+                }
+                int currentBossHash = bossBar.getName().hashCode(); //instead of calling it alot of times 
+                switch (currentBossHash){
+                    //All updated as of 21th August 2025
+                    case -168181711 -> currentCharacterFighting = "Chungus";
+                    case 1368623635 -> currentCharacterFighting = "Illarius";
+                    case -1253632898 -> currentCharacterFighting = "Astaroth";
+                    case -168176906 -> currentCharacterFighting = "Glumi";
+                    case -1254008649 -> currentCharacterFighting = "Lotil";
+                    case 1368934038 -> currentCharacterFighting = "Tidol";
+                    case -1622056066 -> currentCharacterFighting = "Valus";
+                    case -1907114029 -> currentCharacterFighting = "Oozul";
+                    case -1343349613 -> currentCharacterFighting = "Freddy";
+                    case -342545608 -> currentCharacterFighting = "Anubis";
                     case -1240191621 -> currentCharacterFighting = "Hollowbane";
                     case -1048713371 -> currentCharacterFighting = "Claus";
-
-                    case 908391166 -> currentCharacterFighting = "Shadowflare";
-                    case 1996713601 -> currentCharacterFighting = "Loa";
-                    case -1048545196 -> currentCharacterFighting = "Valerion";
-                    // insert astaroth bosses here
-                    case -1624135070 -> currentCharacterFighting = "Prismara";
-                    case 2125160548 -> currentCharacterFighting = "Omnipotent";
-                    case 1757423534 -> currentCharacterFighting = "Thalassar";
-                    case 1735775594 -> currentCharacterFighting = "Silex";
-                    case -624873662 -> currentCharacterFighting = "Chronos";
-                    case -1338784736 -> currentCharacterFighting = "Golden Freddy";
-                    case -1258333136 -> currentCharacterFighting = "Kurvaros";
-
-                    case 2008511319 -> currentCharacterFighting = "Warden";
-                    case 2008512280 -> currentCharacterFighting = "Herald";
-                    case 2008513241 -> currentCharacterFighting = "Reaper";
-                    case 2008514202 -> currentCharacterFighting = "Defender";
-                    case 1757100638 -> currentCharacterFighting = "Asmodeus";
-                    case 1735762140 -> currentCharacterFighting = "Seraphim";
-
-                    case 1216094805 -> currentCharacterFighting = "Onyx Castle";
-                    case 1757905956 -> currentCharacterFighting = "Onyx";
-
-                    case -1083171609 -> currentCharacterFighting = "Pirate's Cove";
-                    case 1997519880 -> currentCharacterFighting = "Thornwood Wargrove";
+                    case 1824190226 -> currentCharacterFighting = "Shadowflare";
+                    case -1382454635 -> currentCharacterFighting = "Loa";
+                    case -132746136 -> currentCharacterFighting = "Valerion";
+                    case -829226362 -> currentCharacterFighting = "Nebula";
+                    case -132585649 -> currentCharacterFighting = "Ophanim";
+                    case -708336010 -> currentCharacterFighting = "Prismara";
+                    case -1254007688 -> currentCharacterFighting = "Omnipotent";
+                    case -1621744702 -> currentCharacterFighting = "Thalassar";
+                    case -1643392642 -> currentCharacterFighting = "Silex";
+                    case 290925398 -> currentCharacterFighting = "Chronos";
+                    case -422985676 -> currentCharacterFighting = "Golden Freddy";
+                    case -342534076 -> currentCharacterFighting = "Kurvaros";
+                    case -1370656917 -> currentCharacterFighting = "Warden";
+                    case -1370655956 -> currentCharacterFighting = "Herald";
+                    case -1370654995 -> currentCharacterFighting = "Reaper";
+                    case -1370654034 -> currentCharacterFighting = "Defender";
+                    case -1622067598 -> currentCharacterFighting = "Asmodeus";
+                    case -1643406096 -> currentCharacterFighting = "Seraphim";
+                    case 2131893865 -> currentCharacterFighting = "Raphael's Castle";
+                    case 254038329 -> currentCharacterFighting = "Raphael";
+                    case 230903377 -> currentCharacterFighting = "Sylvaris";
+                    case -1253581965 -> currentCharacterFighting = "Voided Omnipotent";
+                    case -132915272 -> currentCharacterFighting = "True Ophan";
+                    case -1643245609 -> currentCharacterFighting = "True Seraph";
                     default -> currentCharacterFighting = "";
                 }
-                //System.out.println("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + "current portal call is: " + currentPortalCall);
+                //Improved system to find HashCodes 
+                //This can honestly be kept in if needded , it does not spam logs like before very usefull to get Hash's
+                //if The initial hash is known and the player is on an actual boss 
+                if((initialHash!=currentBossHash) && lastKnownBossHash!=currentBossHash){
+                    //comparing Hash cause they are unique , else if we fight two unknown bosses back to back it wont print
+                    LOGGER.info("old Last known Boss: "+ lastKnownBoss);
+                    LOGGER.info(Level.INFO+ " Bossbar hashcode:" + currentBossHash  +" BossName:" + currentCharacterFighting);
+                    LOGGER.info("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + ", current Area is: " + currentCharacterArea);
+                    LOGGER.info("last known boss Hash is: " + lastKnownBossHash + ", current boss Hash is: " + currentBossHash);
+                    lastKnownBoss=currentCharacterFighting;
+                    lastKnownBossHash=currentBossHash;
+                    LOGGER.info("last known boss is: " + lastKnownBoss + ", current boss is: " + currentCharacterFighting + ", current Area is: " + currentCharacterArea);
+                }
                 // this means a boss has died recently.
-                if (!lastKnownBoss.equals(currentCharacterFighting) && currentCharacterFighting.equals("")) {
-                    LOGGER.info("Boss has died");
-                    System.out.println(lastKnownBoss);
+                if (!lastKnownBoss.equals("") && currentBossHash==initialHash) { 
+                    // We are making sure there is a last known boss and that there is no current boss
+                    //Its not garunteed that the player even killed the boss or just moved away - Stress
+                    //As it is rn , this is called every tick if a boss died or even if you move away from a boss.
+                    //LOGGER.info("Boss has died");
+                    //System.out.println("Last known Boss: "+ lastKnownBoss);
                     switch (lastKnownBoss){
                         case "Chungus" -> currentPortalCall = "void";
                         case "Illarius" -> currentPortalCall = "loa";
@@ -133,10 +153,10 @@ public class LocalAPI {
                         case "Freddy" -> currentPortalCall = "pizza";
                         case "Anubis" -> currentPortalCall = "alair";
                         case "Defender" -> currentPortalCall = "cprov";
-
+                
                         default -> currentPortalCall = "";
                     }
-                    lastKnownBoss = "";
+                    //lastKnownBoss = ""; why is it making it null lol 
                     if (currentPortalCall.isEmpty() || countdownLock){
                         return;
                     }
@@ -154,11 +174,11 @@ public class LocalAPI {
                         }
                         currentPortalCall = "";
                         countdownLock = false;
-
+                
                     });
                 }
-
-
+                
+                
 
             }
         }

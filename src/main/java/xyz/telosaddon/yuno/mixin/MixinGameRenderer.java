@@ -10,9 +10,12 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.mojang.authlib.minecraft.client.MinecraftClient;
+
 import xyz.telosaddon.yuno.TelosAddon;
 import xyz.telosaddon.yuno.sound.SoundManager;
-
+import xyz.telosaddon.yuno.features.BagTrackerFeature;
 
 import java.util.Objects;
 
@@ -36,25 +39,29 @@ public abstract class MixinGameRenderer {
         switch (cmd.getPath()) {
             case "entity/pouch/royal_totem" -> {
                 CONFIG.whiteBags(CONFIG.whiteBags() + 1);
-
                 CONFIG.noWhiteRuns(0);
-
                 if(soundSetting)
                     soundManager.playSound("white_bag");
 
             }
             case "entity/pouch/bloodshot_totem" -> {
                 CONFIG.blackBags(CONFIG.blackBags() + 1);
-                CONFIG.noBlackRuns(0);
-
+                
+                BagTrackerFeature.resetBlackBagPity();    
                 if(soundSetting)
                     soundManager.playSound("black_bag");
 
             }
             case "entity/pouch/companion" -> CONFIG.goldBags(CONFIG.goldBags() + 1);
-            case "entity/pouch/unholy_totem"  -> CONFIG.crosses(CONFIG.crosses() + 1);
+            case "entity/pouch/unholy_totem"  -> {
+                CONFIG.crosses(CONFIG.crosses() + 1);
+                BagTrackerFeature.resetUnholyPity();
+            }
             case "entity/pouch/halloween_totem","entity/pouch/valentine_totem", "entity/pouch/christmas_totem" -> {CONFIG.eventBags(CONFIG.eventBags() + 1);}
-            case "entity/pouch/voidbound_totem" -> CONFIG.relics(CONFIG.relics() + 1);
+            case "entity/pouch/voidbound_totem" -> {
+                CONFIG.relics(CONFIG.relics() + 1); // why is it called relics ?
+                BagTrackerFeature.resetUnholyPity();
+            }
             case "entity/pouch/rune" -> CONFIG.runes(CONFIG.runes() + 1);
             default -> {
             }
