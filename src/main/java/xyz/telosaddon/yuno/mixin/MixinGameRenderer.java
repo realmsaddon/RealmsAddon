@@ -53,9 +53,15 @@ public abstract class MixinGameRenderer {
 
             }
             case "entity/pouch/companion" -> CONFIG.goldBags(CONFIG.goldBags() + 1);
-            case "entity/pouch/unholy_totem"  -> CONFIG.crosses(CONFIG.crosses() + 1);
+            case "entity/pouch/unholy_totem"  -> {
+                CONFIG.crosses(CONFIG.crosses() + 1);
+                BagTrackerFeature.resetUnholyPity();
+            }
             case "entity/pouch/halloween_totem","entity/pouch/valentine_totem", "entity/pouch/christmas_totem" -> {CONFIG.eventBags(CONFIG.eventBags() + 1);}
-            case "entity/pouch/voidbound_totem" -> CONFIG.relics(CONFIG.relics() + 1);
+            case "entity/pouch/voidbound_totem" -> {
+                CONFIG.relics(CONFIG.relics() + 1); // why is it called relics ?
+                BagTrackerFeature.resetUnholyPity();
+            }
             case "entity/pouch/rune" -> CONFIG.runes(CONFIG.runes() + 1);
             default -> {
             }
