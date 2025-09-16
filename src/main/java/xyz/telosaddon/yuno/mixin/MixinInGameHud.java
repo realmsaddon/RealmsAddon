@@ -65,7 +65,7 @@ public abstract class MixinInGameHud {
         if(CONFIG.SylvarisSetting() || isEditMode)
             pitybagTexts.add("Sylvaris§7: §f" + CONFIG.Sylvaris());
         if(CONFIG.VoidedOmnipotentSetting() || isEditMode)
-            pitybagTexts.add("Voided Omnipotent§7: §f" + CONFIG.Voided_Omnipotent());
+            pitybagTexts.add("Voided Omnipotent§7: §f" + CONFIG.VoidedOmnipotent());
         if(CONFIG.KurvarosSetting() || isEditMode)
             pitybagTexts.add("Kurvaros§7: §f" + CONFIG.Kurvaros());
         if(CONFIG.ShadowflareSetting() || isEditMode)
@@ -98,13 +98,20 @@ public abstract class MixinInGameHud {
             pitybagTexts.add("Raphael§7: §f" + CONFIG.Raphael());
         if(CONFIG.OphanimSetting() || isEditMode)
             pitybagTexts.add("Ophanim§7: §f" + CONFIG.Ophanim());
+        if(CONFIG.TrueOphanSetting() || isEditMode)
+            pitybagTexts.add("Pendant of Sin: §f" + CONFIG.TrueOphan());
+        if(CONFIG.TrueSeraphSetting() || isEditMode)
+            pitybagTexts.add("Holy Cross§7: §f" + CONFIG.TrueSeraph());
+        if(CONFIG.NihilitySetting() || isEditMode)
+            pitybagTexts.add("Nihility§7: §f" + CONFIG.Nihility());
+    
 
         int pitybagY = CONFIG.pitybagY();
         int pitybagX = CONFIG.pitybagX();
 
         int ypityBackground = pitybagY - 25;
         if(!pitybagTexts.isEmpty()) {
-            String title = "Blood Shot Pity";
+            String title = "Pity Counter";
             context.fill(pitybagX, ypityBackground, pitybagX + 120, pitybagY + pitybagTexts.size() * 13 + 5, CONFIG.fillColor());
             context.drawBorder(pitybagX, ypityBackground, 120, pitybagY - ypityBackground + pitybagTexts.size() * 13 + 5,CONFIG.borderColor());
             context.drawHorizontalLine(pitybagX + 10, pitybagX + 110, pitybagY - 4, CONFIG.borderColor());
