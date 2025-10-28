@@ -20,7 +20,7 @@ public class MountHotkey {
                 "key.telosaddon.mount",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_V,
-                "category.telosaddon"
+                HotkeyCategory.TELOS_CATEGORY
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

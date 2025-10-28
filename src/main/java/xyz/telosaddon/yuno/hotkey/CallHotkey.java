@@ -34,7 +34,7 @@ public class CallHotkey{
                 "key.telosaddon.call",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_Z,
-                "category.telosaddon"
+                HotkeyCategory.TELOS_CATEGORY
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

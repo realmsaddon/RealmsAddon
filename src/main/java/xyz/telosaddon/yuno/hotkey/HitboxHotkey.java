@@ -17,7 +17,6 @@ import xyz.telosaddon.yuno.utils.LocalAPI;
 
 import java.util.ArrayList;
 
-
 @Environment(EnvType.CLIENT)
 public class HitboxHotkey {
     private static KeyBinding keyBinding;
@@ -29,7 +28,7 @@ public class HitboxHotkey {
                 "key.telosaddon.hitboxes",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_H,
-                "category.telosaddon"
+                HotkeyCategory.TELOS_CATEGORY
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

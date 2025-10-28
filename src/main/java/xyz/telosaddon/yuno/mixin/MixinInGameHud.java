@@ -113,7 +113,7 @@ public abstract class MixinInGameHud {
         if(!pitybagTexts.isEmpty()) {
             String title = "Pity Counter";
             context.fill(pitybagX, ypityBackground, pitybagX + 120, pitybagY + pitybagTexts.size() * 13 + 5, CONFIG.fillColor());
-            context.drawBorder(pitybagX, ypityBackground, 120, pitybagY - ypityBackground + pitybagTexts.size() * 13 + 5,CONFIG.borderColor());
+            context.drawStrokedRectangle(pitybagX, ypityBackground, 120, pitybagY - ypityBackground + pitybagTexts.size() * 13 + 5,CONFIG.borderColor());
             context.drawHorizontalLine(pitybagX + 10, pitybagX + 110, pitybagY - 4, CONFIG.borderColor());
 
             int titleWidth = tr.getWidth(FontHelper.toCustomFont(title, fontName));
@@ -158,7 +158,7 @@ public abstract class MixinInGameHud {
         if(!bagTexts.isEmpty()) {
             String title = CONFIG.lifetimeSetting() ? "Lifetime Stats" : "Session Stats";
             context.fill(bagX, yBackground, bagX + 120, bagY + bagTexts.size() * 13 + 5, CONFIG.fillColor());
-            context.drawBorder(bagX, yBackground, 120, bagY - yBackground + bagTexts.size() * 13 + 5,CONFIG.borderColor());
+            context.drawStrokedRectangle(bagX, yBackground, 120, bagY - yBackground + bagTexts.size() * 13 + 5,CONFIG.borderColor());
             context.drawHorizontalLine(bagX + 10, bagX + 110, bagY - 4, CONFIG.borderColor());
 
             int titleWidth = tr.getWidth(FontHelper.toCustomFont(title, fontName));

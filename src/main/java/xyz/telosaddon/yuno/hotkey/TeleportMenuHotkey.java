@@ -18,13 +18,12 @@ public class TeleportMenuHotkey {
                 "key.telosaddon.tpmenu",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_C,
-                "category.telosaddon"
+                HotkeyCategory.TELOS_CATEGORY
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (keyBinding.wasPressed()) {
                 client.setScreen(new TeleportMenuScreen());
-
             }
         });
     }

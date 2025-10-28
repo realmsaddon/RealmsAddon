@@ -29,7 +29,7 @@ import static xyz.telosaddon.yuno.utils.LocalAPI.updateAPI;
 
 public class TelosAddon implements ClientModInitializer  {
     public static final String MOD_NAME = "RealmsAddon";
-    public static final String MOD_VERSION = "v0.4.2";
+    public static final String MOD_VERSION = "v0.4.3";
     public static final String MOD_ID = "realmsaddon";
 
     public static final ModConfig CONFIG = ModConfig.createAndLoad();
@@ -106,10 +106,6 @@ public class TelosAddon implements ClientModInitializer  {
     public static TelosAddon getInstance() { return instance; }
 
     public SoundManager getSoundManager() { return soundManager; }
-
-
-
-
 
     public String getPlaytimeText() {
         long hours = this.playTime / 3600;

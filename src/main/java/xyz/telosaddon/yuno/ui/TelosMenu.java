@@ -4,8 +4,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.input.CharInput;
+import net.minecraft.client.input.KeyInput;
 import net.minecraft.text.Text;
 import xyz.telosaddon.yuno.TelosAddon;
 
@@ -50,17 +53,21 @@ public class TelosMenu extends Screen {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    public boolean mouseClicked(Click click, boolean doubled) {
 
-        if(this.customUiManager.mouseClicked(mouseX, mouseY, button))
+        if(this.customUiManager.mouseClicked(click.x(), click.y(), click.button()))
             return true;
 
-        return super.mouseClicked(mouseX, mouseY, button);
+
+        return super.mouseClicked(click, doubled);
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+    public boolean mouseDragged(Click click, double deltaX, double deltaY) {
 
+        double mouseX = click.x();
+        double mouseY = click.y();
+        int button = click.button();
         boolean isEditMode = TelosAddon.getInstance().isEditMode();
         if(isEditMode) {
             int infoX = CONFIG.infoX();
@@ -105,21 +112,22 @@ public class TelosMenu extends Screen {
         if(this.customUiManager.mouseDragged(mouseX, mouseY, button, deltaX, deltaY))
             return true;
 
-        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+        return super.mouseDragged(click, deltaX, deltaY);
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        this.customUiManager.keyPressed(keyCode, scanCode, modifiers);
+    public boolean keyPressed(KeyInput input) {
+        this.customUiManager.keyPressed(input.key(), input.scancode(), input.modifiers());
 
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(input);
     }
 
+    //char chr, int modifiers
     @Override
-    public boolean charTyped(char chr, int modifiers) {
-        this.customUiManager.charTyped(chr, modifiers);
+    public boolean charTyped(CharInput input) {
+        this.customUiManager.charTyped(Character.toChars(input.codepoint())[0], input.modifiers());
 
-        return super.charTyped(chr, modifiers);
+        return super.charTyped(input);
     }
 
     @Override
