@@ -11,6 +11,7 @@ repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
     maven { url 'https://maven.wispforest.io/releases/' }
+    maven { url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1" }
     // Add repositories to retrieve artifacts from in here.
     // You should only use this when depending on other mods because
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
@@ -31,6 +32,7 @@ dependencies {
     include implementation('com.kohlschutter.junixsocket:junixsocket-native-common:2.6.2')
     annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
     include "io.wispforest:owo-sentinel:${project.owo_version}"
+    modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${project.devauth_version}")
     }
 
 processResources {
